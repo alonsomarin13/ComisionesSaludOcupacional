@@ -1,0 +1,247 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SaludOcupacionalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Comision">
+          <Key>
+            <PropertyRef Name="idComision" />
+          </Key>
+          <Property Name="idComision" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="contacto" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="correo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="telefono" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="ultimoInforme" Type="date" Nullable="false" />
+          <Property Name="idCuenta" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'SaludOcupacional.dbo.Cuenta' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Cuenta">
+          <Key>
+            <PropertyRef Name="idCuenta" />
+            <PropertyRef Name="nombre" />
+            <PropertyRef Name="contrasena" />
+            <PropertyRef Name="rol" />
+          </Key>
+          <Property Name="idCuenta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="contrasena" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="rol" Type="int" Nullable="false" />
+          <Property Name="idComision" Type="int" />
+        </EntityType>
+        <EntityType Name="Representante">
+          <Key>
+            <PropertyRef Name="idRepresentante" />
+          </Key>
+          <Property Name="idRepresentante" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="correo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="telefono" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="tipo" Type="int" Nullable="false" />
+          <Property Name="ingreso" Type="date" Nullable="false" />
+          <Property Name="vencimiento" Type="date" Nullable="false" />
+          <Property Name="estado" Type="int" Nullable="false" />
+          <Property Name="idComision" Type="int" />
+        </EntityType>
+        <Association Name="FK_Cuenta_Comision">
+          <End Role="Comision" Type="Self.Comision" Multiplicity="0..1" />
+          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comision">
+              <PropertyRef Name="idComision" />
+            </Principal>
+            <Dependent Role="Cuenta">
+              <PropertyRef Name="idComision" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Representante_Comision">
+          <End Role="Comision" Type="Self.Comision" Multiplicity="0..1" />
+          <End Role="Representante" Type="Self.Representante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comision">
+              <PropertyRef Name="idComision" />
+            </Principal>
+            <Dependent Role="Representante">
+              <PropertyRef Name="idComision" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SaludOcupacionalModelStoreContainer">
+          <EntitySet Name="Comision" EntityType="Self.Comision" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Representante" EntityType="Self.Representante" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cuenta" EntityType="Self.Cuenta" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Cuenta].[idCuenta] AS [idCuenta], 
+    [Cuenta].[nombre] AS [nombre], 
+    [Cuenta].[contrasena] AS [contrasena], 
+    [Cuenta].[rol] AS [rol], 
+    [Cuenta].[idComision] AS [idComision]
+    FROM [dbo].[Cuenta] AS [Cuenta]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Cuenta_Comision" Association="Self.FK_Cuenta_Comision">
+            <End Role="Comision" EntitySet="Comision" />
+            <End Role="Cuenta" EntitySet="Cuenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Representante_Comision" Association="Self.FK_Representante_Comision">
+            <End Role="Comision" EntitySet="Comision" />
+            <End Role="Representante" EntitySet="Representante" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SaludOcupacionalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Comision">
+          <Key>
+            <PropertyRef Name="idComision" />
+          </Key>
+          <Property Name="idComision" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="contacto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="telefono" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ultimoInforme" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="idCuenta" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cuenta" Relationship="Self.FK_Cuenta_Comision" FromRole="Comision" ToRole="Cuenta" />
+          <NavigationProperty Name="Representante" Relationship="Self.FK_Representante_Comision" FromRole="Comision" ToRole="Representante" />
+        </EntityType>
+        <EntityType Name="Representante">
+          <Key>
+            <PropertyRef Name="idRepresentante" />
+          </Key>
+          <Property Name="idRepresentante" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="telefono" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tipo" Type="Int32" Nullable="false" />
+          <Property Name="ingreso" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="vencimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="estado" Type="Int32" Nullable="false" />
+          <Property Name="idComision" Type="Int32" />
+          <NavigationProperty Name="Comision" Relationship="Self.FK_Representante_Comision" FromRole="Representante" ToRole="Comision" />
+        </EntityType>
+        <EntityType Name="Cuenta">
+          <Key>
+            <PropertyRef Name="idCuenta" />
+            <PropertyRef Name="nombre" />
+            <PropertyRef Name="contrasena" />
+            <PropertyRef Name="rol" />
+          </Key>
+          <Property Name="idCuenta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="contrasena" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rol" Type="Int32" Nullable="false" />
+          <Property Name="idComision" Type="Int32" />
+          <NavigationProperty Name="Comision" Relationship="Self.FK_Cuenta_Comision" FromRole="Cuenta" ToRole="Comision" />
+        </EntityType>
+        <Association Name="FK_Cuenta_Comision">
+          <End Role="Comision" Type="Self.Comision" Multiplicity="0..1" />
+          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comision">
+              <PropertyRef Name="idComision" />
+            </Principal>
+            <Dependent Role="Cuenta">
+              <PropertyRef Name="idComision" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Representante_Comision">
+          <End Role="Comision" Type="Self.Comision" Multiplicity="0..1" />
+          <End Role="Representante" Type="Self.Representante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comision">
+              <PropertyRef Name="idComision" />
+            </Principal>
+            <Dependent Role="Representante">
+              <PropertyRef Name="idComision" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SaludOcupacionalEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Comision" EntityType="Self.Comision" />
+          <EntitySet Name="Representante" EntityType="Self.Representante" />
+          <EntitySet Name="Cuenta" EntityType="Self.Cuenta" />
+          <AssociationSet Name="FK_Cuenta_Comision" Association="Self.FK_Cuenta_Comision">
+            <End Role="Comision" EntitySet="Comision" />
+            <End Role="Cuenta" EntitySet="Cuenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Representante_Comision" Association="Self.FK_Representante_Comision">
+            <End Role="Comision" EntitySet="Comision" />
+            <End Role="Representante" EntitySet="Representante" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SaludOcupacionalModelStoreContainer" CdmEntityContainer="SaludOcupacionalEntities">
+          <EntitySetMapping Name="Comision">
+            <EntityTypeMapping TypeName="SaludOcupacionalModel.Comision">
+              <MappingFragment StoreEntitySet="Comision">
+                <ScalarProperty Name="idComision" ColumnName="idComision" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="contacto" ColumnName="contacto" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="ultimoInforme" ColumnName="ultimoInforme" />
+                <ScalarProperty Name="idCuenta" ColumnName="idCuenta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Representante">
+            <EntityTypeMapping TypeName="SaludOcupacionalModel.Representante">
+              <MappingFragment StoreEntitySet="Representante">
+                <ScalarProperty Name="idRepresentante" ColumnName="idRepresentante" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="ingreso" ColumnName="ingreso" />
+                <ScalarProperty Name="vencimiento" ColumnName="vencimiento" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="idComision" ColumnName="idComision" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cuenta">
+            <EntityTypeMapping TypeName="SaludOcupacionalModel.Cuenta">
+              <MappingFragment StoreEntitySet="Cuenta">
+                <ScalarProperty Name="idCuenta" ColumnName="idCuenta" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="contrasena" ColumnName="contrasena" />
+                <ScalarProperty Name="rol" ColumnName="rol" />
+                <ScalarProperty Name="idComision" ColumnName="idComision" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
