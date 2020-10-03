@@ -27,7 +27,6 @@ namespace ComisionesSaludOcupacional.Models.ET01
         public string correo { get; set; }
         public string telefono { get; set; }
         public System.DateTime ultimoInforme { get; set; }
-        public int idCuenta { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cuenta> Cuenta { get; set; }

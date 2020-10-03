@@ -26,7 +26,7 @@ namespace ComisionesSaludOcupacional.Models.ET01
         }
     
         public virtual DbSet<Comision> Comision { get; set; }
-        public virtual DbSet<Representante> Representante { get; set; }
         public virtual DbSet<Cuenta> Cuenta { get; set; }
+        public virtual DbSet<Representante> Representante { get; set; }
     }
 }

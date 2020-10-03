@@ -1,0 +1,37 @@
+﻿@model ComisionesSaludOcupacional.Models.ViewModels.ComisionViewModel
+@{
+    ViewBag.Title = "Agregar Comisión";
+}
+
+<h2>Add</h2>
+
+<div class="row">
+    <div class="col-md-12">
+
+        @using (Html.BeginForm("Add", "Comision", FormMethod.Post, new { role = "form", @class = "" }))
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.ValidationMessage("error", new { @class = "text-danger" })
+
+            @Html.LabelFor(d => d.nombre)
+            @Html.TextBoxFor(d => d.nombre, new { @class = "formControl" })
+
+            @Html.LabelFor(d => d.contacto)
+            @Html.TextBoxFor(d => d.contacto, new { @class = "formControl" })
+
+            @Html.LabelFor(d => d.correo)
+            @Html.TextBoxFor(d => d.correo, new { @class = "formControl" })
+
+            @Html.LabelFor(d => d.telefono)
+            @Html.TextBoxFor(d => d.telefono, new { @class = "formControl" })
+
+            <div style="text-align:right;">
+                <input type="submit" class="btn btn-success" value="Crear"/>
+            </div>
+        }
+
+    </div>
+
+</div>
+
