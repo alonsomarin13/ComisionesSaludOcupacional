@@ -25,7 +25,7 @@ namespace ComisionesSaludOcupacional.Controllers
             using (SaludOcupacionalEntities db = new SaludOcupacionalEntities())
             {
                 lista = (from d in db.Representante
-                         where d.idRepresentante == 1
+                         where d.idComision == pIdComision
                          orderby d.idRepresentante
                          select new RepresentanteTableViewModel
                          {
