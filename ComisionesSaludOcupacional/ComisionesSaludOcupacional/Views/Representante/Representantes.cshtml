@@ -1,0 +1,39 @@
+﻿@model List<ComisionesSaludOcupacional.Models.ViewModels.RepresentanteTableViewModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Representantes</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        <input type="button" class="btn btn-primary" onclick="document.location.href='@Url.Content("~/Representante/Add")'" value="Crear Representante" />
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table table-bordered">
+            <tr>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Teléfono</th>
+                <th>Ingreso</th>
+                <th>Vencimiento</th>
+            </tr>
+
+            @if (Model != null) {
+                foreach (var oObjeto in Model)
+                {
+                    <tr>
+                        <td>@oObjeto.nombre</td>
+                        <td>@oObjeto.correo</td>
+                        <td>@oObjeto.telefono</td>
+                        <td>@oObjeto.ingreso</td>
+                        <td>@oObjeto.vencimiento</td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+</div>

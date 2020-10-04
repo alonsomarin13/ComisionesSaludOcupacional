@@ -16,18 +16,22 @@
 
             @Html.LabelFor(d => d.nombre)
             @Html.TextBoxFor(d => d.nombre, new { @class = "formControl" })
+            @Html.ValidationMessage("nombre", new { @class = "text-danger" }) <br/>
 
             @Html.LabelFor(d => d.contacto)
             @Html.TextBoxFor(d => d.contacto, new { @class = "formControl" })
+            @Html.ValidationMessage("contacto", new { @class = "text-danger" }) <br/>
 
             @Html.LabelFor(d => d.correo)
             @Html.TextBoxFor(d => d.correo, new { @class = "formControl" })
+            @Html.ValidationMessage("correo", new { @class = "text-danger" }) <br/>
 
             @Html.LabelFor(d => d.telefono)
             @Html.TextBoxFor(d => d.telefono, new { @class = "formControl" })
+            @Html.ValidationMessage("telefono", new { @class = "text-danger" }) <br/>
 
             <div style="text-align:right;">
-                <input type="submit" class="btn btn-success" value="Crear"/>
+                <input type="submit" class="btn btn-success" value="Crear" />
             </div>
         }
 

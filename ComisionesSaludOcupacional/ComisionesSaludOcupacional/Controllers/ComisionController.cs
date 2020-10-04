@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -14,7 +15,22 @@ namespace ComisionesSaludOcupacional.Controllers
         // GET: Comision
         public ActionResult Index()
         {
-            return View();
+            List<ComisionTableViewModel> lista = null;
+            using (SaludOcupacionalEntities db = new SaludOcupacionalEntities())
+            {
+                lista = (from d in db.Comision
+                       orderby d.idComision
+                       select new ComisionTableViewModel
+                       {
+                           idComision = d.idComision,
+                           nombre = d.nombre,
+                           contacto = d.contacto,
+                           correo = d.correo,
+                           telefono = d.telefono
+                       }).ToList();
+            }
+
+            return View(lista);
         }
 
         [HttpGet]
