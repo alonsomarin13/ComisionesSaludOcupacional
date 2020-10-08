@@ -1,0 +1,38 @@
+﻿@model ComisionesSaludOcupacional.Models.ViewModels.EditComisionViewModel
+@{
+    ViewBag.Title = "Editar datos de Comisión";
+}
+
+<h2>Editar Datos de Comisión</h2>
+
+<div class="row">
+    <div class="col-md-12">
+
+        @using (Html.BeginForm("Edit", "Comision", FormMethod.Post, new { role = "form", @class = "" }))
+        {
+            @Html.HiddenFor(d=>d.idComision)
+            @Html.AntiForgeryToken()
+
+            @Html.ValidationMessage("error", new { @class = "text-danger" })
+
+            @Html.LabelFor(d => d.contacto)
+            @Html.TextBoxFor(d => d.contacto, new { @class = "formControl" })
+            @Html.ValidationMessage("contacto", new { @class = "text-danger" }) <br />
+
+            @Html.LabelFor(d => d.correo)
+            @Html.TextBoxFor(d => d.correo, new { @class = "formControl" })
+            @Html.ValidationMessage("correo", new { @class = "text-danger" }) <br />
+
+            @Html.LabelFor(d => d.telefono)
+            @Html.TextBoxFor(d => d.telefono, new { @class = "formControl" })
+            @Html.ValidationMessage("telefono", new { @class = "text-danger" }) <br />
+
+            <div style="text-align:right;">
+                <input type="submit" class="btn btn-success" value="Guardar Cambios" />
+            </div>
+        }
+
+    </div>
+
+</div>
+

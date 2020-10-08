@@ -26,4 +26,19 @@ namespace ComisionesSaludOcupacional.Models.ViewModels
         public string tipo { get; set; }
 
     }
+
+    public class EditRepresentanteViewModel
+    {
+        public int idRepresentante { get; set; }
+        [Required]
+        [Display(Name = "Nombre")]
+        public string nombre { get; set; }
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Correo electrónico")]
+        public string correo { get; set; }
+        [Required]
+        [Display(Name = "Teléfono")]
+        public string telefono { get; set; }
+    }
 }

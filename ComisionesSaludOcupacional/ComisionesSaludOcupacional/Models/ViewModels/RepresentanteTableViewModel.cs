@@ -14,6 +14,8 @@ namespace ComisionesSaludOcupacional.Models.ViewModels
         public string tipo { get; set; }
         public DateTime ingreso { get; set; }
         public DateTime vencimiento { get; set; }
+        public string sIngreso { get; set; }
+        public string sVencimiento { get; set; }
         public int? idComision { get; set; }
     }
 }

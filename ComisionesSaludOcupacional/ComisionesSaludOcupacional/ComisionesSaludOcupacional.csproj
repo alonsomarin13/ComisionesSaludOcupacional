@@ -221,6 +221,8 @@
     <Content Include="Views\Comision\Index.cshtml" />
     <Content Include="Views\Representante\Representantes.cshtml" />
     <Content Include="Views\Representante\Add.cshtml" />
+    <Content Include="Views\Comision\Edit.cshtml" />
+    <Content Include="Views\Representante\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

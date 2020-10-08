@@ -20,20 +20,30 @@
                 <th>Teléfono</th>
                 <th>Ingreso</th>
                 <th>Vencimiento</th>
+                <th> </th>
+                <th> </th>
             </tr>
 
             @if (Model != null) {
                 foreach (var oObjeto in Model)
                 {
-                    <tr>
-                        <td>@oObjeto.nombre</td>
-                        <td>@oObjeto.correo</td>
-                        <td>@oObjeto.telefono</td>
-                        <td>@oObjeto.ingreso</td>
-                        <td>@oObjeto.vencimiento</td>
-                    </tr>
+        <tr>
+            <td>@oObjeto.nombre</td>
+            <td>@oObjeto.correo</td>
+            <td>@oObjeto.telefono</td>
+            <td>@oObjeto.sIngreso</td>
+            <td>@oObjeto.sVencimiento</td>
+            <td><input onclick="jsDelete(@oObjeto.idRepresentante)" type="button" value="Borrar" class="btn btn-danger" /></td>
+            <td><input onclick="document.location.href='@Url.Content("~/Representante/Edit/"+oObjeto.idRepresentante)'" type="button" value="Editar" class="btn btn-default" /></td>
+        </tr>
                 }
             }
         </table>
     </div>
 </div>
+
+<script>
+    function jsDelete(id) {
+
+    }
+</script>

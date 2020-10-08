@@ -62,5 +62,44 @@ namespace ComisionesSaludOcupacional.Controllers
 
             return Redirect(Url.Content("~/Home/Index"));
         }
+
+        public ActionResult Edit(int id)
+        {
+            EditComisionViewModel model = new EditComisionViewModel();
+
+            using (var db = new SaludOcupacionalEntities())
+            {
+                var oComision = db.Comision.Find(id);
+                model.contacto = oComision.contacto;
+                model.correo = oComision.correo;
+                model.telefono = oComision.telefono;
+                model.idComision = oComision.idComision;
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(EditComisionViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            using (var db = new SaludOcupacionalEntities())
+            {
+                var oComision = db.Comision.Find(model.idComision);
+                oComision.contacto = model.contacto;
+                oComision.correo = model.correo;
+                oComision.telefono = model.telefono;
+
+                db.Entry(oComision).State = System.Data.Entity.EntityState.Modified;
+
+                db.SaveChanges();
+            }
+
+            return Redirect(Url.Content("~/Home/Index"));
+        }
     }
 }

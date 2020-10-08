@@ -20,17 +20,19 @@
                 <th>Correo</th>
                 <th>Teléfono</th>
                 <th> </th>
+                <th> </th>
             </tr>
 
             @foreach(var oObjeto in Model)
             {
-            <tr>
-                <td>@oObjeto.nombre</td>
-                <td>@oObjeto.contacto</td>
-                <td>@oObjeto.correo</td>
-                <td>@oObjeto.telefono</td>
-                <td><input onclick="document.location.href='@Url.Content("~/Representante/Representantes/"+oObjeto.idComision)'" type="button" value="Editar" class="btn btn-default"/></td>
-            </tr>
+        <tr>
+            <td>@oObjeto.nombre</td>
+            <td>@oObjeto.contacto</td>
+            <td>@oObjeto.correo</td>
+            <td>@oObjeto.telefono</td>
+            <td><input onclick="document.location.href='@Url.Content("~/Representante/Representantes/"+oObjeto.idComision)'" type="button" value="Integrantes" class="btn btn-default" /></td>
+            <td><input onclick="document.location.href='@Url.Content("~/Comision/Edit/"+oObjeto.idComision)'" type="button" value="Editar" class="btn btn-default" /></td>
+        </tr>
             }
         </table>
     </div>

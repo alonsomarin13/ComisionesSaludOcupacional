@@ -1,15 +1,16 @@
-﻿@model ComisionesSaludOcupacional.Models.ViewModels.RepresentanteViewModel
+﻿@model ComisionesSaludOcupacional.Models.ViewModels.EditRepresentanteViewModel
 @{
-    ViewBag.Title = "Agregar Representante";
+    ViewBag.Title = "Editar Representante";
 }
 
-<h2>Agregar Representante</h2>
+<h2>Editar Representante</h2>
 
 <div class="row">
     <div class="col-md-12">
 
-        @using (Html.BeginForm("Add", "Representante", FormMethod.Post, new { role = "form", @class = "" }))
+        @using (Html.BeginForm("Edit", "Representante", FormMethod.Post, new { role = "form", @class = "" }))
         {
+            @Html.HiddenFor(d => d.idRepresentante)
             @Html.AntiForgeryToken()
 
             @Html.ValidationMessage("error", new { @class = "text-danger" })
@@ -26,29 +27,11 @@
             @Html.TextBoxFor(d => d.telefono, new { @class = "formControl" })
             @Html.ValidationMessage("telefono", new { @class = "text-danger" }) <br />
 
-            var lista = new List<SelectListItem>()
-            {
-                    new SelectListItem()
-                    {
-                        Text = "Patrono",
-                        Value = "0",
-                    }, new SelectListItem()
-                    {
-                        Text = "Trabajador",
-                        Value = "1",
-                    }
-                };
-
-            @Html.Label("Tipo de Representante");
-            @Html.DropDownListFor(d => d.tipo, lista);
-
             <div style="text-align:right;">
-                <input type="submit" class="btn btn-success" value="Crear" />
+                <input type="submit" class="btn btn-success" value="Guardar Cambios" />
             </div>
         }
 
     </div>
 
 </div>
-
-
