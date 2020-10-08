@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -42,6 +43,8 @@ namespace ComisionesSaludOcupacional.Controllers
             foreach (var obj in lista) {
                 obj.sIngreso = obj.ingreso.ToShortDateString();
                 obj.sVencimiento = obj.vencimiento.ToShortDateString();
+                Debug.WriteLine("Id representante");
+                Debug.WriteLine(obj.idRepresentante);
             }
             return View(lista);
         }
@@ -80,16 +83,17 @@ namespace ComisionesSaludOcupacional.Controllers
             return Redirect(Url.Content("~/Home/Index"));
         }
 
-        public ActionResult Edit(int? idRepresentante)
+        public ActionResult Edit(int id)
         {
             EditRepresentanteViewModel model = new EditRepresentanteViewModel();
-
+            Debug.WriteLine(id);
             using (var db = new SaludOcupacionalEntities())
             {
-                var oRepresentante = db.Representante.Find(idRepresentante);
+                var oRepresentante = db.Representante.Find(id);
                 model.nombre = oRepresentante.nombre;
                 model.correo = oRepresentante.correo;
                 model.telefono = oRepresentante.telefono;
+                model.idRepresentante = oRepresentante.idRepresentante;
             }
 
             return View(model);
