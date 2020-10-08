@@ -20,13 +20,13 @@ namespace ComisionesSaludOcupacional.Controllers
         }
 
 
-        public ActionResult Representantes(int? pIdComision)
+        public ActionResult Representantes(int id)
         {
             List<RepresentanteTableViewModel> lista = null;
             using (SaludOcupacionalEntities db = new SaludOcupacionalEntities())
             {
                 lista = (from d in db.Representante
-                         where d.idComision == pIdComision
+                         where d.idComision == id && d.estado == 1
                          orderby d.idRepresentante
                          select new RepresentanteTableViewModel
                          {
@@ -43,8 +43,6 @@ namespace ComisionesSaludOcupacional.Controllers
             foreach (var obj in lista) {
                 obj.sIngreso = obj.ingreso.ToShortDateString();
                 obj.sVencimiento = obj.vencimiento.ToShortDateString();
-                Debug.WriteLine("Id representante");
-                Debug.WriteLine(obj.idRepresentante);
             }
             return View(lista);
         }
@@ -120,6 +118,23 @@ namespace ComisionesSaludOcupacional.Controllers
             }
 
             return Redirect(Url.Content("~/Home/Index"));
+        }
+
+        public ActionResult Delete(int? id)
+        {
+            int? volver = 0;
+            using (var db = new SaludOcupacionalEntities())
+            {
+                var oRepresentate = db.Representante.Find(id);
+                oRepresentate.estado = 0;
+                volver = oRepresentate.idComision;
+
+                db.Entry(oRepresentate).State = System.Data.Entity.EntityState.Modified;
+
+                db.SaveChanges();
+            }
+
+            return Redirect(Url.Content("~/Representante/Representantes/" + volver));
         }
     }
 }

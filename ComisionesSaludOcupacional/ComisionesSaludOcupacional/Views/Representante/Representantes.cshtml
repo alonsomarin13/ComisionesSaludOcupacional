@@ -33,7 +33,7 @@
             <td>@oObjeto.telefono</td>
             <td>@oObjeto.sIngreso</td>
             <td>@oObjeto.sVencimiento</td>
-            <td><input onclick="jsDelete(@oObjeto.idRepresentante)" type="button" value="Borrar" class="btn btn-danger" /></td>
+            <td><input onclick="location.href='@Url.Content("~/Representante/Delete/"+oObjeto.idRepresentante)'" type="button" value="Borrar" class="btn btn-danger" /></td>
             <td><input onclick="document.location.href='@Url.Content("~/Representante/Edit/"+oObjeto.idRepresentante)'" type="button" value="Editar" class="btn btn-default" /></td>
         </tr>
                 }
@@ -41,9 +41,3 @@
         </table>
     </div>
 </div>
-
-<script>
-    function jsDelete(id) {
-
-    }
-</script>

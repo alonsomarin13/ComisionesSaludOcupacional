@@ -223,6 +223,7 @@
     <Content Include="Views\Representante\Add.cshtml" />
     <Content Include="Views\Comision\Edit.cshtml" />
     <Content Include="Views\Representante\Edit.cshtml" />
+    <Content Include="Views\Representante\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

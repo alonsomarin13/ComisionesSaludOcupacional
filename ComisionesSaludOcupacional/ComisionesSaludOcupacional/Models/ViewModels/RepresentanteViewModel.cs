@@ -26,6 +26,8 @@ namespace ComisionesSaludOcupacional.Models.ViewModels
 
         public string tipo { get; set; }
 
+        public string idComision { get; set; }
+
     }
 
     public class EditRepresentanteViewModel

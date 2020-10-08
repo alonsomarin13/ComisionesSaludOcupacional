@@ -60,7 +60,7 @@ namespace ComisionesSaludOcupacional.Controllers
                 db.SaveChanges();
             }
 
-            return Redirect(Url.Content("~/Home/Index"));
+            return Redirect(Url.Content("~/Comision/Index"));
         }
 
         public ActionResult Edit(int id)
@@ -99,7 +99,7 @@ namespace ComisionesSaludOcupacional.Controllers
                 db.SaveChanges();
             }
 
-            return Redirect(Url.Content("~/Home/Index"));
+            return Redirect(Url.Content("~/Comision/Index"));
         }
     }
 }
