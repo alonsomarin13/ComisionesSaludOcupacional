@@ -29,13 +29,13 @@ namespace ComisionesSaludOcupacional.Controllers
                          orderby d.idRepresentante
                          select new RepresentanteTableViewModel
                          {
+                             idRepresentante = d.idRepresentante,
                              nombre = d.nombre,
                              correo = d.correo,
                              telefono = d.telefono,
                              ingreso = d.ingreso,
                              vencimiento = d.vencimiento,
-                             idComision = d.idComision,
-                             idRepresentante = d.idRepresentante
+                             idComision = d.idComision
                          }).ToList();
             }
 
@@ -90,7 +90,6 @@ namespace ComisionesSaludOcupacional.Controllers
                 model.nombre = oRepresentante.nombre;
                 model.correo = oRepresentante.correo;
                 model.telefono = oRepresentante.telefono;
-                model.idRepresentante = oRepresentante.idRepresentante;
             }
 
             return View(model);

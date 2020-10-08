@@ -10,6 +10,7 @@ namespace ComisionesSaludOcupacional.Models.ViewModels
 {
     public class RepresentanteViewModel
     {
+        public int idRepresentante { get; set; }
         [Required]
         [Display(Name = "Nombre")]
         public string nombre { get; set; }
