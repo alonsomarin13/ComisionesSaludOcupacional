@@ -55,7 +55,7 @@ namespace ComisionesSaludOcupacional.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(RepresentanteViewModel model)
+        public ActionResult Add(RepresentanteViewModel model, int id)
         {
             if (!ModelState.IsValid)
             {
@@ -72,13 +72,14 @@ namespace ComisionesSaludOcupacional.Controllers
                 oRepresentante.vencimiento = oRepresentante.ingreso.AddYears(3);
                 oRepresentante.tipo = int.Parse(model.tipo);
                 oRepresentante.estado = 1;
+                oRepresentante.idComision = id;
 
                 db.Representante.Add(oRepresentante);
 
                 db.SaveChanges();
             }
 
-            return Redirect(Url.Content("~/Home/Index"));
+            return Redirect(Url.Content("~/Representante/Representantes/"+id));
         }
 
         public ActionResult Edit(int id)
