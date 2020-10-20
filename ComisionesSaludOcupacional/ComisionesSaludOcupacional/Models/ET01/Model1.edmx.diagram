@@ -4,12 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0dd107cc8ca54f498f11d80196779ac3" Name="Diagram1">
-        <EntityTypeShape EntityType="SaludOcupacionalModel.Comision" Width="1.5" PointX="0.75" PointY="2.75" />
-        <EntityTypeShape EntityType="SaludOcupacionalModel.Cuenta" Width="1.5" PointX="3" PointY="1.125" />
-        <EntityTypeShape EntityType="SaludOcupacionalModel.Representante" Width="1.5" PointX="3" PointY="4" />
-        <AssociationConnector Association="SaludOcupacionalModel.FK_Cuenta_Comision" />
-        <AssociationConnector Association="SaludOcupacionalModel.FK_Representante_Comision" />
+      <Diagram DiagramId="d654d6083b79478ca32a3d7b68db8524" Name="Diagram1">
+        <EntityTypeShape EntityType="SaludOcupacionalModel.Comision" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaludOcupacionalModel.Cuenta" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaludOcupacionalModel.Representante" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <AssociationConnector Association="SaludOcupacionalModel.FK_Cuenta_Comision" ManuallyRouted="false" />
+        <AssociationConnector Association="SaludOcupacionalModel.FK_Representante_Comision" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

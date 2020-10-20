@@ -25,8 +25,11 @@ namespace ComisionesSaludOcupacional.Controllers
                            idComision = d.idComision,
                            nombre = d.nombre,
                            contacto = d.contacto,
-                           correo = d.correo,
-                           telefono = d.telefono
+                           contactoCorreo = d.contactoCorreo,
+                           contactoTelefono = d.contactoTelefono,
+                           jefatura = d.jefatura,
+                           jefaturaCorreo = d.jefaturaCorreo,
+                           jefaturaTelefono = d.jefaturaTelefono
                        }).ToList();
             }
 
@@ -52,9 +55,11 @@ namespace ComisionesSaludOcupacional.Controllers
                 Comision oComision = new Comision();
                 oComision.nombre = model.nombre;
                 oComision.contacto = model.contacto;
-                oComision.correo = model.correo;
-                oComision.telefono = model.telefono;
-
+                oComision.contactoCorreo = model.contactoCorreo;
+                oComision.contactoTelefono = model.contactoTelefono;
+                oComision.jefatura = model.jefatura;
+                oComision.jefaturaCorreo = model.jefaturaCorreo;
+                oComision.jefaturaTelefono = model.jefaturaTelefono;
                 db.Comision.Add(oComision);
 
                 db.SaveChanges();
@@ -71,8 +76,11 @@ namespace ComisionesSaludOcupacional.Controllers
             {
                 var oComision = db.Comision.Find(id);
                 model.contacto = oComision.contacto;
-                model.correo = oComision.correo;
-                model.telefono = oComision.telefono;
+                model.contactoCorreo = oComision.contactoCorreo;
+                model.contactoTelefono = oComision.contactoTelefono;
+                model.jefatura = oComision.jefatura;
+                model.jefaturaCorreo = oComision.jefaturaCorreo;
+                model.jefaturaTelefono = oComision.jefaturaTelefono;
                 model.idComision = oComision.idComision;
             }
 
@@ -91,9 +99,11 @@ namespace ComisionesSaludOcupacional.Controllers
             {
                 var oComision = db.Comision.Find(model.idComision);
                 oComision.contacto = model.contacto;
-                oComision.correo = model.correo;
-                oComision.telefono = model.telefono;
-
+                oComision.contactoCorreo = model.contactoCorreo;
+                oComision.contactoTelefono = model.contactoTelefono;
+                oComision.jefatura = model.jefatura;
+                oComision.jefaturaCorreo = model.jefaturaCorreo;
+                oComision.jefaturaTelefono = model.jefaturaTelefono;
                 db.Entry(oComision).State = System.Data.Entity.EntityState.Modified;
 
                 db.SaveChanges();

@@ -16,9 +16,12 @@
         <table class="table table-bordered">
             <tr>
                 <th>Nombre</th>
-                <th>Contacto</th>
-                <th>Correo</th>
-                <th>Teléfono</th>
+                <th>Nombre de Contacto</th>
+                <th>Correo del Contacto</th>
+                <th>Teléfono del Contacto</th>
+                <th>Nombre de la Jefatura</th>
+                <th>Correo del la Jefatura</th>
+                <th>Teléfono de la Jefatura</th>
                 <th> </th>
                 <th> </th>
             </tr>
@@ -28,8 +31,11 @@
         <tr>
             <td>@oObjeto.nombre</td>
             <td>@oObjeto.contacto</td>
-            <td>@oObjeto.correo</td>
-            <td>@oObjeto.telefono</td>
+            <td>@oObjeto.contactoCorreo</td>
+            <td>@oObjeto.contactoTelefono</td>
+            <td>@oObjeto.jefatura</td>
+            <td>@oObjeto.jefaturaCorreo</td>
+            <td>@oObjeto.jefaturaTelefono</td>
             <td><input onclick="document.location.href='@Url.Content("~/Representante/Representantes/"+oObjeto.idComision)'" type="button" value="Integrantes" class="btn btn-default" /></td>
             <td><input onclick="document.location.href='@Url.Content("~/Comision/Edit/"+oObjeto.idComision)'" type="button" value="Editar" class="btn btn-default" /></td>
         </tr>

@@ -17,10 +17,20 @@ namespace ComisionesSaludOcupacional.Models.ViewModels
         [Required]
         [EmailAddress]
         [Display(Name = "Correo electrónico")]
-        public string correo { get; set; }
+        public string contactoCorreo { get; set; }
         [Required]
         [Display(Name = "Teléfono")]
-        public string telefono { get; set; }
+        public string contactoTelefono { get; set; }
+        [Required]
+        [Display(Name = "Nombre de Jefatura")]
+        public string jefatura { get; set; }
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Correo electrónico de la Jefatura")]
+        public string jefaturaCorreo { get; set; }
+        [Required]
+        [Display(Name = "Teléfono de la Jefatura")]
+        public string jefaturaTelefono { get; set; }
     }
 
     public class EditComisionViewModel
@@ -32,9 +42,19 @@ namespace ComisionesSaludOcupacional.Models.ViewModels
         [Required]
         [EmailAddress]
         [Display(Name = "Correo electrónico")]
-        public string correo { get; set; }
+        public string contactoCorreo { get; set; }
         [Required]
         [Display(Name = "Teléfono")]
-        public string telefono { get; set; }
+        public string contactoTelefono { get; set; }
+        [Required]
+        [Display(Name = "Nombre de Jefatura")]
+        public string jefatura { get; set; }
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Correo electrónico de la Jefatura")]
+        public string jefaturaCorreo { get; set; }
+        [Required]
+        [Display(Name = "Teléfono de la Jefatura")]
+        public string jefaturaTelefono { get; set; }
     }
 }

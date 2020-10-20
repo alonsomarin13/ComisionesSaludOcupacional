@@ -10,8 +10,11 @@ namespace ComisionesSaludOcupacional.Models.ViewModels
         public int idComision { get; set; }
         public string nombre { get; set; }
         public string contacto { get; set; }
-        public string correo { get; set; }
-        public string telefono { get; set; }
+        public string contactoCorreo { get; set; }
+        public string contactoTelefono { get; set; }
+        public string jefatura { get; set; }
+        public string jefaturaCorreo { get; set; }
+        public string jefaturaTelefono { get; set; }
 
     }
 }
