@@ -19,8 +19,6 @@ namespace ComisionesSaludOcupacional.Models.ET01
         public string correo { get; set; }
         public string telefono { get; set; }
         public int tipo { get; set; }
-        public System.DateTime ingreso { get; set; }
-        public System.DateTime vencimiento { get; set; }
         public int estado { get; set; }
         public Nullable<int> idComision { get; set; }
     

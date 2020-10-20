@@ -34,8 +34,6 @@ namespace ComisionesSaludOcupacional.Controllers
                              nombre = d.nombre,
                              correo = d.correo,
                              telefono = d.telefono,
-                             ingreso = d.ingreso,
-                             vencimiento = d.vencimiento,
                              idComision = d.idComision
                          }).ToList();
             }
@@ -68,8 +66,6 @@ namespace ComisionesSaludOcupacional.Controllers
                 oRepresentante.nombre = model.nombre;
                 oRepresentante.correo = model.correo;
                 oRepresentante.telefono = model.telefono;
-                oRepresentante.ingreso = DateTime.Today;
-                oRepresentante.vencimiento = oRepresentante.ingreso.AddYears(3);
                 oRepresentante.tipo = int.Parse(model.tipo);
                 oRepresentante.estado = 1;
                 oRepresentante.idComision = id;

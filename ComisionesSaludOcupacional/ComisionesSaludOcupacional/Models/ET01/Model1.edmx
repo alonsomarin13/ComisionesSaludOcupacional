@@ -38,8 +38,6 @@
           <Property Name="correo" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="telefono" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="tipo" Type="int" Nullable="false" />
-          <Property Name="ingreso" Type="date" Nullable="false" />
-          <Property Name="vencimiento" Type="date" Nullable="false" />
           <Property Name="estado" Type="int" Nullable="false" />
           <Property Name="idComision" Type="int" />
         </EntityType>
@@ -121,8 +119,6 @@
           <Property Name="correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="telefono" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="tipo" Type="Int32" Nullable="false" />
-          <Property Name="ingreso" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="vencimiento" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="estado" Type="Int32" Nullable="false" />
           <Property Name="idComision" Type="Int32" />
           <NavigationProperty Name="Comision" Relationship="Self.FK_Representante_Comision" FromRole="Representante" ToRole="Comision" />
@@ -204,8 +200,6 @@
                 <ScalarProperty Name="correo" ColumnName="correo" />
                 <ScalarProperty Name="telefono" ColumnName="telefono" />
                 <ScalarProperty Name="tipo" ColumnName="tipo" />
-                <ScalarProperty Name="ingreso" ColumnName="ingreso" />
-                <ScalarProperty Name="vencimiento" ColumnName="vencimiento" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
                 <ScalarProperty Name="idComision" ColumnName="idComision" />
               </MappingFragment>
