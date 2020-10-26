@@ -1,4 +1,5 @@
-﻿@model ComisionesSaludOcupacional.Models.ViewModels.RepresentanteViewModel
+﻿@Scripts.Render("~/bundles/jqueryval")
+@model ComisionesSaludOcupacional.Models.ViewModels.RepresentanteViewModel
 @{
     ViewBag.Title = "Agregar Representante";
 }
@@ -27,7 +28,7 @@
             @Html.ValidationMessage("telefono", new { @class = "text-danger" }) <br />
 
             var lista = new List<SelectListItem>()
-            {
+        {
                     new SelectListItem()
                     {
                         Text = "Patrono",

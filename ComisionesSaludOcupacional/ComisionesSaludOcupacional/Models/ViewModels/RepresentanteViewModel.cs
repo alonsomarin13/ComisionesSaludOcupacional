@@ -19,6 +19,7 @@ namespace ComisionesSaludOcupacional.Models.ViewModels
         [Display(Name = "Correo electrónico")]
         public string correo { get; set; }
         [Required]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "El teléfono del representante debe ser un número de télefono válido")]
         [Display(Name = "Teléfono")]
         public string telefono { get; set; }
         [Required]
@@ -41,6 +42,7 @@ namespace ComisionesSaludOcupacional.Models.ViewModels
         [Display(Name = "Correo electrónico")]
         public string correo { get; set; }
         [Required]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "El teléfono del representante debe ser un número de télefono válido")]
         [Display(Name = "Teléfono")]
         public string telefono { get; set; }
     }
