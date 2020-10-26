@@ -54,12 +54,6 @@ namespace ComisionesSaludOcupacional.Controllers
             {
                 Comision oComision = new Comision();
                 oComision.nombre = model.nombre;
-                oComision.contacto = model.contacto;
-                oComision.contactoCorreo = model.contactoCorreo;
-                oComision.contactoTelefono = model.contactoTelefono;
-                oComision.jefatura = model.jefatura;
-                oComision.jefaturaCorreo = model.jefaturaCorreo;
-                oComision.jefaturaTelefono = model.jefaturaTelefono;
                 db.Comision.Add(oComision);
 
                 db.SaveChanges();

@@ -26,7 +26,7 @@ namespace ComisionesSaludOcupacional.Models.ET01
         public string contacto { get; set; }
         public string contactoCorreo { get; set; }
         public string contactoTelefono { get; set; }
-        public System.DateTime ultimoInforme { get; set; }
+        public string ultimoInforme { get; set; }
         public string jefatura { get; set; }
         public string jefaturaCorreo { get; set; }
         public string jefaturaTelefono { get; set; }

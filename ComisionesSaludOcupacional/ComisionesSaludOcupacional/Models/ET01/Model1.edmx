@@ -11,10 +11,10 @@
           </Key>
           <Property Name="idComision" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="contacto" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="contactoCorreo" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="contactoTelefono" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="ultimoInforme" Type="date" Nullable="false" />
+          <Property Name="contacto" Type="varchar" MaxLength="50" />
+          <Property Name="contactoCorreo" Type="varchar" MaxLength="50" />
+          <Property Name="contactoTelefono" Type="varchar" MaxLength="50" />
+          <Property Name="ultimoInforme" Type="varchar" MaxLength="50" />
           <Property Name="jefatura" Type="varchar" MaxLength="50" />
           <Property Name="jefaturaCorreo" Type="varchar" MaxLength="50" />
           <Property Name="jefaturaTelefono" Type="varchar" MaxLength="25" />
@@ -89,10 +89,10 @@
           </Key>
           <Property Name="idComision" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="contacto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="contactoCorreo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="contactoTelefono" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ultimoInforme" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="contacto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="contactoCorreo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="contactoTelefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ultimoInforme" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="jefatura" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="jefaturaCorreo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="jefaturaTelefono" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />

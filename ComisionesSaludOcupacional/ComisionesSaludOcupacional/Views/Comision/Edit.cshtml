@@ -22,23 +22,23 @@
 
             @Html.LabelFor(d => d.contactoCorreo)
             @Html.TextBoxFor(d => d.contactoCorreo, new { @class = "formControl" })
-            @Html.ValidationMessage("correo", new { @class = "text-danger" }) <br />
+            @Html.ValidationMessage("contactoCorreo", new { @class = "text-danger" }) <br />
 
             @Html.LabelFor(d => d.contactoTelefono)
             @Html.TextBoxFor(d => d.contactoTelefono, new { @class = "formControl" })
-            @Html.ValidationMessage("telefono", new { @class = "text-danger" }) <br />
+            @Html.ValidationMessage("contactoTelefono", new { @class = "text-danger" }) <br />
 
             @Html.LabelFor(d => d.jefatura)
             @Html.TextBoxFor(d => d.jefatura, new { @class = "formControl" })
-            @Html.ValidationMessage("contacto", new { @class = "text-danger" }) <br />
+            @Html.ValidationMessage("jefatura", new { @class = "text-danger" }) <br />
 
             @Html.LabelFor(d => d.jefaturaCorreo)
             @Html.TextBoxFor(d => d.jefaturaCorreo, new { @class = "formControl" })
-            @Html.ValidationMessage("correo", new { @class = "text-danger" }) <br />
+            @Html.ValidationMessage("jefaturaCorreo", new { @class = "text-danger" }) <br />
 
             @Html.LabelFor(d => d.jefaturaTelefono)
             @Html.TextBoxFor(d => d.jefaturaTelefono, new { @class = "formControl" })
-            @Html.ValidationMessage("telefono", new { @class = "text-danger" }) <br />
+            @Html.ValidationMessage("jefaturaTelefono", new { @class = "text-danger" }) <br />
 
             <div style="text-align:right;">
                 <input type="submit" class="btn btn-success" value="Guardar Cambios" />
