@@ -98,6 +98,7 @@ namespace ComisionesSaludOcupacional.Controllers
                 oComision.jefatura = model.jefatura;
                 oComision.jefaturaCorreo = model.jefaturaCorreo;
                 oComision.jefaturaTelefono = model.jefaturaTelefono;
+                oComision.numeroDeRegistro = model.numeroRegistro;
                 db.Entry(oComision).State = System.Data.Entity.EntityState.Modified;
 
                 db.SaveChanges();

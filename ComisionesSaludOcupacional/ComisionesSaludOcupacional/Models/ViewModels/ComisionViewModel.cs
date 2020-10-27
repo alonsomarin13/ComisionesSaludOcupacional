@@ -38,5 +38,12 @@ namespace ComisionesSaludOcupacional.Models.ViewModels
         [RegularExpression("^[0-9]*$", ErrorMessage = "El campo debe ser un número de teléfono válido")]
         [Display(Name = "Teléfono de la Jefatura")]
         public string jefaturaTelefono { get; set; }
+        [Required]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "El campo debe ser un número de registro válido")]
+        [Display(Name = "Número de Registro")]
+        public string numeroRegistro { get; set; }
+        [Required]
+        [DataType(DataType.Date)]
+        public DateTime fechaDeRegistro { get; set; }
     }
 }

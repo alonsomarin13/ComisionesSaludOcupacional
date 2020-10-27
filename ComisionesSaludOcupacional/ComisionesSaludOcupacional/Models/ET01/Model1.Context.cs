@@ -25,8 +25,10 @@ namespace ComisionesSaludOcupacional.Models.ET01
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<CentroDeTrabajo> CentroDeTrabajo { get; set; }
         public virtual DbSet<Comision> Comision { get; set; }
         public virtual DbSet<Cuenta> Cuenta { get; set; }
+        public virtual DbSet<Region> Region { get; set; }
         public virtual DbSet<Representante> Representante { get; set; }
     }
 }
