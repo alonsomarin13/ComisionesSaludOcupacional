@@ -4,20 +4,30 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="SaludOcupacionalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="SaludOcupacionalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CentroDeTrabajo">
+          <Key>
+            <PropertyRef Name="idCentroDeTrabajo" />
+          </Key>
+          <Property Name="idCentroDeTrabajo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreCentroDeTrabajo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="idRegion" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Comision">
           <Key>
             <PropertyRef Name="idComision" />
           </Key>
           <Property Name="idComision" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="contacto" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="contactoCorreo" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="contactoTelefono" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="ultimoInforme" Type="date" Nullable="false" />
+          <Property Name="contacto" Type="varchar" MaxLength="50" />
+          <Property Name="contactoCorreo" Type="varchar" MaxLength="50" />
+          <Property Name="contactoTelefono" Type="varchar" MaxLength="50" />
+          <Property Name="ultimoInforme" Type="varchar" MaxLength="50" />
           <Property Name="jefatura" Type="varchar" MaxLength="50" />
           <Property Name="jefaturaCorreo" Type="varchar" MaxLength="50" />
           <Property Name="jefaturaTelefono" Type="varchar" MaxLength="25" />
+          <Property Name="numeroDeRegistro" Type="varchar" MaxLength="25" />
+          <Property Name="fechaDeRegistro" Type="date" />
         </EntityType>
         <EntityType Name="Cuenta">
           <Key>
@@ -28,6 +38,14 @@
           <Property Name="contrasena" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="rol" Type="int" Nullable="false" />
           <Property Name="idComision" Type="int" />
+        </EntityType>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="idRegion" />
+          </Key>
+          <Property Name="idRegion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="numeroRegion" Type="int" Nullable="false" />
+          <Property Name="nombreRegion" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Representante">
           <Key>
@@ -66,8 +84,10 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="SaludOcupacionalModelStoreContainer">
+          <EntitySet Name="CentroDeTrabajo" EntityType="Self.CentroDeTrabajo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Comision" EntityType="Self.Comision" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cuenta" EntityType="Self.Cuenta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Region" EntityType="Self.Region" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Representante" EntityType="Self.Representante" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Cuenta_Comision" Association="Self.FK_Cuenta_Comision">
             <End Role="Comision" EntitySet="Comision" />
@@ -78,66 +98,72 @@
             <End Role="Representante" EntitySet="Representante" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SaludOcupacionalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="SaludOcupacionalEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Comision" EntityType="SaludOcupacionalModel.Comision" />
-          <EntitySet Name="Cuenta" EntityType="SaludOcupacionalModel.Cuenta" />
-          <EntitySet Name="Representante" EntityType="SaludOcupacionalModel.Representante" />
-          <AssociationSet Name="FK_Cuenta_Comision" Association="SaludOcupacionalModel.FK_Cuenta_Comision">
-            <End Role="Comision" EntitySet="Comision" />
-            <End Role="Cuenta" EntitySet="Cuenta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Representante_Comision" Association="SaludOcupacionalModel.FK_Representante_Comision">
-            <End Role="Comision" EntitySet="Comision" />
-            <End Role="Representante" EntitySet="Representante" />
-          </AssociationSet>
-        </EntityContainer>
+        <EntityType Name="CentroDeTrabajo">
+          <Key>
+            <PropertyRef Name="idCentroDeTrabajo" />
+          </Key>
+          <Property Name="idCentroDeTrabajo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreCentroDeTrabajo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idRegion" Type="Int32" Nullable="false" />
+        </EntityType>
         <EntityType Name="Comision">
           <Key>
             <PropertyRef Name="idComision" />
           </Key>
           <Property Name="idComision" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="contacto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="contactoCorreo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="contactoTelefono" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="ultimoInforme" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="contacto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="contactoCorreo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="contactoTelefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ultimoInforme" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="jefatura" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="jefaturaCorreo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="jefaturaTelefono" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Cuenta" Relationship="SaludOcupacionalModel.FK_Cuenta_Comision" FromRole="Comision" ToRole="Cuenta" />
-          <NavigationProperty Name="Representante" Relationship="SaludOcupacionalModel.FK_Representante_Comision" FromRole="Comision" ToRole="Representante" />
+          <Property Name="numeroDeRegistro" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="fechaDeRegistro" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Cuenta" Relationship="Self.FK_Cuenta_Comision" FromRole="Comision" ToRole="Cuenta" />
+          <NavigationProperty Name="Representante" Relationship="Self.FK_Representante_Comision" FromRole="Comision" ToRole="Representante" />
         </EntityType>
         <EntityType Name="Cuenta">
           <Key>
             <PropertyRef Name="idCuenta" />
           </Key>
           <Property Name="idCuenta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="contrasena" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="contrasena" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="rol" Type="Int32" Nullable="false" />
           <Property Name="idComision" Type="Int32" />
-          <NavigationProperty Name="Comision" Relationship="SaludOcupacionalModel.FK_Cuenta_Comision" FromRole="Cuenta" ToRole="Comision" />
+          <NavigationProperty Name="Comision" Relationship="Self.FK_Cuenta_Comision" FromRole="Cuenta" ToRole="Comision" />
+        </EntityType>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="idRegion" />
+          </Key>
+          <Property Name="idRegion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="numeroRegion" Type="Int32" Nullable="false" />
+          <Property Name="nombreRegion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityType Name="Representante">
           <Key>
             <PropertyRef Name="idRepresentante" />
           </Key>
           <Property Name="idRepresentante" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="correo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="telefono" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="telefono" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="tipo" Type="Int32" Nullable="false" />
           <Property Name="estado" Type="Int32" Nullable="false" />
           <Property Name="idComision" Type="Int32" />
-          <NavigationProperty Name="Comision" Relationship="SaludOcupacionalModel.FK_Representante_Comision" FromRole="Representante" ToRole="Comision" />
+          <NavigationProperty Name="Comision" Relationship="Self.FK_Representante_Comision" FromRole="Representante" ToRole="Comision" />
         </EntityType>
         <Association Name="FK_Cuenta_Comision">
-          <End Type="SaludOcupacionalModel.Comision" Role="Comision" Multiplicity="0..1" />
-          <End Type="SaludOcupacionalModel.Cuenta" Role="Cuenta" Multiplicity="*" />
+          <End Role="Comision" Type="Self.Comision" Multiplicity="0..1" />
+          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Comision">
               <PropertyRef Name="idComision" />
@@ -148,8 +174,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Representante_Comision">
-          <End Type="SaludOcupacionalModel.Comision" Role="Comision" Multiplicity="0..1" />
-          <End Type="SaludOcupacionalModel.Representante" Role="Representante" Multiplicity="*" />
+          <End Role="Comision" Type="Self.Comision" Multiplicity="0..1" />
+          <End Role="Representante" Type="Self.Representante" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Comision">
               <PropertyRef Name="idComision" />
@@ -159,48 +185,83 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityContainer Name="SaludOcupacionalEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CentroDeTrabajo" EntityType="Self.CentroDeTrabajo" />
+          <EntitySet Name="Comision" EntityType="Self.Comision" />
+          <EntitySet Name="Cuenta" EntityType="Self.Cuenta" />
+          <EntitySet Name="Region" EntityType="Self.Region" />
+          <EntitySet Name="Representante" EntityType="Self.Representante" />
+          <AssociationSet Name="FK_Cuenta_Comision" Association="Self.FK_Cuenta_Comision">
+            <End Role="Comision" EntitySet="Comision" />
+            <End Role="Cuenta" EntitySet="Cuenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Representante_Comision" Association="Self.FK_Representante_Comision">
+            <End Role="Comision" EntitySet="Comision" />
+            <End Role="Representante" EntitySet="Representante" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="SaludOcupacionalModelStoreContainer" CdmEntityContainer="SaludOcupacionalEntities">
+          <EntitySetMapping Name="CentroDeTrabajo">
+            <EntityTypeMapping TypeName="SaludOcupacionalModel.CentroDeTrabajo">
+              <MappingFragment StoreEntitySet="CentroDeTrabajo">
+                <ScalarProperty Name="idCentroDeTrabajo" ColumnName="idCentroDeTrabajo" />
+                <ScalarProperty Name="nombreCentroDeTrabajo" ColumnName="nombreCentroDeTrabajo" />
+                <ScalarProperty Name="idRegion" ColumnName="idRegion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Comision">
             <EntityTypeMapping TypeName="SaludOcupacionalModel.Comision">
               <MappingFragment StoreEntitySet="Comision">
-                <ScalarProperty Name="jefaturaTelefono" ColumnName="jefaturaTelefono" />
-                <ScalarProperty Name="jefaturaCorreo" ColumnName="jefaturaCorreo" />
-                <ScalarProperty Name="jefatura" ColumnName="jefatura" />
-                <ScalarProperty Name="ultimoInforme" ColumnName="ultimoInforme" />
-                <ScalarProperty Name="contactoTelefono" ColumnName="contactoTelefono" />
-                <ScalarProperty Name="contactoCorreo" ColumnName="contactoCorreo" />
-                <ScalarProperty Name="contacto" ColumnName="contacto" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="idComision" ColumnName="idComision" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="contacto" ColumnName="contacto" />
+                <ScalarProperty Name="contactoCorreo" ColumnName="contactoCorreo" />
+                <ScalarProperty Name="contactoTelefono" ColumnName="contactoTelefono" />
+                <ScalarProperty Name="ultimoInforme" ColumnName="ultimoInforme" />
+                <ScalarProperty Name="jefatura" ColumnName="jefatura" />
+                <ScalarProperty Name="jefaturaCorreo" ColumnName="jefaturaCorreo" />
+                <ScalarProperty Name="jefaturaTelefono" ColumnName="jefaturaTelefono" />
+                <ScalarProperty Name="numeroDeRegistro" ColumnName="numeroDeRegistro" />
+                <ScalarProperty Name="fechaDeRegistro" ColumnName="fechaDeRegistro" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Cuenta">
             <EntityTypeMapping TypeName="SaludOcupacionalModel.Cuenta">
               <MappingFragment StoreEntitySet="Cuenta">
-                <ScalarProperty Name="idComision" ColumnName="idComision" />
-                <ScalarProperty Name="rol" ColumnName="rol" />
-                <ScalarProperty Name="contrasena" ColumnName="contrasena" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="idCuenta" ColumnName="idCuenta" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="contrasena" ColumnName="contrasena" />
+                <ScalarProperty Name="rol" ColumnName="rol" />
+                <ScalarProperty Name="idComision" ColumnName="idComision" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Region">
+            <EntityTypeMapping TypeName="SaludOcupacionalModel.Region">
+              <MappingFragment StoreEntitySet="Region">
+                <ScalarProperty Name="idRegion" ColumnName="idRegion" />
+                <ScalarProperty Name="numeroRegion" ColumnName="numeroRegion" />
+                <ScalarProperty Name="nombreRegion" ColumnName="nombreRegion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Representante">
             <EntityTypeMapping TypeName="SaludOcupacionalModel.Representante">
               <MappingFragment StoreEntitySet="Representante">
-                <ScalarProperty Name="idComision" ColumnName="idComision" />
-                <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="tipo" ColumnName="tipo" />
-                <ScalarProperty Name="telefono" ColumnName="telefono" />
-                <ScalarProperty Name="correo" ColumnName="correo" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="idRepresentante" ColumnName="idRepresentante" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="idComision" ColumnName="idComision" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
