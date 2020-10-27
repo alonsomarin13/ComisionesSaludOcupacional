@@ -76,6 +76,8 @@ namespace ComisionesSaludOcupacional.Controllers
                 model.jefaturaCorreo = oComision.jefaturaCorreo;
                 model.jefaturaTelefono = oComision.jefaturaTelefono;
                 model.idComision = oComision.idComision;
+                model.fechaDeRegistro = oComision.fechaDeRegistro;
+                model.numeroRegistro = oComision.numeroDeRegistro;
             }
 
             return View(model);
@@ -99,6 +101,7 @@ namespace ComisionesSaludOcupacional.Controllers
                 oComision.jefaturaCorreo = model.jefaturaCorreo;
                 oComision.jefaturaTelefono = model.jefaturaTelefono;
                 oComision.numeroDeRegistro = model.numeroRegistro;
+                oComision.fechaDeRegistro = model.fechaDeRegistro;
                 db.Entry(oComision).State = System.Data.Entity.EntityState.Modified;
 
                 db.SaveChanges();

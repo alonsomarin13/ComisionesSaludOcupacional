@@ -45,7 +45,7 @@
             @Html.ValidationMessage("numeroRegistro", new { @class = "text-danger" }) <br />
 
             @Html.LabelFor(d => d.fechaDeRegistro)
-            @Html.TextBoxFor(d => d.fechaDeRegistro, new { @class = "formControl" })
+            @Html.EditorFor(d => d.fechaDeRegistro, new { @class = "formControl" })
             @Html.ValidationMessage("fechaDeRegistro", new { @class = "text-danger" }) <br />
 
             <div style="text-align:right;">
