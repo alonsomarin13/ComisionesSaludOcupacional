@@ -1,0 +1,57 @@
+﻿@model ComisionesSaludOcupacional.Models.ViewModels.ComisionUserTableViewModel
+@{
+    ViewBag.Title = "Informacion de la Comisión";
+}
+
+<h2>@Model.nombre</h2>
+
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table table-bordered">
+            <tr>
+                <th>Nombre de Contacto</th>
+                <th>Correo del Contacto</th>
+                <th>Teléfono del Contacto</th>
+                <th>Nombre de la Jefatura</th>
+                <th>Correo del la Jefatura</th>
+                <th>Teléfono de la Jefatura</th>
+            </tr>
+                <tr>
+                    <td>@Model.contacto</td>
+                    <td>@Model.contactoCorreo</td>
+                    <td>@Model.contactoTelefono</td>
+                    <td>@Model.jefatura</td>
+                    <td>@Model.jefaturaCorreo</td>
+                    <td>@Model.jefaturaTelefono</td>
+                </tr>
+        </table>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table table-bordered">
+            <tr>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Teléfono</th>
+                <th> </th>
+                <th> </th>
+            </tr>
+
+            @if (Model != null)
+            {
+                foreach (var oObjeto in Model.representantes)
+                {
+                    <tr>
+                        <td>@oObjeto.nombre</td>
+                        <td>@oObjeto.correo</td>
+                        <td>@oObjeto.telefono</td>
+                        <td><input onclick="location.href='@Url.Content("~/Representante/Delete/"+oObjeto.idRepresentante)'" type="button" value="Borrar" class="btn btn-danger" /></td>
+                        <td><input onclick="document.location.href='@Url.Content("~/Representante/Edit/"+oObjeto.idRepresentante)'" type="button" value="Editar" class="btn btn-default" /></td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+</div>
