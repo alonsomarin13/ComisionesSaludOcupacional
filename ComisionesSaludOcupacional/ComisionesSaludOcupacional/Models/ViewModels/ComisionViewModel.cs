@@ -44,6 +44,8 @@ namespace ComisionesSaludOcupacional.Models.ViewModels
         public string numeroRegistro { get; set; }
         [Required]
         [DataType(DataType.DateTime)]
+        [Display(Name = "Fecha de Registro")]
         public DateTime? fechaDeRegistro { get; set; }
+        
     }
 }

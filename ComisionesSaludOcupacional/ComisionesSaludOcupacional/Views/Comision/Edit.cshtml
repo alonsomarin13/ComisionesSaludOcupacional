@@ -6,54 +6,72 @@
 
 <h2>Editar Datos de Comisión</h2>
 
-<div class="row">
-    <div class="col-md-12">
 
-        @using (Html.BeginForm("Edit", "Comision", FormMethod.Post, new { role = "form", @class = "" }))
-        {
-            @Html.HiddenFor(d => d.idComision)
-            @Html.AntiForgeryToken()
 
-            @Html.ValidationMessage("error", new { @class = "text-danger" })
 
-            @Html.LabelFor(d => d.contacto)
-            @Html.TextBoxFor(d => d.contacto, new { @class = "formControl" })
-            @Html.ValidationMessage("contacto", new { @class = "text-danger" }) <br />
 
-            @Html.LabelFor(d => d.contactoCorreo)
-            @Html.TextBoxFor(d => d.contactoCorreo, new { @class = "formControl" })
-            @Html.ValidationMessage("contactoCorreo", new { @class = "text-danger" }) <br />
 
-            @Html.LabelFor(d => d.contactoTelefono)
-            @Html.TextBoxFor(d => d.contactoTelefono, new { @class = "formControl" })
-            @Html.ValidationMessage("contactoTelefono", new { @class = "text-danger" }) <br />
+@using (Html.BeginForm("Edit", "Comision", FormMethod.Post, new { role = "form", @class = "" }))
+{
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-sm">
+                @Html.HiddenFor(d => d.idComision)
+                @Html.AntiForgeryToken()
 
-            @Html.LabelFor(d => d.jefatura)
-            @Html.TextBoxFor(d => d.jefatura, new { @class = "formControl" })
-            @Html.ValidationMessage("jefatura", new { @class = "text-danger" }) <br />
+                @Html.ValidationMessage("error", new { @class = "text-danger" })
 
-            @Html.LabelFor(d => d.jefaturaCorreo)
-            @Html.TextBoxFor(d => d.jefaturaCorreo, new { @class = "formControl" })
-            @Html.ValidationMessage("jefaturaCorreo", new { @class = "text-danger" }) <br />
+                @Html.LabelFor(d => d.contacto)
+                @Html.TextBoxFor(d => d.contacto, new { placeholder = "Ingrese el nombre del contacto", @class = "form-control" })
+                @Html.ValidationMessage("contacto", new { @class = "text-danger" }) <br />
 
-            @Html.LabelFor(d => d.jefaturaTelefono)
-            @Html.TextBoxFor(d => d.jefaturaTelefono, new { @class = "formControl" })
-            @Html.ValidationMessage("jefaturaTelefono", new { @class = "text-danger" }) <br />
+                @Html.LabelFor(d => d.contactoCorreo)
+                @Html.TextBoxFor(d => d.contactoCorreo, new { placeholder = "Ingrese el correo", @class = "form-control" })
+                @Html.ValidationMessage("contactoCorreo", new { @class = "text-danger" }) <br />
 
-            @Html.LabelFor(d => d.numeroRegistro)
-            @Html.TextBoxFor(d => d.numeroRegistro, new { @class = "formControl" })
-            @Html.ValidationMessage("numeroRegistro", new { @class = "text-danger" }) <br />
+                @Html.LabelFor(d => d.contactoTelefono)
+                @Html.TextBoxFor(d => d.contactoTelefono, new { placeholder = "Ingrese el contacto de teléfono", @class = "form-control" })
+                @Html.ValidationMessage("contactoTelefono", new { @class = "text-danger" }) <br />
 
-            @Html.LabelFor(d => d.fechaDeRegistro)
-            @Html.EditorFor(d => d.fechaDeRegistro, new { @class = "formControl" })
-            @Html.ValidationMessage("fechaDeRegistro", new { @class = "text-danger" }) <br />
-
-            <div style="text-align:right;">
-                <input type="submit" class="btn btn-success" value="Guardar Cambios" />
+                @Html.LabelFor(d => d.jefatura)
+                @Html.TextBoxFor(d => d.jefatura, new { placeholder = "Ingrese el nombre de la jefatura", @class = "form-control" })
+                @Html.ValidationMessage("jefatura", new { @class = "text-danger" }) <br />
             </div>
-        }
+            <div class="col-sm">
+                @Html.LabelFor(d => d.jefaturaCorreo)
+                @Html.TextBoxFor(d => d.jefaturaCorreo, new { placeholder = "Ingrese el correo de la jefatura", @class = "form-control" })
+                @Html.ValidationMessage("jefaturaCorreo", new { @class = "text-danger" }) <br />
 
+                @Html.LabelFor(d => d.jefaturaTelefono)
+                @Html.TextBoxFor(d => d.jefaturaTelefono, new { placeholder = "Ingrese el teléfono de la jefatura", @class = "form-control" })
+                @Html.ValidationMessage("jefaturaTelefono", new { @class = "text-danger" }) <br />
+
+                @Html.LabelFor(d => d.numeroRegistro)
+                @Html.TextBoxFor(d => d.numeroRegistro, new { placeholder = "Ingrese el número de registro", @class = "form-control" })
+                @Html.ValidationMessage("numeroRegistro", new { @class = "text-danger" }) <br />
+
+                @Html.LabelFor(d => d.fechaDeRegistro)
+                <br />
+                @Html.EditorFor(d => d.fechaDeRegistro, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessage("fechaDeRegistro", new { @class = "text-danger" }) <br />
+            </div>
+
+            <div class="col-sm">
+            </div>
+        </div>
+
+        <div class="row">
+
+                <div style="text-align:left;">
+                    <input type="submit" class="btn btn-primary btn-lg" value="Atrás" />
+                </div>
+
+                <div style="text-align:right;">
+                    <input type="submit" class="btn btn-primary btn-lg" value="Guardar Cambios" />
+                </div>
+        </div>
     </div>
+ }
 
-</div>
+
 

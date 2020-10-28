@@ -1,20 +1,26 @@
 ﻿@{
     ViewBag.Title = "Página Principal";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
 }
 
+<br />
 <div class="jumbotron">
-    <h1>Comisiones de Salud Ocupacional - Ministerio de Seguridad Pública</h1>
-    <p class="lead">Prototipo desarrollado por Erick Muñoz, Alonso Marín, Jorge Barquero y David Gätjens</p>
+    <div class="row">
+        
+        <div class="col-sm">
+            <div style="text-align:center;">
+                <input onclick="document.location.href='@Url.Content("~/Comision")'" type="button" value="Admin" class="btn btn-primary btn-lg" />
+            </div>
+
+            <br />
+            
+            <div style="text-align:center;">
+                <input onclick="document.location.href='@Url.Content("~/Comision")'" type="button" value="Usuario" class="btn btn-primary btn-lg" />
+            </div>
+        </div>
+        
+
+    </div>
+    
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Funciones:</h2>
-        <p>
-            Crear comisiones (Temporal)
-            Editar datos de una comisión
-            Agregar Representantes a una Comisión
-            Editar y borrar esos Representantes
-        </p>
-    </div>
-</div>
