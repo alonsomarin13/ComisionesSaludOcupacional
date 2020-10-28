@@ -131,6 +131,7 @@
     <Compile Include="Controllers\ComisionController.cs" />
     <Compile Include="Controllers\ComisionUserChooserController.cs" />
     <Compile Include="Controllers\ComisionUserController.cs" />
+    <Compile Include="Controllers\ComisionUserRepresentantesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RepresentanteController.cs" />
     <Compile Include="Global.asax.cs">
@@ -243,10 +244,15 @@
     <Content Include="Views\Shared\_NavBar.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DateTime.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
-    <Content Include="Views\Shared\_LayoutLogin.cshtml" />
+    <Content Include="Views\Shared\_LayoutEmpty.cshtml" />
     <Content Include="Views\ComisionUserChooser\Index.cshtml" />
     <Content Include="Views\ComisionUser\InformacionPrincipal.cshtml" />
     <Content Include="Views\ComisionUser\LlenarInformacion.cshtml" />
+    <Content Include="Views\Shared\_LayoutComisionUser.cshtml" />
+    <Content Include="Views\ComisionUserRepresentantes\Add.cshtml" />
+    <Content Include="Views\ComisionUserRepresentantes\Edit.cshtml" />
+    <Content Include="Views\ComisionUserRepresentantes\Delete.cshtml" />
+    <Content Include="Views\ComisionUser\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

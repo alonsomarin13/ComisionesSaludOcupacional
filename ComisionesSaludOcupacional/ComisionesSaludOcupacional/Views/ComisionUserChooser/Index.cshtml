@@ -1,7 +1,7 @@
 ﻿@model List<ComisionesSaludOcupacional.Models.ViewModels.ComisionTableUserChooser>
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+    Layout = "~/Views/Shared/_LayoutEmpty.cshtml";
 }
 
 <div class="row">
@@ -12,6 +12,7 @@
             {
                 <tr>
                     <td align="center"><input onclick="document.location.href='@Url.Content("~/ComisionUser/InformacionPrincipal/"+oObjeto.idComision)'" type="button" value="@oObjeto.nombre" class="btn btn-primary" /></td>
+
                 </tr>
             }
         </table>

@@ -99,5 +99,53 @@ namespace ComisionesSaludOcupacional.Controllers
 
             return Redirect(Url.Content("~/ComisionUser/InformacionPrincipal/" + model.idComision));
         }
+
+        public ActionResult Edit(int id)
+        {
+            EditComisionViewModel model = new EditComisionViewModel();
+
+            using (var db = new SaludOcupacionalEntities())
+            {
+                var oComision = db.Comision.Find(id);
+                model.contacto = oComision.contacto;
+                model.contactoCorreo = oComision.contactoCorreo;
+                model.contactoTelefono = oComision.contactoTelefono;
+                model.jefatura = oComision.jefatura;
+                model.jefaturaCorreo = oComision.jefaturaCorreo;
+                model.jefaturaTelefono = oComision.jefaturaTelefono;
+                model.idComision = oComision.idComision;
+                model.fechaDeRegistro = oComision.fechaDeRegistro;
+                model.numeroRegistro = oComision.numeroDeRegistro;
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(EditComisionViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            using (var db = new SaludOcupacionalEntities())
+            {
+                var oComision = db.Comision.Find(model.idComision);
+                oComision.contacto = model.contacto;
+                oComision.contactoCorreo = model.contactoCorreo;
+                oComision.contactoTelefono = model.contactoTelefono;
+                oComision.jefatura = model.jefatura;
+                oComision.jefaturaCorreo = model.jefaturaCorreo;
+                oComision.jefaturaTelefono = model.jefaturaTelefono;
+                oComision.numeroDeRegistro = model.numeroRegistro;
+                oComision.fechaDeRegistro = model.fechaDeRegistro;
+                db.Entry(oComision).State = System.Data.Entity.EntityState.Modified;
+
+                db.SaveChanges();
+            }
+
+            return Redirect(Url.Content("~/ComisionUser/InformacionPrincipal/" + model.idComision));
+        }
     }
 }
