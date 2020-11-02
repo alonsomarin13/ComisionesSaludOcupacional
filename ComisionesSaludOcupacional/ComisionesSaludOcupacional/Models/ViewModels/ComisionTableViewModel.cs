@@ -16,6 +16,9 @@ namespace ComisionesSaludOcupacional.Models.ViewModels
         public string jefaturaCorreo { get; set; }
         public string jefaturaTelefono { get; set; }
 
+        public string numeroRegistro { get; set; }
+        public DateTime? fechaDeRegistro { get; set; }
+
     }
 
     public class ComisionTableUserChooser

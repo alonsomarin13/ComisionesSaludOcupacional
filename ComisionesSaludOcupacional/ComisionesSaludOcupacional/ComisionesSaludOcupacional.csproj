@@ -128,6 +128,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminComisionController.cs" />
+    <Compile Include="Controllers\AdminRepresentantesController.cs" />
     <Compile Include="Controllers\ComisionController.cs" />
     <Compile Include="Controllers\ComisionUserChooserController.cs" />
     <Compile Include="Controllers\ComisionUserController.cs" />
@@ -253,6 +255,11 @@
     <Content Include="Views\ComisionUserRepresentantes\Edit.cshtml" />
     <Content Include="Views\ComisionUserRepresentantes\Delete.cshtml" />
     <Content Include="Views\ComisionUser\Edit.cshtml" />
+    <Content Include="Views\AdminComision\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Views\AdminComision\Add.cshtml" />
+    <Content Include="Views\AdminRepresentantes\Representantes.cshtml" />
+    <Content Include="Views\Shared\_LayoutSalirOnly.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
