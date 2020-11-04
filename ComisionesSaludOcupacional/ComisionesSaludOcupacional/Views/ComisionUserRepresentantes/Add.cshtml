@@ -22,50 +22,45 @@
             Value = "1",
         }
     };
-    <div class="jumbotron">
-        <div class="row">
-            <div class="col-sm"></div>
-            <div class="col-sm">
-                @Html.AntiForgeryToken()
+<div class="jumbotron">
+    <div class="row">
+        <div class="col-sm"></div>
+        <div class="col-sm">
+            @Html.AntiForgeryToken()
 
-                @Html.ValidationMessage("error", new { @class = "text-danger" })
+            @Html.ValidationMessage("error", new { @class = "text-danger" })
 
-                @Html.LabelFor(d => d.nombre)
-                @Html.TextBoxFor(d => d.nombre, new { @class = "form-control" })
-                @Html.ValidationMessage("nombre", new { @class = "text-danger" }) <hr class="my-4">
+            @Html.LabelFor(d => d.nombre)
+            @Html.TextBoxFor(d => d.nombre, new { @class = "form-control" })
+            @Html.ValidationMessage("nombre", new { @class = "text-danger" }) <hr class="my-4">
 
-                @Html.LabelFor(d => d.correo)
-                @Html.TextBoxFor(d => d.correo, new { @class = "form-control" })
-                @Html.ValidationMessage("correo", new { @class = "text-danger" }) <hr class="my-4">
+            @Html.LabelFor(d => d.correo)
+            @Html.TextBoxFor(d => d.correo, new { @class = "form-control" })
+            @Html.ValidationMessage("correo", new { @class = "text-danger" }) <hr class="my-4">
 
-                @Html.LabelFor(d => d.telefono)
-                @Html.TextBoxFor(d => d.telefono, new { @class = "form-control" })
-                @Html.ValidationMessage("telefono", new { @class = "text-danger" }) <hr class="my-4">
+            @Html.LabelFor(d => d.telefono)
+            @Html.TextBoxFor(d => d.telefono, new { @class = "form-control" })
+            @Html.ValidationMessage("telefono", new { @class = "text-danger" }) <hr class="my-4">
 
-                @Html.Label("Tipo de Representante");
-                <br>
-                @Html.DropDownListFor(d => d.tipo, lista, new { @class = "custom-select" }) <hr class="my-4">
-            </div>
-            <div class="col-sm"></div>
+            @Html.Label("Tipo de Representante");
+            <br>
+            @Html.DropDownListFor(d => d.tipo, lista, new { @class = "custom-select" }) <hr class="my-4">
         </div>
-
+        <div class="col-sm"></div>
+    </div>
+        <br />
         <div class="row">
             <div class="col-sm">
-                <br>
                 <div style="text-align:left;">
-                    <input onclick="history.back()" type="button" class="btn btn-primary btn-lg" value="Atrás" />
+                    <input onclick="history.back()" type="button" class="btn btn-danger btn-lg" value="Atrás" />
                 </div>
             </div>
-
-            <div class="col-sm"></div>
-
             <div class="col-sm">
-                <br>
                 <div style="text-align:right;">
-                    <input type="submit" class="btn btn-primary btn-lg" value="Crear" />
+                    <input type="submit" class="btn btn-success btn-lg" value="Crear" />
                 </div>
             </div>
         </div>
     </div>
-}
-        
+    }
+

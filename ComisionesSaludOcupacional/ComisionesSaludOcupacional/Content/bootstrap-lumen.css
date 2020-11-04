@@ -61,6 +61,14 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   display: block;
 }
 
+.myBox {
+    background-color: lightgrey;
+    border: 5px solid #555;
+    border-radius: 20px;
+    padding: 25px;
+    
+}
+
 body {
   margin-top:-50px;
   margin-bottom:0;

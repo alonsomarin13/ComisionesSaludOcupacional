@@ -18,7 +18,6 @@
             <PropertyRef Name="idComision" />
           </Key>
           <Property Name="idComision" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="contacto" Type="varchar" MaxLength="50" />
           <Property Name="contactoCorreo" Type="varchar" MaxLength="50" />
           <Property Name="contactoTelefono" Type="varchar" MaxLength="50" />
@@ -28,6 +27,7 @@
           <Property Name="jefaturaTelefono" Type="varchar" MaxLength="25" />
           <Property Name="numeroDeRegistro" Type="varchar" MaxLength="25" />
           <Property Name="fechaDeRegistro" Type="date" />
+          <Property Name="idCentroDeTrabajo" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Cuenta">
           <Key>
@@ -59,6 +59,30 @@
           <Property Name="estado" Type="int" Nullable="false" />
           <Property Name="idComision" Type="int" />
         </EntityType>
+        <Association Name="FK_CentroDeTrabajo_Region">
+          <End Role="Region" Type="Self.Region" Multiplicity="1" />
+          <End Role="CentroDeTrabajo" Type="Self.CentroDeTrabajo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="idRegion" />
+            </Principal>
+            <Dependent Role="CentroDeTrabajo">
+              <PropertyRef Name="idRegion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comision_CentroDeTrabajo">
+          <End Role="CentroDeTrabajo" Type="Self.CentroDeTrabajo" Multiplicity="1" />
+          <End Role="Comision" Type="Self.Comision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CentroDeTrabajo">
+              <PropertyRef Name="idCentroDeTrabajo" />
+            </Principal>
+            <Dependent Role="Comision">
+              <PropertyRef Name="idCentroDeTrabajo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Cuenta_Comision">
           <End Role="Comision" Type="Self.Comision" Multiplicity="0..1" />
           <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="*" />
@@ -89,6 +113,14 @@
           <EntitySet Name="Cuenta" EntityType="Self.Cuenta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Region" EntityType="Self.Region" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Representante" EntityType="Self.Representante" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CentroDeTrabajo_Region" Association="Self.FK_CentroDeTrabajo_Region">
+            <End Role="Region" EntitySet="Region" />
+            <End Role="CentroDeTrabajo" EntitySet="CentroDeTrabajo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comision_CentroDeTrabajo" Association="Self.FK_Comision_CentroDeTrabajo">
+            <End Role="CentroDeTrabajo" EntitySet="CentroDeTrabajo" />
+            <End Role="Comision" EntitySet="Comision" />
+          </AssociationSet>
           <AssociationSet Name="FK_Cuenta_Comision" Association="Self.FK_Cuenta_Comision">
             <End Role="Comision" EntitySet="Comision" />
             <End Role="Cuenta" EntitySet="Cuenta" />
@@ -108,6 +140,14 @@
           <EntitySet Name="Cuenta" EntityType="SaludOcupacionalModel.Cuenta" />
           <EntitySet Name="Region" EntityType="SaludOcupacionalModel.Region" />
           <EntitySet Name="Representante" EntityType="SaludOcupacionalModel.Representante" />
+          <AssociationSet Name="FK_CentroDeTrabajo_Region" Association="SaludOcupacionalModel.FK_CentroDeTrabajo_Region">
+            <End Role="Region" EntitySet="Region" />
+            <End Role="CentroDeTrabajo" EntitySet="CentroDeTrabajo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comision_CentroDeTrabajo" Association="SaludOcupacionalModel.FK_Comision_CentroDeTrabajo">
+            <End Role="CentroDeTrabajo" EntitySet="CentroDeTrabajo" />
+            <End Role="Comision" EntitySet="Comision" />
+          </AssociationSet>
           <AssociationSet Name="FK_Cuenta_Comision" Association="SaludOcupacionalModel.FK_Cuenta_Comision">
             <End Role="Comision" EntitySet="Comision" />
             <End Role="Cuenta" EntitySet="Cuenta" />
@@ -124,13 +164,14 @@
           <Property Name="idCentroDeTrabajo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombreCentroDeTrabajo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="idRegion" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Region" Relationship="SaludOcupacionalModel.FK_CentroDeTrabajo_Region" FromRole="CentroDeTrabajo" ToRole="Region" />
+          <NavigationProperty Name="Comision" Relationship="SaludOcupacionalModel.FK_Comision_CentroDeTrabajo" FromRole="CentroDeTrabajo" ToRole="Comision" />
         </EntityType>
         <EntityType Name="Comision">
           <Key>
             <PropertyRef Name="idComision" />
           </Key>
           <Property Name="idComision" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="contacto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="contactoCorreo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="contactoTelefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -140,6 +181,8 @@
           <Property Name="jefaturaTelefono" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="numeroDeRegistro" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="fechaDeRegistro" Type="DateTime" Precision="0" />
+          <Property Name="idCentroDeTrabajo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CentroDeTrabajo" Relationship="SaludOcupacionalModel.FK_Comision_CentroDeTrabajo" FromRole="Comision" ToRole="CentroDeTrabajo" />
           <NavigationProperty Name="Cuenta" Relationship="SaludOcupacionalModel.FK_Cuenta_Comision" FromRole="Comision" ToRole="Cuenta" />
           <NavigationProperty Name="Representante" Relationship="SaludOcupacionalModel.FK_Representante_Comision" FromRole="Comision" ToRole="Representante" />
         </EntityType>
@@ -161,6 +204,7 @@
           <Property Name="idRegion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="numeroRegion" Type="Int32" Nullable="false" />
           <Property Name="nombreRegion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CentroDeTrabajo" Relationship="SaludOcupacionalModel.FK_CentroDeTrabajo_Region" FromRole="Region" ToRole="CentroDeTrabajo" />
         </EntityType>
         <EntityType Name="Representante">
           <Key>
@@ -175,6 +219,30 @@
           <Property Name="idComision" Type="Int32" />
           <NavigationProperty Name="Comision" Relationship="SaludOcupacionalModel.FK_Representante_Comision" FromRole="Representante" ToRole="Comision" />
         </EntityType>
+        <Association Name="FK_CentroDeTrabajo_Region">
+          <End Type="SaludOcupacionalModel.Region" Role="Region" Multiplicity="1" />
+          <End Type="SaludOcupacionalModel.CentroDeTrabajo" Role="CentroDeTrabajo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="idRegion" />
+            </Principal>
+            <Dependent Role="CentroDeTrabajo">
+              <PropertyRef Name="idRegion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comision_CentroDeTrabajo">
+          <End Type="SaludOcupacionalModel.CentroDeTrabajo" Role="CentroDeTrabajo" Multiplicity="1" />
+          <End Type="SaludOcupacionalModel.Comision" Role="Comision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CentroDeTrabajo">
+              <PropertyRef Name="idCentroDeTrabajo" />
+            </Principal>
+            <Dependent Role="Comision">
+              <PropertyRef Name="idCentroDeTrabajo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Cuenta_Comision">
           <End Type="SaludOcupacionalModel.Comision" Role="Comision" Multiplicity="0..1" />
           <End Type="SaludOcupacionalModel.Cuenta" Role="Cuenta" Multiplicity="*" />
@@ -199,7 +267,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -217,6 +285,7 @@
           <EntitySetMapping Name="Comision">
             <EntityTypeMapping TypeName="SaludOcupacionalModel.Comision">
               <MappingFragment StoreEntitySet="Comision">
+                <ScalarProperty Name="idCentroDeTrabajo" ColumnName="idCentroDeTrabajo" />
                 <ScalarProperty Name="fechaDeRegistro" ColumnName="fechaDeRegistro" />
                 <ScalarProperty Name="numeroDeRegistro" ColumnName="numeroDeRegistro" />
                 <ScalarProperty Name="jefaturaTelefono" ColumnName="jefaturaTelefono" />
@@ -226,7 +295,6 @@
                 <ScalarProperty Name="contactoTelefono" ColumnName="contactoTelefono" />
                 <ScalarProperty Name="contactoCorreo" ColumnName="contactoCorreo" />
                 <ScalarProperty Name="contacto" ColumnName="contacto" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="idComision" ColumnName="idComision" />
               </MappingFragment>
             </EntityTypeMapping>
