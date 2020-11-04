@@ -18,11 +18,12 @@ namespace ComisionesSaludOcupacional.Controllers
             using (SaludOcupacionalEntities db = new SaludOcupacionalEntities())
             {
                 lista = (from d in db.Comision
+                         join c in db.CentroDeTrabajo on d.idCentroDeTrabajo equals c.idCentroDeTrabajo
                          orderby d.idComision
                          select new ComisionTableUserChooser
                          {
                              idComision = d.idComision,
-                             nombre = d.nombre,
+                             nombre = c.nombreCentroDeTrabajo,
                          }).ToList();
             }
 

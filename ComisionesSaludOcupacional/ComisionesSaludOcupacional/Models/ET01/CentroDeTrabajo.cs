@@ -14,8 +14,18 @@ namespace ComisionesSaludOcupacional.Models.ET01
     
     public partial class CentroDeTrabajo
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CentroDeTrabajo()
+        {
+            this.Comision = new HashSet<Comision>();
+        }
+    
         public int idCentroDeTrabajo { get; set; }
         public string nombreCentroDeTrabajo { get; set; }
         public int idRegion { get; set; }
+    
+        public virtual Region Region { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Comision> Comision { get; set; }
     }
 }

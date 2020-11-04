@@ -22,7 +22,6 @@ namespace ComisionesSaludOcupacional.Models.ET01
         }
     
         public int idComision { get; set; }
-        public string nombre { get; set; }
         public string contacto { get; set; }
         public string contactoCorreo { get; set; }
         public string contactoTelefono { get; set; }
@@ -32,7 +31,9 @@ namespace ComisionesSaludOcupacional.Models.ET01
         public string jefaturaTelefono { get; set; }
         public string numeroDeRegistro { get; set; }
         public Nullable<System.DateTime> fechaDeRegistro { get; set; }
+        public int idCentroDeTrabajo { get; set; }
     
+        public virtual CentroDeTrabajo CentroDeTrabajo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cuenta> Cuenta { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

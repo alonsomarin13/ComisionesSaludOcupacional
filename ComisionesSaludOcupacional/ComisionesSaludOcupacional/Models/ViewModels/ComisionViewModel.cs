@@ -3,14 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace ComisionesSaludOcupacional.Models.ViewModels
 {
     public class ComisionViewModel
     {
+
         [Required]
-        [Display(Name ="Nombre de la Comisión")]
-        public string nombre { get; set; }
+        [Display(Name ="Region")]
+        public string nombreRegion { get; set; }
+        public IEnumerable<SelectListItem> listaDeRegiones { get; set; }
+
+        [Required]
+        [Display(Name = "Nombre del Centro de Trabajo")]
+        public string nombreCentroDeTrabajo { get; set; }
+        public IEnumerable<SelectListItem> listaDeCentrosDeTrabajo { get; set; }
+        [Required]
+        public int idCentroDeTrabajo { get; set; }
     }
 
     public class EditComisionViewModel

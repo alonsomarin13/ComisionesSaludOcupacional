@@ -19,11 +19,12 @@ namespace ComisionesSaludOcupacional.Controllers
             using (SaludOcupacionalEntities db = new SaludOcupacionalEntities())
             {
                 lista = (from d in db.Comision
-                       orderby d.idComision
+                         join c in db.CentroDeTrabajo on d.idCentroDeTrabajo equals c.idCentroDeTrabajo
+                         orderby d.idComision
                        select new ComisionTableViewModel
                        {
                            idComision = d.idComision,
-                           nombre = d.nombre,
+                           nombre = c.nombreCentroDeTrabajo,
                            contacto = d.contacto,
                            contactoCorreo = d.contactoCorreo,
                            contactoTelefono = d.contactoTelefono,
@@ -39,6 +40,7 @@ namespace ComisionesSaludOcupacional.Controllers
         [HttpGet]
         public ActionResult Add()
         {
+            
             return View();
         }
 
@@ -53,7 +55,7 @@ namespace ComisionesSaludOcupacional.Controllers
             using (var db = new SaludOcupacionalEntities())
             {
                 Comision oComision = new Comision();
-                oComision.nombre = model.nombre;
+                //oComision.nombre = model.nombre;
                 db.Comision.Add(oComision);
 
                 db.SaveChanges();

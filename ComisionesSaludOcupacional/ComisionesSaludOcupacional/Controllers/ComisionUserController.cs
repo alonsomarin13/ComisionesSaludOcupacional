@@ -22,7 +22,8 @@ namespace ComisionesSaludOcupacional.Controllers
             using (var db = new SaludOcupacionalEntities())
             {
                 var oComision = db.Comision.Find(id);
-                model.nombre = oComision.nombre;
+                var oCentroDeTrabajo = db.CentroDeTrabajo.Find(oComision.idCentroDeTrabajo);
+                model.nombre = oCentroDeTrabajo.nombreCentroDeTrabajo;
                 model.contacto = oComision.contacto;
                 model.contactoCorreo = oComision.contactoCorreo;
                 model.contactoTelefono = oComision.contactoTelefono;
