@@ -5,50 +5,67 @@
     Layout = "~/Views/Shared/_LayoutComisionUser.cshtml";
 }
 
-<h2>Agregar Representante</h2>
+<h4 class="display-3">Agregar Representante</h4>
 
-<div class="row">
-    <div class="col-md-12">
+@using (Html.BeginForm("Add", "ComisionUserRepresentantes", FormMethod.Post, new { role = "form", @class = "form-group" }))
+{
 
-        @using (Html.BeginForm("Add", "ComisionUserRepresentantes", FormMethod.Post, new { role = "form", @class = "" }))
-        {
-            @Html.AntiForgeryToken()
-
-            @Html.ValidationMessage("error", new { @class = "text-danger" })
-
-            @Html.LabelFor(d => d.nombre)
-            @Html.TextBoxFor(d => d.nombre, new { @class = "formControl" })
-            @Html.ValidationMessage("nombre", new { @class = "text-danger" }) <br />
-
-            @Html.LabelFor(d => d.correo)
-            @Html.TextBoxFor(d => d.correo, new { @class = "formControl" })
-            @Html.ValidationMessage("correo", new { @class = "text-danger" }) <br />
-
-            @Html.LabelFor(d => d.telefono)
-            @Html.TextBoxFor(d => d.telefono, new { @class = "formControl" })
-            @Html.ValidationMessage("telefono", new { @class = "text-danger" }) <br />
-
-            var lista = new List<SelectListItem>()
+    var lista = new List<SelectListItem>()
     {
-                    new SelectListItem()
-                    {
-                        Text = "Patrono",
-                        Value = "0",
-                    }, new SelectListItem()
-                    {
-                        Text = "Trabajador",
-                        Value = "1",
-                    }
-                };
-
-            @Html.Label("Tipo de Representante");
-            @Html.DropDownListFor(d => d.tipo, lista);
-
-            <div style="text-align:right;">
-                <input type="submit" class="btn btn-success" value="Crear" />
-            </div>
+        new SelectListItem()
+        {
+            Text = "Patrono",
+            Value = "0",
+        }, new SelectListItem()
+        {
+            Text = "Trabajador",
+            Value = "1",
         }
+    };
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-sm"></div>
+            <div class="col-sm">
+                @Html.AntiForgeryToken()
 
+                @Html.ValidationMessage("error", new { @class = "text-danger" })
+
+                @Html.LabelFor(d => d.nombre)
+                @Html.TextBoxFor(d => d.nombre, new { @class = "form-control" })
+                @Html.ValidationMessage("nombre", new { @class = "text-danger" }) <hr class="my-4">
+
+                @Html.LabelFor(d => d.correo)
+                @Html.TextBoxFor(d => d.correo, new { @class = "form-control" })
+                @Html.ValidationMessage("correo", new { @class = "text-danger" }) <hr class="my-4">
+
+                @Html.LabelFor(d => d.telefono)
+                @Html.TextBoxFor(d => d.telefono, new { @class = "form-control" })
+                @Html.ValidationMessage("telefono", new { @class = "text-danger" }) <hr class="my-4">
+
+                @Html.Label("Tipo de Representante");
+                <br>
+                @Html.DropDownListFor(d => d.tipo, lista, new { @class = "custom-select" }) <hr class="my-4">
+            </div>
+            <div class="col-sm"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm">
+                <br>
+                <div style="text-align:left;">
+                    <input onclick="history.back()" type="button" class="btn btn-primary btn-lg" value="Atrás" />
+                </div>
+            </div>
+
+            <div class="col-sm"></div>
+
+            <div class="col-sm">
+                <br>
+                <div style="text-align:right;">
+                    <input type="submit" class="btn btn-primary btn-lg" value="Crear" />
+                </div>
+            </div>
+        </div>
     </div>
-
-</div>
+}
+        

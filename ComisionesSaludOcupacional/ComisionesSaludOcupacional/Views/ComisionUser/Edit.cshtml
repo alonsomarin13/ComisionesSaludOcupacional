@@ -5,18 +5,16 @@
     Layout = "~/Views/Shared/_LayoutComisionUser.cshtml";
 }
 
-<h2>Editar Datos de Comisión</h2>
-
-
-
-
-
+<h4 class="display-3">Editar Datos de Comisión</h4>
 
 @using (Html.BeginForm("Edit", "ComisionUser", FormMethod.Post, new { role = "form", @class = "" }))
 {
     <div class="jumbotron">
         <div class="row">
             <div class="col-sm">
+                
+            </div>
+            <div class="col-lg">
                 @Html.HiddenFor(d => d.idComision)
                 @Html.AntiForgeryToken()
 
@@ -24,37 +22,44 @@
 
                 @Html.LabelFor(d => d.contacto)
                 @Html.TextBoxFor(d => d.contacto, new { placeholder = "Ingrese el nombre del contacto", @class = "form-control" })
-                @Html.ValidationMessage("contacto", new { @class = "text-danger" }) <br />
+                @Html.ValidationMessage("contacto", new { @class = "text-danger" })
+                <hr class="my-4">
 
                 @Html.LabelFor(d => d.contactoCorreo)
                 @Html.TextBoxFor(d => d.contactoCorreo, new { placeholder = "Ingrese el correo", @class = "form-control" })
-                @Html.ValidationMessage("contactoCorreo", new { @class = "text-danger" }) <br />
+                @Html.ValidationMessage("contactoCorreo", new { @class = "text-danger" })
+                <hr class="my-4">
 
                 @Html.LabelFor(d => d.contactoTelefono)
                 @Html.TextBoxFor(d => d.contactoTelefono, new { placeholder = "Ingrese el contacto de teléfono", @class = "form-control" })
-                @Html.ValidationMessage("contactoTelefono", new { @class = "text-danger" }) <br />
+                @Html.ValidationMessage("contactoTelefono", new { @class = "text-danger" })
+                <hr class="my-4">
 
                 @Html.LabelFor(d => d.jefatura)
                 @Html.TextBoxFor(d => d.jefatura, new { placeholder = "Ingrese el nombre de la jefatura", @class = "form-control" })
-                @Html.ValidationMessage("jefatura", new { @class = "text-danger" }) <br />
-            </div>
-            <div class="col-sm">
+                @Html.ValidationMessage("jefatura", new { @class = "text-danger" })
+                <hr class="my-4">
+
                 @Html.LabelFor(d => d.jefaturaCorreo)
                 @Html.TextBoxFor(d => d.jefaturaCorreo, new { placeholder = "Ingrese el correo de la jefatura", @class = "form-control" })
-                @Html.ValidationMessage("jefaturaCorreo", new { @class = "text-danger" }) <br />
+                @Html.ValidationMessage("jefaturaCorreo", new { @class = "text-danger" })
+                <hr class="my-4">
 
                 @Html.LabelFor(d => d.jefaturaTelefono)
                 @Html.TextBoxFor(d => d.jefaturaTelefono, new { placeholder = "Ingrese el teléfono de la jefatura", @class = "form-control" })
-                @Html.ValidationMessage("jefaturaTelefono", new { @class = "text-danger" }) <br />
+                @Html.ValidationMessage("jefaturaTelefono", new { @class = "text-danger" })
+                <hr class="my-4">
 
                 @Html.LabelFor(d => d.numeroRegistro)
                 @Html.TextBoxFor(d => d.numeroRegistro, new { placeholder = "Ingrese el número de registro", @class = "form-control" })
-                @Html.ValidationMessage("numeroRegistro", new { @class = "text-danger" }) <br />
+                @Html.ValidationMessage("numeroRegistro", new { @class = "text-danger" })
+                <hr class="my-4">
 
                 @Html.LabelFor(d => d.fechaDeRegistro)
                 <br />
                 @Html.EditorFor(d => d.fechaDeRegistro, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessage("fechaDeRegistro", new { @class = "text-danger" }) <br />
+                @Html.ValidationMessage("fechaDeRegistro", new { @class = "text-danger" })
+                <hr class="my-4">
             </div>
 
             <div class="col-sm">
@@ -62,14 +67,24 @@
         </div>
 
         <div class="row">
-
-            <div style="text-align:left;">
-                <input type="submit" class="btn btn-primary btn-lg" value="Atrás" />
+            <div class="col-sm">
+                <br>
+                <div style="text-align:left;">
+                    <input onclick="history.back()" type="button" class="btn btn-primary btn-lg" value="Atrás" />
+                </div>
             </div>
 
-            <div style="text-align:right;">
-                <input type="submit" class="btn btn-primary btn-lg" value="Guardar Cambios" />
+            <div class="col-sm"></div>
+
+            <div class="col-sm">
+                <br>
+                <div style="text-align:right;">
+                    <input type="submit" class="btn btn-primary btn-lg" value="Guardar Cambios" />
+                </div>
             </div>
+            
+
+            
         </div>
     </div>
 }

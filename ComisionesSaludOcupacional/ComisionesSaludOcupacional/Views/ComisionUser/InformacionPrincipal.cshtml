@@ -1,4 +1,5 @@
 ﻿@model ComisionesSaludOcupacional.Models.ViewModels.ComisionUserTableViewModel
+
 @{
     ViewBag.Title = "Informacion de la Comisión";
     Session["ComisionUserID"] = Model.idComision;
@@ -6,65 +7,75 @@
 }
 
 
-<h2>@Model.nombre</h2>
-<div class="col-md-12">
-    <input type="button" class="btn btn-primary" onclick="document.location.href='@Url.Content("~/ComisionUser/Edit/" + Model.idComision)'" value="Editar Información" />
-</div>
-<div class="row">
-    <div class="col-lg-12">
-        <table class="table table-bordered">
-            <tr>
-                <th>Nombre de Contacto</th>
-                <th>Correo del Contacto</th>
-                <th>Teléfono del Contacto</th>
-                <th>Nombre de la Jefatura</th>
-                <th>Correo del la Jefatura</th>
-                <th>Teléfono de la Jefatura</th>
-                <th>Número de Registro</th>
-                <th>Fecha de Registro</th>
-            </tr>
-            <tr>
-                <td>@Model.contacto</td>
-                <td>@Model.contactoCorreo</td>
-                <td>@Model.contactoTelefono</td>
-                <td>@Model.jefatura</td>
-                <td>@Model.jefaturaCorreo</td>
-                <td>@Model.jefaturaTelefono</td>
-                <td>@Model.numeroRegistro</td>
-                <td>@Model.fechaDeRegistro.ToString().Replace("12:00:00","")</td>
-            </tr>
-        </table>
+<div class="jumbotron">
+    <h3 class="display-3">@Model.nombre</h3>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="table table-bordered">
+                <tr class="table-primary">
+                    <th>Nombre de Contacto</th>
+                    <th>Correo del Contacto</th>
+                    <th>Teléfono del Contacto</th>
+                    <th>Nombre de la Jefatura</th>
+                    <th>Correo del la Jefatura</th>
+                    <th>Teléfono de la Jefatura</th>
+                    <th>Número de Registro</th>
+                    <th>Fecha de Registro</th>
+                </tr>
+                <tr>
+                    <td>@Model.contacto</td>
+                    <td>@Model.contactoCorreo</td>
+                    <td>@Model.contactoTelefono</td>
+                    <td>@Model.jefatura</td>
+                    <td>@Model.jefaturaCorreo</td>
+                    <td>@Model.jefaturaTelefono</td>
+                    <td>@Model.numeroRegistro</td>
+                    <td>@Model.fechaDeRegistro.ToString().Replace("00:00:00", "")</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <br>
+    <div class="col-md-12" style="text-align:right;">
+        <input type="button" class="btn btn-primary" onclick="document.location.href='@Url.Content("~/ComisionUser/Edit/" + Model.idComision)'" value="Editar Información" />
     </div>
 </div>
-<br>
-<h2>Representantes:</h2>
-<div class="col-md-12">
-    <input type="button" class="btn btn-primary" onclick="document.location.href='@Url.Content("~/ComisionUserRepresentantes/Add/"+ Model.idComision)'" value="Crear Representante" />
-</div>
-<div class="row">
-    <div class="col-lg-12">
-        <table class="table table-bordered">
-            <tr>
-                <th>Nombre</th>
-                <th>Correo</th>
-                <th>Teléfono</th>
-                <th> </th>
-                <th> </th>
-            </tr>
 
-            @if (Model != null)
-            {
-                foreach (var oObjeto in Model.representantes)
+<div class="jumbotron">
+    <h4 class="display-3">Representantes</h4>
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="table table-bordered">
+                <tr class="table-primary">
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Teléfono</th>
+                    <th>Editar representante</th>
+                    <th>Borrar representante</th>
+                </tr>
+
+                @if (Model != null)
                 {
-                    <tr>
-                        <td>@oObjeto.nombre</td>
-                        <td>@oObjeto.correo</td>
-                        <td>@oObjeto.telefono</td>
-                        <td><input onclick="location.href='@Url.Content("~/ComisionUserRepresentantes/Delete/"+oObjeto.idRepresentante)'" type="button" value="Borrar" class="btn btn-danger" /></td>
-                        <td><input onclick="document.location.href='@Url.Content("~/ComisionUserRepresentantes/Edit/"+oObjeto.idRepresentante)'" type="button" value="Editar" class="btn btn-default" /></td>
-                    </tr>
+                    foreach (var oObjeto in Model.representantes)
+                    {
+                        <tr>
+                            <td>@oObjeto.nombre</td>
+                            <td>@oObjeto.correo</td>
+                            <td>@oObjeto.telefono</td>
+                            <td><input onclick="document.location.href='@Url.Content("~/ComisionUserRepresentantes/Edit/"+oObjeto.idRepresentante)'" type="button" value="Editar" class="btn btn-warning" /></td>
+                            <td><input onclick="location.href='@Url.Content("~/ComisionUserRepresentantes/Delete/"+oObjeto.idRepresentante)'" type="button" value="Borrar" class="btn btn-danger" /></td>
+                            
+                        </tr>
+                    }
                 }
-            }
-        </table>
+            </table>
+        </div>
+    </div>
+    <br>
+
+    <div class="col-md-12" style="text-align:right;">
+        <input type="button" class="btn btn-primary" onclick="document.location.href='@Url.Content("~/ComisionUserRepresentantes/Add/"+ Model.idComision)'" value="Crear Representante" />
     </div>
 </div>
