@@ -4,28 +4,32 @@
     ViewBag.Title = "Representantes";
 }
 
-<h2>Representantes</h2>
 <br>
-<div class="row">
-    <div class="col-lg-12">
-        <table class="table table-bordered">
-            <tr>
-                <th>Nombre</th>
-                <th>Correo</th>
-                <th>Teléfono</th>
-            </tr>
+<div class="jumbotron">
+    <h1 class="display-3">Representantes</h1>
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="table table-bordered">
+                <tr class="table-primary">
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Teléfono</th>
+                </tr>
 
-            @if (Model != null)
-            {
-                foreach (var oObjeto in Model)
+                @if (Model != null)
                 {
-                    <tr>
-                        <td>@oObjeto.nombre</td>
-                        <td>@oObjeto.correo</td>
-                        <td>@oObjeto.telefono</td>
-                    </tr>
+                    foreach (var oObjeto in Model)
+                    {
+                        <tr>
+                            <td>@oObjeto.nombre</td>
+                            <td>@oObjeto.correo</td>
+                            <td>@oObjeto.telefono</td>
+                        </tr>
+                    }
                 }
-            }
-        </table>
+            </table>
+        </div>
     </div>
 </div>
+
+

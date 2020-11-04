@@ -5847,6 +5847,16 @@ a.badge-dark:focus, a.badge-dark.focus {
   border-color: #2c2c2c;
 }
 
+.close-black {
+    float: right;
+    font-size: 1.3125rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #222;
+    text-shadow: 0 1px 0 #222;
+    opacity: .5;
+}
+
 .close {
   float: right;
   font-size: 1.3125rem;
