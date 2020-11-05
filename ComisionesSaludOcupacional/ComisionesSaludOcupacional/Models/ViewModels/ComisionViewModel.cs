@@ -9,7 +9,6 @@ namespace ComisionesSaludOcupacional.Models.ViewModels
 {
     public class ComisionViewModel
     {
-
         [Required]
         [Display(Name ="Region")]
         public string nombreRegion { get; set; }
@@ -53,7 +52,7 @@ namespace ComisionesSaludOcupacional.Models.ViewModels
         [Display(Name = "Número de Registro")]
         public string numeroRegistro { get; set; }
         [Required]
-        [DataType(DataType.DateTime)]
+        [DataType(DataType.Date)]
         [Display(Name = "Fecha de Registro")]
         public DateTime? fechaDeRegistro { get; set; }
         

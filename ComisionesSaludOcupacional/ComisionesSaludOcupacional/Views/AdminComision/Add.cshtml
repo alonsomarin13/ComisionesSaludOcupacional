@@ -2,51 +2,52 @@
 @{
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
     ViewBag.Title = "Agregar Comisión";
-    
+
 }
 
 <h2>Agregar Comisión</h2>
 
-<div class="jumbotron">
-    <div class="myBox">
-        <div class="row">
-            <div class="col-sm">
-
-                @using (Html.BeginForm("Add", "AdminComision", FormMethod.Post, new { role = "form", @class = "" }))
-                {
+@using (Html.BeginForm("Add", "AdminComision", FormMethod.Post, new { role = "form", @class = "" }))
+{
+    <div class="jumbotron">
+        <div class="myBox">
+            <div class="row">
+                <div class="col-sm">
                     @Html.AntiForgeryToken()
 
                     @Html.ValidationMessage("error", new { @class = "text-danger" })
 
                     @Html.LabelFor(d => d.nombreRegion) <br />
-                    @Html.DropDownListFor(d => d.nombreRegion, new SelectList(Model.listaDeRegiones, "Value", "Text"), htmlAttributes: new { @class = "custom-select" })
+                    @Html.DropDownListFor(d => d.nombreRegion, Model.listaDeRegiones, htmlAttributes: new { @class = "custom-select" })
                     <br />
-                    @Html.ValidationMessage("nombre", new { @class = "text-danger" }) <br />
+                    @Html.ValidationMessage("nombreRegion", new { @class = "text-danger" }) <br />
                     @Html.LabelFor(d => d.nombreCentroDeTrabajo)
                     @Html.TextBoxFor(model => model.nombreCentroDeTrabajo, htmlAttributes: new { @class = "form-control" })
+                    <br />
+                    @Html.ValidationMessage("nombreCentroDeTrabajo", new { @class = "text-danger" }) <br />
                     @Html.TextBoxFor(model => model.idCentroDeTrabajo, htmlAttributes: new { style = "display: none;" })
-                }
+                </div>
             </div>
-        </div>
-        <br />
-        <div class="row">
-            <div class="col-sm">
-                <div class="col">
-                    <div style="text-align:left;">
-                        <input onclick="history.back()" type="button" class="btn btn-danger btn-lg" value="Atrás" />
+            <br />
+            <div class="row">
+                <div class="col-sm">
+                    <div class="col">
+                        <div style="text-align:left;">
+                            <input onclick="history.back()" type="button" class="btn btn-danger btn-lg" value="Atrás" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div class="col">
+                        <div style="text-align:right;">
+                            <input type="submit" class="btn btn-success btn-lg" value="Crear" />
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm">
-                <div class="col">
-                    <div style="text-align:right;">
-                        <input type="submit" class="btn btn-success btn-lg" value="Crear" />
-                    </div>
-                </div>
-            </div>
         </div>
-       </div>
     </div>
+}
 
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/start/jquery-ui.css">

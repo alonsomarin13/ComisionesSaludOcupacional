@@ -8,11 +8,11 @@
         if ((System.DateTime)Model != null) {
 
             dt = (System.DateTime)Model;
-            System.Diagnostics.Debug.WriteLine((System.DateTime)Model);
+            //System.Diagnostics.Debug.WriteLine((System.DateTime)Model);
         }
-        System.Diagnostics.Debug.WriteLine("null");
+        //System.Diagnostics.Debug.WriteLine("null");
 
     }
     @Html.TextBox("", String.Format("{0:d}", dt.ToShortDateString()),
-     new { @class = "datefield", type = "string" })
+     new { @class = "datefield", type = "string", @readonly = "readonly" })
 } 

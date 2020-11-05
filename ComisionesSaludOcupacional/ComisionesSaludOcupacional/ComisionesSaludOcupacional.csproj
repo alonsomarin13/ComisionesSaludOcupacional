@@ -171,6 +171,7 @@
     </Compile>
     <Compile Include="Models\ViewModels\ComisionTableViewModel.cs" />
     <Compile Include="Models\ViewModels\ComisionViewModel.cs" />
+    <Compile Include="Models\ViewModels\FiltroFechasViewModel.cs" />
     <Compile Include="Models\ViewModels\RepresentanteTableViewModel.cs" />
     <Compile Include="Models\ViewModels\RepresentanteViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

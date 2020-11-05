@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Common.CommandTrees;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ComisionesSaludOcupacional.Models;
 using ComisionesSaludOcupacional.Models.ET01;
 using ComisionesSaludOcupacional.Models.ViewModels;
+using Microsoft.Ajax.Utilities;
 
 namespace ComisionesSaludOcupacional.Controllers
 {
@@ -14,38 +17,84 @@ namespace ComisionesSaludOcupacional.Controllers
     {
         public int regionIDCombo;
         // GET: AdminComision
-        public ActionResult Index()
+        public ActionResult Index(string nombre, int? region, DateTime? fechaInicial, DateTime? fechaFinal)
         {
-            List<ComisionTableViewModel> lista = null;
+            AdminComisionViewModel model = new AdminComisionViewModel();
+
+            model.fechaInicial = fechaInicial;
+            model.fechaFinal = fechaFinal;
+
+            model.comisiones = null;
             using (SaludOcupacionalEntities db = new SaludOcupacionalEntities())
             {
-                lista = (from d in db.Comision
-                         join c in db.CentroDeTrabajo on d.idCentroDeTrabajo equals c.idCentroDeTrabajo
-                         orderby d.idComision
-                         select new ComisionTableViewModel
-                         {
-                             idComision = d.idComision,
-                             nombre = c.nombreCentroDeTrabajo,
-                             contacto = d.contacto,
-                             contactoCorreo = d.contactoCorreo,
-                             contactoTelefono = d.contactoTelefono,
-                             jefatura = d.jefatura,
-                             jefaturaCorreo = d.jefaturaCorreo,
-                             jefaturaTelefono = d.jefaturaTelefono,
-                             numeroRegistro = d.numeroDeRegistro,
-                             fechaDeRegistro = d.fechaDeRegistro
-                         }).ToList();
+
+                List<SelectListItem> regiones = (from d in db.Region
+                                orderby d.numeroRegion
+                                select new SelectListItem
+                                {
+                                    Value = d.idRegion.ToString(),
+                                    Text = d.nombreRegion,
+                                }).ToList();
+
+                ViewBag.Regiones = new SelectList(regiones, "Value", "Text");
+
+                Debug.WriteLine(fechaInicial.ToString());
+
+                var comisiones = from d in db.Comision
+                                 join c in db.CentroDeTrabajo on d.idCentroDeTrabajo equals c.idCentroDeTrabajo
+                                 join r in db.Region on c.idRegion equals r.idRegion
+                                 orderby d.idComision
+                                 select new ComisionTableViewModel
+                                 {
+                                     idComision = d.idComision,
+                                     nombre = c.nombreCentroDeTrabajo,
+                                     idRegion = r.idRegion,
+                                     nombreRegion = r.nombreRegion,
+                                     contacto = d.contacto,
+                                     contactoCorreo = d.contactoCorreo,
+                                     contactoTelefono = d.contactoTelefono,
+                                     jefatura = d.jefatura,
+                                     jefaturaCorreo = d.jefaturaCorreo,
+                                     jefaturaTelefono = d.jefaturaTelefono,
+                                     numeroRegistro = d.numeroDeRegistro,
+                                     fechaDeRegistro = d.fechaDeRegistro
+                                 };
+
+                if (!String.IsNullOrEmpty(nombre)) {
+                    comisiones = comisiones.Where(d => d.nombre.Contains(nombre));
+                }
+
+                if (region != null)
+                {
+                    comisiones = comisiones.Where(d => d.idRegion == region);
+                }
+
+                if (fechaInicial != null)
+                {
+                    comisiones = comisiones.Where(d => d.fechaDeRegistro >= fechaInicial);
+                }
+
+                if (fechaFinal != null)
+                {
+                    comisiones = comisiones.Where(d => d.fechaDeRegistro <= fechaFinal);
+                }
+
+                model.comisiones = comisiones.ToList();
+
+                return View(model);
             }
 
-            return View(lista);
+            
         }
         [HttpGet]
         public ActionResult Add()
         {
+
             ComisionViewModel model = new ComisionViewModel();
+            List<SelectListItem> regionesTemp;
             using (SaludOcupacionalEntities db = new SaludOcupacionalEntities())
             {
-            model.listaDeRegiones = (from d in db.Region
+            regionesTemp = (from d in db.Region
                          orderby d.numeroRegion
                          select new SelectListItem
                          {
@@ -53,6 +102,7 @@ namespace ComisionesSaludOcupacional.Controllers
                              Text = d.nombreRegion,
                          }).ToList();
             }
+            model.listaDeRegiones = new SelectList(regionesTemp, "Value", "Text");
             return View(model);
         }
 
@@ -61,6 +111,18 @@ namespace ComisionesSaludOcupacional.Controllers
         {
             if (!ModelState.IsValid)
             {
+                List<SelectListItem> regionesTemp;
+                using (SaludOcupacionalEntities db = new SaludOcupacionalEntities())
+                {
+                    regionesTemp = (from d in db.Region
+                                    orderby d.numeroRegion
+                                    select new SelectListItem
+                                    {
+                                        Value = d.idRegion.ToString(),
+                                        Text = d.nombreRegion,
+                                    }).ToList();
+                }
+                model.listaDeRegiones = new SelectList(regionesTemp, "Value", "Text");
                 return View(model);
             }
 
@@ -68,6 +130,23 @@ namespace ComisionesSaludOcupacional.Controllers
 
             using (var db = new SaludOcupacionalEntities())
             {
+
+                CentroDeTrabajo oCentroDeTrabajo = db.CentroDeTrabajo.Find(model.idCentroDeTrabajo);
+                if (oCentroDeTrabajo == null)
+                {
+                    List<SelectListItem> regionesTemp;
+                    regionesTemp = (from d in db.Region
+                                    orderby d.numeroRegion
+                                    select new SelectListItem
+                                    {
+                                        Value = d.idRegion.ToString(),
+                                        Text = d.nombreRegion,
+                                    }).ToList();
+                    model.listaDeRegiones = new SelectList(regionesTemp, "Value", "Text");
+                    ModelState.AddModelError("nombreCentroDeTrabajo", "El Centro de Trabajo no Existe");
+                    return View(model);
+                }
+
                 Comision oComision = new Comision();
                 oComision.idCentroDeTrabajo = model.idCentroDeTrabajo;
                 db.Comision.Add(oComision);
@@ -80,9 +159,9 @@ namespace ComisionesSaludOcupacional.Controllers
 
         [HttpPost]
         public JsonResult GetCentrosDeTrabajo(string Prefix, int regID) {
-            //Debug.WriteLine("Entre a la funcion de centros");
+            Debug.WriteLine("Entre a la funcion de centros");
             
-            //Debug.WriteLine(regionIDCombo);
+            Debug.WriteLine(regionIDCombo);
             using (SaludOcupacionalEntities db = new SaludOcupacionalEntities()) {
                 var centros = (from d in db.CentroDeTrabajo
                                join c in db.Region on d.idRegion equals c.idRegion

@@ -1,4 +1,4 @@
-﻿@model List<ComisionesSaludOcupacional.Models.ViewModels.ComisionTableViewModel>
+﻿@model ComisionesSaludOcupacional.Models.ViewModels.AdminComisionViewModel
 @{
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
     ViewBag.Title = "Index";
@@ -6,6 +6,22 @@
 
 <br>
 
+@using (Html.BeginForm("Index", "AdminComision", FormMethod.Get))
+{
+    @Html.Label("Nombre")
+    @Html.TextBox("nombre")
+
+    @Html.Label("Region")
+    @Html.DropDownList("region", (SelectList)ViewBag.Regiones, "Seleccione Región")
+
+    @Html.Label("Fecha Inicial")
+    @Html.EditorFor(model => model.fechaInicial, new { @class = "form-control", @id = "fechaInicial", @placeholder = "fechaInicial" })
+
+    @Html.Label("Fecha Final")
+    @Html.EditorFor(model => model.fechaFinal, new { @class = "form-control", @id = "fechaFinal", @placeholder = "fechaFinal" })
+
+    <input type="submit" value="Buscar" />
+}
 <div class="jumbotron">
     <h1 class="display-3">Comisiones</h1>
     <div class="row">
@@ -13,6 +29,7 @@
             <table class="table table-bordered">
                 <tr class="table-primary">
                     <th>Nombre</th>
+                    <th>Region</th>
                     <th>Nombre de Contacto</th>
                     <th>Correo del Contacto</th>
                     <th>Teléfono del Contacto</th>
@@ -24,10 +41,11 @@
                     <th> </th>
                 </tr>
 
-                @foreach (var oObjeto in Model)
+                @foreach (var oObjeto in Model.comisiones)
                 {
                     <tr>
                         <td>@oObjeto.nombre</td>
+                        <td>@oObjeto.nombreRegion</td>
                         <td>@oObjeto.contacto</td>
                         <td>@oObjeto.contactoCorreo</td>
                         <td>@oObjeto.contactoTelefono</td>
@@ -35,8 +53,8 @@
                         <td>@oObjeto.jefaturaCorreo</td>
                         <td>@oObjeto.jefaturaTelefono</td>
                         <td>@oObjeto.numeroRegistro</td>
-                        <td>@oObjeto.fechaDeRegistro.ToString().Replace("12:00:00", "")</td>
-                        <td><input onclick="document.location.href='@Url.Content("~/AdminRepresentantes/Representantes/"+oObjeto.idComision)'" type="button" value="Integrantes" class="btn btn-primary" /></td>
+                        <td>@oObjeto.fechaDeRegistro.ToString().Replace("0:00:00", "")</td>
+                        <td><input onclick="document.location.href='@Url.Content("~/AdminRepresentantes/Representantes/" + oObjeto.idComision)'" type="button" value="Integrantes" class="btn btn-primary" /></td>
                     </tr>
                 }
             </table>
