@@ -6,24 +6,29 @@
 
 <br>
 
-@using (Html.BeginForm("Index", "AdminComision", FormMethod.Get))
-{
-    @Html.Label("Nombre")
-    @Html.TextBox("nombre")
 
-    @Html.Label("Region")
-    @Html.DropDownList("region", (SelectList)ViewBag.Regiones, "Seleccione Región")
-
-    @Html.Label("Fecha Inicial")
-    @Html.EditorFor(model => model.fechaInicial, new { @class = "form-control", @id = "fechaInicial", @placeholder = "fechaInicial" })
-
-    @Html.Label("Fecha Final")
-    @Html.EditorFor(model => model.fechaFinal, new { @class = "form-control", @id = "fechaFinal", @placeholder = "fechaFinal" })
-
-    <input type="submit" value="Buscar" />
-}
 <div class="jumbotron">
     <h1 class="display-3">Comisiones</h1>
+
+    <div class="myBox-adjustable">
+        @using (Html.BeginForm("Index", "AdminComision", FormMethod.Get))
+        {
+            @Html.Label("Nombre")
+            @Html.TextBox("nombre", null, new { @class = "form-control-filter" })
+
+            @Html.Label("Region")
+            @Html.DropDownList("region", (SelectList)ViewBag.Regiones, "Seleccione Región", new { @class = "custom-select-filter" })
+
+            @Html.Label("Fecha Inicial")
+            @Html.EditorFor(model => model.fechaInicial, new { htmlAttributes = new { @class = "form-control-filter" } })
+
+            @Html.Label("Fecha Final")
+            @Html.EditorFor(model => model.fechaFinal, new { htmlAttributes = new { @class = "form-control-filter" } })
+
+            <input type="submit" value="Buscar" />
+        }
+    </div>
+
     <div class="row">
         <div class="col-lg-12">
             <table class="table table-bordered">

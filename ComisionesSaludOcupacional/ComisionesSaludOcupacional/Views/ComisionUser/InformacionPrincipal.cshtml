@@ -39,7 +39,7 @@
 
     <br>
     <div class="col-md-12" style="text-align:right;">
-        <input type="button" class="btn btn-primary" onclick="document.location.href='@Url.Content("~/ComisionUser/Edit/" + Model.idComision)'" value="Editar Información" />
+        <input type="button" onclick="document.location.href='@Url.Content("~/ComisionUser/Edit/" + Model.idComision)'" value="Editar Información" class="btn btn-lg btn-warning"/>
     </div>
 </div>
 
@@ -76,6 +76,6 @@
     <br>
 
     <div class="col-md-12" style="text-align:right;">
-        <input type="button" class="btn btn-primary" onclick="document.location.href='@Url.Content("~/ComisionUserRepresentantes/Add/"+ Model.idComision)'" value="Crear Representante" />
+        <input type="button" onclick="document.location.href='@Url.Content("~/ComisionUserRepresentantes/Add/"+ Model.idComision)'" value="Crear Representante" class="btn btn-lg btn-success"/>
     </div>
 </div>

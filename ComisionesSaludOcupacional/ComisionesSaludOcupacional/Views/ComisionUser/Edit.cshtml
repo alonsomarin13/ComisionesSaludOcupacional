@@ -9,11 +9,8 @@
 
 @using (Html.BeginForm("Edit", "ComisionUser", FormMethod.Post, new { role = "form", @class = "" }))
 {
-    <div class="jumbotron">
+    <div class="myBox-two-col">
         <div class="row">
-            <div class="col-sm">
-                
-            </div>
             <div class="col-lg">
                 @Html.HiddenFor(d => d.idComision)
                 @Html.AntiForgeryToken()
@@ -39,7 +36,8 @@
                 @Html.TextBoxFor(d => d.jefatura, new { placeholder = "Ingrese el nombre de la jefatura", @class = "form-control" })
                 @Html.ValidationMessage("jefatura", new { @class = "text-danger" })
                 <hr class="my-4">
-
+            </div>
+            <div class="col-lg">
                 @Html.LabelFor(d => d.jefaturaCorreo)
                 @Html.TextBoxFor(d => d.jefaturaCorreo, new { placeholder = "Ingrese el correo de la jefatura", @class = "form-control" })
                 @Html.ValidationMessage("jefaturaCorreo", new { @class = "text-danger" })
@@ -57,34 +55,26 @@
 
                 @Html.LabelFor(d => d.fechaDeRegistro)
                 <br />
-                @Html.EditorFor(d => d.fechaDeRegistro, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(d => d.fechaDeRegistro, new { htmlAttributes = new { @class = "form-control-filter" } })
                 @Html.ValidationMessage("fechaDeRegistro", new { @class = "text-danger" })
                 <hr class="my-4">
-            </div>
-
-            <div class="col-sm">
             </div>
         </div>
 
         <div class="row">
             <div class="col-sm">
-                <br>
-                <div style="text-align:left;">
-                    <input onclick="history.back()" type="button" class="btn btn-primary btn-lg" value="Atrás" />
+                <div style="text-align:left">
+                    <input onclick="history.back()" type="button" class="btn btn-danger btn-lg" value="Atrás" />
                 </div>
             </div>
-
-            <div class="col-sm"></div>
-
             <div class="col-sm">
-                <br>
-                <div style="text-align:right;">
+                <div style="text-align:right">
                     <input type="submit" class="btn btn-primary btn-lg" value="Guardar Cambios" />
                 </div>
             </div>
-            
 
-            
+
+
         </div>
     </div>
 }
