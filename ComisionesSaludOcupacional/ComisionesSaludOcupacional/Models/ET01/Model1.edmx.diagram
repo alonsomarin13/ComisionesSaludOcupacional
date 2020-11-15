@@ -4,16 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b81922d554014ed2b9b7c3b4c3ab0f40" Name="Diagram1">
-        <EntityTypeShape EntityType="SaludOcupacionalModel.CentroDeTrabajo" Width="1.5" PointX="3" PointY="2.875" />
-        <EntityTypeShape EntityType="SaludOcupacionalModel.Comision" Width="1.5" PointX="5.25" PointY="2" />
-        <EntityTypeShape EntityType="SaludOcupacionalModel.Cuenta" Width="1.5" PointX="7.5" PointY="1.125" />
-        <EntityTypeShape EntityType="SaludOcupacionalModel.Region" Width="1.5" PointX="0.75" PointY="3" />
-        <EntityTypeShape EntityType="SaludOcupacionalModel.Representante" Width="1.5" PointX="7.5" PointY="4" />
-        <AssociationConnector Association="SaludOcupacionalModel.FK_CentroDeTrabajo_Region" />
-        <AssociationConnector Association="SaludOcupacionalModel.FK_Comision_CentroDeTrabajo" />
-        <AssociationConnector Association="SaludOcupacionalModel.FK_Cuenta_Comision" />
-        <AssociationConnector Association="SaludOcupacionalModel.FK_Representante_Comision" />
+      <Diagram DiagramId="5184812dadd9410fb10bcb29830622a6" Name="Diagram1">
+        <EntityTypeShape EntityType="SaludOcupacionalModel.CentroDeTrabajo" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaludOcupacionalModel.Comision" Width="1.5" PointX="5.25" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaludOcupacionalModel.Cuenta" Width="1.5" PointX="7.5" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaludOcupacionalModel.Region" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaludOcupacionalModel.Representante" Width="1.5" PointX="7.5" PointY="4" IsExpanded="true" />
+        <AssociationConnector Association="SaludOcupacionalModel.FK_CentroDeTrabajo_Region" ManuallyRouted="false" />
+        <AssociationConnector Association="SaludOcupacionalModel.FK_Comision_CentroDeTrabajo" ManuallyRouted="false" />
+        <AssociationConnector Association="SaludOcupacionalModel.FK_Cuenta_Comision" ManuallyRouted="false" />
+        <AssociationConnector Association="SaludOcupacionalModel.FK_Representante_Comision" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
