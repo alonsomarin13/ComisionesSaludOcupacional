@@ -6,10 +6,13 @@ using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Text.RegularExpressions;
 using ComisionesSaludOcupacional.Models;
 using ComisionesSaludOcupacional.Models.ET01;
 using ComisionesSaludOcupacional.Models.ViewModels;
 using Microsoft.Ajax.Utilities;
+using System.Text;
+using System.Web.Security;
 
 namespace ComisionesSaludOcupacional.Controllers
 {
@@ -87,7 +90,7 @@ namespace ComisionesSaludOcupacional.Controllers
             
         }
         [HttpGet]
-        public ActionResult Add()
+        public ActionResult AddComisionUser()
         {
 
             ComisionViewModel model = new ComisionViewModel();
@@ -107,7 +110,7 @@ namespace ComisionesSaludOcupacional.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(ComisionViewModel model)
+        public ActionResult AddComisionUser(ComisionViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -147,14 +150,48 @@ namespace ComisionesSaludOcupacional.Controllers
                     return View(model);
                 }
 
+                int valido = (from d in db.Comision
+                              join ct in db.CentroDeTrabajo on d.idCentroDeTrabajo equals ct.idCentroDeTrabajo
+                              where ct.idCentroDeTrabajo == model.idCentroDeTrabajo
+                              select d.idCentroDeTrabajo).Count();
+
+                if (valido != 0)
+                {
+                    List<SelectListItem> regionesTemp;
+                    regionesTemp = (from d in db.Region
+                                    orderby d.numeroRegion
+                                    select new SelectListItem
+                                    {
+                                        Value = d.idRegion.ToString(),
+                                        Text = d.nombreRegion,
+                                    }).ToList();
+                    model.listaDeRegiones = new SelectList(regionesTemp, "Value", "Text");
+                    ModelState.AddModelError("nombreCentroDeTrabajo", "El Centro de Trabajo ya está asignado a otra comisión");
+                    return View(model);
+                }
+
                 Comision oComision = new Comision();
                 oComision.idCentroDeTrabajo = model.idCentroDeTrabajo;
                 db.Comision.Add(oComision);
 
+                string nombreComision = String.Concat(oCentroDeTrabajo.nombreCentroDeTrabajo.Where(c => !Char.IsWhiteSpace(c)));
+                nombreComision = "comision" + nombreComision;
+                nombreComision = nombreComision.ToLower();
+                nombreComision = Regex.Replace(nombreComision.Normalize(NormalizationForm.FormD), @"[^a-zA-z0-9 ]+", "");
+
+                string contrasena = Membership.GeneratePassword(10, 1);
+
+                Cuenta oCuenta = new Cuenta();
+                oCuenta.nombre = nombreComision;
+                oCuenta.contrasena = contrasena;
+                oCuenta.rol = 1;
+                oCuenta.idComision = oComision.idComision;
+                db.Cuenta.Add(oCuenta);
+
                 db.SaveChanges();
             }
 
-            return Redirect(Url.Content("~/AdminComision"));
+            return Redirect(Url.Content("~/AdminCuenta"));
         }
 
         [HttpPost]

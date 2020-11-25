@@ -9,6 +9,7 @@ namespace ComisionesSaludOcupacional.Models.ViewModels
 {
     public class ComisionViewModel
     {
+        public int idComision { get; set; }
         [Required]
         [Display(Name ="Region")]
         public string nombreRegion { get; set; }
@@ -20,6 +21,7 @@ namespace ComisionesSaludOcupacional.Models.ViewModels
         public IEnumerable<SelectListItem> listaDeCentrosDeTrabajo { get; set; }
         [Required]
         public int idCentroDeTrabajo { get; set; }
+
     }
 
     public class EditComisionViewModel

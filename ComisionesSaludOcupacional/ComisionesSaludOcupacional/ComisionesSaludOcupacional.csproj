@@ -129,16 +129,16 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminComisionController.cs" />
+    <Compile Include="Controllers\AdminCuentaController.cs" />
     <Compile Include="Controllers\AdminRepresentantesController.cs" />
-    <Compile Include="Controllers\ComisionController.cs" />
     <Compile Include="Controllers\ComisionUserChooserController.cs" />
     <Compile Include="Controllers\ComisionUserController.cs" />
     <Compile Include="Controllers\ComisionUserRepresentantesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\RepresentanteController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ClasesUtilidad\CryptoEngine.cs" />
     <Compile Include="Models\ET01\CentroDeTrabajo.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -171,6 +171,8 @@
     </Compile>
     <Compile Include="Models\ViewModels\ComisionTableViewModel.cs" />
     <Compile Include="Models\ViewModels\ComisionViewModel.cs" />
+    <Compile Include="Models\ViewModels\CuentaTableViewModel.cs" />
+    <Compile Include="Models\ViewModels\CuentaViewModel.cs" />
     <Compile Include="Models\ViewModels\FiltroFechasViewModel.cs" />
     <Compile Include="Models\ViewModels\RepresentanteTableViewModel.cs" />
     <Compile Include="Models\ViewModels\RepresentanteViewModel.cs" />
@@ -238,13 +240,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Comision\Add.cshtml" />
-    <Content Include="Views\Comision\Index.cshtml" />
-    <Content Include="Views\Representante\Representantes.cshtml" />
-    <Content Include="Views\Representante\Add.cshtml" />
-    <Content Include="Views\Comision\Edit.cshtml" />
-    <Content Include="Views\Representante\Edit.cshtml" />
-    <Content Include="Views\Representante\Delete.cshtml" />
     <Content Include="Views\Shared\_NavBar.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DateTime.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
@@ -259,9 +254,11 @@
     <Content Include="Views\ComisionUser\Edit.cshtml" />
     <Content Include="Views\AdminComision\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
-    <Content Include="Views\AdminComision\Add.cshtml" />
+    <Content Include="Views\AdminComision\AddComisionUser.cshtml" />
     <Content Include="Views\AdminRepresentantes\Representantes.cshtml" />
     <Content Include="Views\Shared\_LayoutSalirOnly.cshtml" />
+    <Content Include="Views\AdminCuenta\Index.cshtml" />
+    <Content Include="Views\AdminCuenta\AddAdminUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

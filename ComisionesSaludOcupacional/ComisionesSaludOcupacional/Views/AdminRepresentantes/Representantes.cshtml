@@ -10,14 +10,15 @@
     <div class="row">
         <div class="col-lg-12">
             <table class="table table-bordered">
-                <tr class="table-primary">
-                    <th>Nombre</th>
-                    <th>Correo</th>
-                    <th>Teléfono</th>
-                </tr>
 
-                @if (Model != null)
-                {
+               @if (Model != null && Model.Count() != 0)
+               {
+                    <tr class="table-primary">
+                        <th>Nombre</th>
+                        <th>Correo</th>
+                        <th>Teléfono</th>
+                    </tr>
+
                     foreach (var oObjeto in Model)
                     {
                         <tr>
@@ -27,9 +28,15 @@
                         </tr>
                     }
                 }
+                else
+                {
+                    <tr>No se encuentran Representantes asociados a esta comisión</tr>
+                }
             </table>
         </div>
     </div>
 </div>
+
+
 
 

@@ -1,0 +1,45 @@
+﻿@model ComisionesSaludOcupacional.Models.ViewModels.CuentaViewModel
+@{
+    ViewBag.Title = "Agregar Cuenta de Administrador";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h4 class="display-3">Agregar Cuenta de Administrador</h4>
+
+@using (Html.BeginForm("AddAdminUser", "AdminCuenta", FormMethod.Post, new { role = "form", @class = "form-group" }))
+{
+
+<div class="myBox">
+    <div class="row">
+        <div class="col-sm">
+            @Html.AntiForgeryToken()
+
+            @Html.ValidationMessage("error", new { @class = "text-danger" })
+
+            @Html.LabelFor(d => d.nombre)
+            @Html.TextBoxFor(d => d.nombre, new { @class = "form-control" })
+            @Html.ValidationMessage("nombre", new { @class = "text-danger" }) <hr class="my-4">
+
+            @Html.LabelFor(d => d.contrasena)
+            @Html.PasswordFor(d => d.contrasena, new { @class = "form-control" })
+            @Html.ValidationMessage("contrasena", new { @class = "text-danger" }) <hr class="my-4">
+
+            @Html.LabelFor(d => d.confirmarContrasena)
+            @Html.PasswordFor(d => d.confirmarContrasena, new { @class = "form-control" })
+            @Html.ValidationMessage("confirmarContrasena", new { @class = "text-danger" }) <hr class="my-4">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm">
+            <div style="text-align:left">
+                <input onclick="history.back()" type="button" class="btn btn-danger btn-lg" value="Atrás" />
+            </div>
+        </div>
+        <div class="col-sm">
+            <div style="text-align:right">
+                <input type="submit" class="btn btn-success btn-lg" value="Crear" />
+            </div>
+        </div>
+    </div>
+</div>
+}
