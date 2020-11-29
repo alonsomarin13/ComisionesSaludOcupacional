@@ -22,7 +22,10 @@
                     <a class="nav-link" onclick="document.location.href='@Url.Content("~/ComisionUser/InformacionPrincipal/"+Session["ComisionUserID"])'">Comision</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" onclick="document.location.href='@Url.Content("~/Home/")'">Salir</a>
+                    <a class="nav-link" onclick="document.location.href='@Url.Content("~/ComisionUser/Cuenta")'">Cuenta</a>
+                </li>
+                <li class="nav-item">
+                    <a> @Html.ActionLink("Cerrar Sesión", "Logout", "Cierre", null, new { @class = "nav-link" })</a>
                 </li>
             </ul>
         </div>

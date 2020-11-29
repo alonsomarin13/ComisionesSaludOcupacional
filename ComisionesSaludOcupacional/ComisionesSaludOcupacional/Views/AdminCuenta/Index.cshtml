@@ -32,6 +32,7 @@
                 <tr>
                     <td>@oObjeto.nombreComision</td>
                     <td>@oObjeto.nombre</td>
+                    <td><a class="contrasenaBtn" href="javascript:;" data-id="@oObjeto.idCuenta">Consultar Contraseña</a>  </td>
                 </tr>
             }
         </table>
@@ -43,4 +44,45 @@
 <div class="col-md-12" style="text-align:right;">
     <input type="button" onclick="document.location.href='@Url.Content("~/AdminCuenta/AddAdminUser")'" value="Crear cuenta de Administrador" class="btn btn-lg btn-success" />
 </div>
+<div id="dialog" style="display: none">
+</div>
 
+@section scripts
+{
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/jquery-ui.js" type="text/javascript"></script>
+    <link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/themes/blitzer/jquery-ui.css"
+          rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+    $(function () {
+        $("#dialog").dialog({
+                autoOpen: false,
+                modal: true,
+                title: ""
+            });
+        $(".contrasenaBtn").click(function () {
+            debugger;
+            var $buttonClicked = $(this);
+            var id = $buttonClicked.attr('data-id');
+            var options = { "backdrop": "static", keyboard: true };
+            $.ajax({
+                type: "POST",
+                url: "AdminCuenta/VerContrasena/" + id,
+                contentType: "application/json; charset=utf-8",
+                datatype: "json",
+                success: function (response) {
+                    debugger;
+                    $('#dialog').html(response);
+                    $('#dialog').dialog('open');
+
+                },
+                error: function () {
+                    alert("Dynamic content load failed.");
+                }
+            });
+        });
+    });
+
+    </script>
+
+}

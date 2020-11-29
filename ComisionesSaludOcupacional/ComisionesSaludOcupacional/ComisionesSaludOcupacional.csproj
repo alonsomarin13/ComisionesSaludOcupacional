@@ -128,13 +128,15 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminCentroDeTrabajoController.cs" />
     <Compile Include="Controllers\AdminComisionController.cs" />
     <Compile Include="Controllers\AdminCuentaController.cs" />
     <Compile Include="Controllers\AdminRepresentantesController.cs" />
-    <Compile Include="Controllers\ComisionUserChooserController.cs" />
     <Compile Include="Controllers\ComisionUserController.cs" />
     <Compile Include="Controllers\ComisionUserRepresentantesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\CierreController.cs" />
+    <Compile Include="Filters\VerifySession.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -169,11 +171,13 @@
     <Compile Include="Models\ET01\Representante.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModels\CentroDeTrabajoViewModel.cs" />
     <Compile Include="Models\ViewModels\ComisionTableViewModel.cs" />
     <Compile Include="Models\ViewModels\ComisionViewModel.cs" />
     <Compile Include="Models\ViewModels\CuentaTableViewModel.cs" />
     <Compile Include="Models\ViewModels\CuentaViewModel.cs" />
     <Compile Include="Models\ViewModels\FiltroFechasViewModel.cs" />
+    <Compile Include="Models\ViewModels\LoginViewModel.cs" />
     <Compile Include="Models\ViewModels\RepresentanteTableViewModel.cs" />
     <Compile Include="Models\ViewModels\RepresentanteViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -244,7 +248,6 @@
     <Content Include="Views\Shared\DisplayTemplates\DateTime.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
     <Content Include="Views\Shared\_LayoutEmpty.cshtml" />
-    <Content Include="Views\ComisionUserChooser\Index.cshtml" />
     <Content Include="Views\ComisionUser\InformacionPrincipal.cshtml" />
     <Content Include="Views\ComisionUser\LlenarInformacion.cshtml" />
     <Content Include="Views\Shared\_LayoutComisionUser.cshtml" />
@@ -259,9 +262,15 @@
     <Content Include="Views\Shared\_LayoutSalirOnly.cshtml" />
     <Content Include="Views\AdminCuenta\Index.cshtml" />
     <Content Include="Views\AdminCuenta\AddAdminUser.cshtml" />
+    <Content Include="Views\ComisionUser\Cuenta.cshtml" />
+    <Content Include="Views\AdminCuenta\VerContrasena.cshtml" />
+    <Content Include="Views\AdminCentroDeTrabajo\Index.cshtml" />
+    <Content Include="Views\AdminCentroDeTrabajo\EditCentroDeTrabajo.cshtml" />
+    <Content Include="Views\AdminCentroDeTrabajo\AddCentroDeTrabajo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Logout\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

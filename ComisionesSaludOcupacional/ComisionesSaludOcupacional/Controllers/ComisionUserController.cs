@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ComisionesSaludOcupacional.Models;
+using ComisionesSaludOcupacional.Models.ClasesUtilidad;
 using ComisionesSaludOcupacional.Models.ET01;
 using ComisionesSaludOcupacional.Models.ViewModels;
 
@@ -147,6 +148,47 @@ namespace ComisionesSaludOcupacional.Controllers
             }
 
             return Redirect(Url.Content("~/ComisionUser/InformacionPrincipal/" + model.idComision));
+        }
+
+        public ActionResult Cuenta()
+        {
+            CuentaModificadaViewModel model = new CuentaModificadaViewModel();
+
+            Cuenta oCuenta = (Cuenta)Session["Usuario"];
+            model.nombre = oCuenta.nombre;
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Cuenta(CuentaModificadaViewModel model)
+        {
+            Cuenta oCuenta = (Cuenta)Session["Usuario"];
+            model.nombre = oCuenta.nombre;
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            if (oCuenta.contrasena != CryptoEngine.Encrypt(model.contrasena, "sxlw-3jn8-sqoy12"))
+            {
+                ModelState.AddModelError("contrasena", "Contraseña incorrecta");
+                return View(model);
+            }
+
+            using (var db = new SaludOcupacionalEntities())
+            {
+                string contrasenaNueva = CryptoEngine.Encrypt(model.contrasenaNueva, "sxlw-3jn8-sqoy12");
+                oCuenta.contrasena = contrasenaNueva;
+
+                db.Entry(oCuenta).State = System.Data.Entity.EntityState.Modified;
+
+                db.SaveChanges();
+
+                TempData["Success"] = "Contraseña cambiada correctamente";
+            }
+
+            return View(model);
         }
     }
 }

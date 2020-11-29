@@ -28,6 +28,7 @@
           <Property Name="numeroDeRegistro" Type="varchar" MaxLength="25" />
           <Property Name="fechaDeRegistro" Type="date" />
           <Property Name="idCentroDeTrabajo" Type="int" Nullable="false" />
+          <Property Name="idCuenta" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Cuenta">
           <Key>
@@ -37,7 +38,6 @@
           <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="contrasena" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="rol" Type="int" Nullable="false" />
-          <Property Name="idComision" Type="int" />
         </EntityType>
         <EntityType Name="Region">
           <Key>
@@ -83,15 +83,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Cuenta_Comision">
-          <End Role="Comision" Type="Self.Comision" Multiplicity="0..1" />
-          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="*" />
+        <Association Name="FK_Comision_Cuenta">
+          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="1" />
+          <End Role="Comision" Type="Self.Comision" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Comision">
-              <PropertyRef Name="idComision" />
+            <Principal Role="Cuenta">
+              <PropertyRef Name="idCuenta" />
             </Principal>
-            <Dependent Role="Cuenta">
-              <PropertyRef Name="idComision" />
+            <Dependent Role="Comision">
+              <PropertyRef Name="idCuenta" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -121,9 +121,9 @@
             <End Role="CentroDeTrabajo" EntitySet="CentroDeTrabajo" />
             <End Role="Comision" EntitySet="Comision" />
           </AssociationSet>
-          <AssociationSet Name="FK_Cuenta_Comision" Association="Self.FK_Cuenta_Comision">
-            <End Role="Comision" EntitySet="Comision" />
+          <AssociationSet Name="FK_Comision_Cuenta" Association="Self.FK_Comision_Cuenta">
             <End Role="Cuenta" EntitySet="Cuenta" />
+            <End Role="Comision" EntitySet="Comision" />
           </AssociationSet>
           <AssociationSet Name="FK_Representante_Comision" Association="Self.FK_Representante_Comision">
             <End Role="Comision" EntitySet="Comision" />
@@ -160,8 +160,9 @@
           <Property Name="numeroDeRegistro" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="fechaDeRegistro" Type="DateTime" Precision="0" />
           <Property Name="idCentroDeTrabajo" Type="Int32" Nullable="false" />
+          <Property Name="idCuenta" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CentroDeTrabajo" Relationship="Self.FK_Comision_CentroDeTrabajo" FromRole="Comision" ToRole="CentroDeTrabajo" />
-          <NavigationProperty Name="Cuenta" Relationship="Self.FK_Cuenta_Comision" FromRole="Comision" ToRole="Cuenta" />
+          <NavigationProperty Name="Cuenta" Relationship="Self.FK_Comision_Cuenta" FromRole="Comision" ToRole="Cuenta" />
           <NavigationProperty Name="Representante" Relationship="Self.FK_Representante_Comision" FromRole="Comision" ToRole="Representante" />
         </EntityType>
         <EntityType Name="Cuenta">
@@ -172,8 +173,7 @@
           <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="contrasena" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="rol" Type="Int32" Nullable="false" />
-          <Property Name="idComision" Type="Int32" />
-          <NavigationProperty Name="Comision" Relationship="Self.FK_Cuenta_Comision" FromRole="Cuenta" ToRole="Comision" />
+          <NavigationProperty Name="Comision" Relationship="Self.FK_Comision_Cuenta" FromRole="Cuenta" ToRole="Comision" />
         </EntityType>
         <EntityType Name="Region">
           <Key>
@@ -221,15 +221,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Cuenta_Comision">
-          <End Role="Comision" Type="Self.Comision" Multiplicity="0..1" />
-          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="*" />
+        <Association Name="FK_Comision_Cuenta">
+          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="1" />
+          <End Role="Comision" Type="Self.Comision" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Comision">
-              <PropertyRef Name="idComision" />
+            <Principal Role="Cuenta">
+              <PropertyRef Name="idCuenta" />
             </Principal>
-            <Dependent Role="Cuenta">
-              <PropertyRef Name="idComision" />
+            <Dependent Role="Comision">
+              <PropertyRef Name="idCuenta" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -259,9 +259,9 @@
             <End Role="CentroDeTrabajo" EntitySet="CentroDeTrabajo" />
             <End Role="Comision" EntitySet="Comision" />
           </AssociationSet>
-          <AssociationSet Name="FK_Cuenta_Comision" Association="Self.FK_Cuenta_Comision">
-            <End Role="Comision" EntitySet="Comision" />
+          <AssociationSet Name="FK_Comision_Cuenta" Association="Self.FK_Comision_Cuenta">
             <End Role="Cuenta" EntitySet="Cuenta" />
+            <End Role="Comision" EntitySet="Comision" />
           </AssociationSet>
           <AssociationSet Name="FK_Representante_Comision" Association="Self.FK_Representante_Comision">
             <End Role="Comision" EntitySet="Comision" />
@@ -297,6 +297,7 @@
                 <ScalarProperty Name="numeroDeRegistro" ColumnName="numeroDeRegistro" />
                 <ScalarProperty Name="fechaDeRegistro" ColumnName="fechaDeRegistro" />
                 <ScalarProperty Name="idCentroDeTrabajo" ColumnName="idCentroDeTrabajo" />
+                <ScalarProperty Name="idCuenta" ColumnName="idCuenta" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -307,7 +308,6 @@
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="contrasena" ColumnName="contrasena" />
                 <ScalarProperty Name="rol" ColumnName="rol" />
-                <ScalarProperty Name="idComision" ColumnName="idComision" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

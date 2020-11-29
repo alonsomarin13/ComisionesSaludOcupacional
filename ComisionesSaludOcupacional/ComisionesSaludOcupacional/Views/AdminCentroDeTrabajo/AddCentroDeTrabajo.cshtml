@@ -1,0 +1,53 @@
+﻿@model ComisionesSaludOcupacional.Models.ViewModels.CentroDeTrabajoViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "Agregar Centro de Trabajo";
+
+}
+
+<h2>Agregar Centro de Trabajo</h2>
+
+@using (Html.BeginForm("AddCentroDeTrabajo", "AdminCentroDeTrabajo", FormMethod.Post, new { role = "form", @class = "", id = "form" }))
+{
+    <div class="jumbotron">
+        <div class="myBox">
+            <div class="row">
+                <div class="col-sm">
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationMessage("error", new { @class = "text-danger" })
+
+                    @Html.LabelFor(d => d.nombre)
+                    @Html.TextBoxFor(model => model.nombre, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessage("nombre", new { @class = "text-danger" }) <br />
+                    <br />
+                    @Html.LabelFor(d => d.idRegion) <br />
+                    @Html.DropDownListFor(d => d.idRegion, Model.listaDeRegiones, htmlAttributes: new { @class = "custom-select" })
+                    <br />
+
+                    @if (TempData["Success"] != null)
+                    {
+                        <p class="text-success" id="successMessage">@TempData["Success"]</p>
+                    }
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm">
+                    <div class="col">
+                        <div style="text-align:left;">
+                            <input onclick="history.back()" type="button" class="btn btn-danger btn-lg" value="Atrás" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div class="col">
+                        <div style="text-align:right;">
+                            <input type="submit" class="btn btn-success btn-lg" value="Crear" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

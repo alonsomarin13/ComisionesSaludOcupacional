@@ -19,7 +19,7 @@
         <div class="collapse navbar-collapse" id="navbarColor02">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" onclick="document.location.href='@Url.Content("~/Home/")'">Salir</a>
+                    <a> @Html.ActionLink("Cerrar Sesión", "Logout", "Cierre", null, new { @class = "nav-link" })</a>
                 </li>
             </ul>
         </div>

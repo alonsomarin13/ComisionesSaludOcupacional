@@ -1,4 +1,5 @@
-﻿@{
+﻿@model ComisionesSaludOcupacional.Models.ViewModels.LoginViewModel
+@{
     ViewBag.Title = "Página Principal";
     Layout = "~/Views/Shared/_LayoutEmpty.cshtml";
 }
@@ -6,23 +7,31 @@
 <br />
 
 <div class="jumbotron">
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { role = "form", @class = "form-group" }))
+    {
 
-    <div class="row">
+    <div class="myBox">
+        <div class="row">
+            <div class="col-sm">
+                @Html.AntiForgeryToken()
 
-        <div class="col-sm">
-            <div style="text-align:center;">
-                <input onclick="document.location.href='@Url.Content("~/AdminComision")'" type="button" value="Admin" class="btn btn-primary btn-lg" />
-            </div>
+                @Html.ValidationMessage("error", new { @class = "text-danger" })
 
-            <br />
+                @Html.LabelFor(d => d.username)
+                @Html.TextBoxFor(d => d.username, new { @class = "form-control" })
+                @Html.ValidationMessage("username", new { @class = "text-danger" }) <hr class="my-4">
 
-            <div style="text-align:center;">
-                <input onclick="document.location.href='@Url.Content("~/ComisionUserChooser")'" type="button" value="Usuario" class="btn btn-primary btn-lg" />
+                @Html.LabelFor(d => d.contrasena)
+                @Html.PasswordFor(d => d.contrasena, new { @class = "form-control" })
+                @Html.ValidationMessage("contrasena", new { @class = "text-danger" }) <hr class="my-4">
             </div>
         </div>
-
-
+        <div class="col-sm">
+            <div style="text-align:right">
+                <input type="submit" class="btn btn-success btn-lg" value="Iniciar Sesión" />
+            </div>
+        </div>
     </div>
-
+    }
 </div>
-
+    

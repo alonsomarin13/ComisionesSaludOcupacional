@@ -17,7 +17,6 @@ namespace ComisionesSaludOcupacional.Models.ET01
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Comision()
         {
-            this.Cuenta = new HashSet<Cuenta>();
             this.Representante = new HashSet<Representante>();
         }
     
@@ -32,10 +31,10 @@ namespace ComisionesSaludOcupacional.Models.ET01
         public string numeroDeRegistro { get; set; }
         public Nullable<System.DateTime> fechaDeRegistro { get; set; }
         public int idCentroDeTrabajo { get; set; }
+        public int idCuenta { get; set; }
     
         public virtual CentroDeTrabajo CentroDeTrabajo { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cuenta> Cuenta { get; set; }
+        public virtual Cuenta Cuenta { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Representante> Representante { get; set; }
     }

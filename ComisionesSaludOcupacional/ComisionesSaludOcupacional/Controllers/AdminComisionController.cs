@@ -13,6 +13,7 @@ using ComisionesSaludOcupacional.Models.ViewModels;
 using Microsoft.Ajax.Utilities;
 using System.Text;
 using System.Web.Security;
+using ComisionesSaludOcupacional.Models.ClasesUtilidad;
 
 namespace ComisionesSaludOcupacional.Controllers
 {
@@ -112,24 +113,23 @@ namespace ComisionesSaludOcupacional.Controllers
         [HttpPost]
         public ActionResult AddComisionUser(ComisionViewModel model)
         {
+            List<SelectListItem> regionesTemp;
+            using (SaludOcupacionalEntities db = new SaludOcupacionalEntities())
+            {
+                regionesTemp = (from d in db.Region
+                                orderby d.numeroRegion
+                                select new SelectListItem
+                                {
+                                    Value = d.idRegion.ToString(),
+                                    Text = d.nombreRegion,
+                                }).ToList();
+            }
+            model.listaDeRegiones = new SelectList(regionesTemp, "Value", "Text");
+
             if (!ModelState.IsValid)
             {
-                List<SelectListItem> regionesTemp;
-                using (SaludOcupacionalEntities db = new SaludOcupacionalEntities())
-                {
-                    regionesTemp = (from d in db.Region
-                                    orderby d.numeroRegion
-                                    select new SelectListItem
-                                    {
-                                        Value = d.idRegion.ToString(),
-                                        Text = d.nombreRegion,
-                                    }).ToList();
-                }
-                model.listaDeRegiones = new SelectList(regionesTemp, "Value", "Text");
                 return View(model);
             }
-
-            Debug.WriteLine(model.idCentroDeTrabajo);
 
             using (var db = new SaludOcupacionalEntities())
             {
@@ -137,15 +137,6 @@ namespace ComisionesSaludOcupacional.Controllers
                 CentroDeTrabajo oCentroDeTrabajo = db.CentroDeTrabajo.Find(model.idCentroDeTrabajo);
                 if (oCentroDeTrabajo == null)
                 {
-                    List<SelectListItem> regionesTemp;
-                    regionesTemp = (from d in db.Region
-                                    orderby d.numeroRegion
-                                    select new SelectListItem
-                                    {
-                                        Value = d.idRegion.ToString(),
-                                        Text = d.nombreRegion,
-                                    }).ToList();
-                    model.listaDeRegiones = new SelectList(regionesTemp, "Value", "Text");
                     ModelState.AddModelError("nombreCentroDeTrabajo", "El Centro de Trabajo no Existe");
                     return View(model);
                 }
@@ -157,22 +148,9 @@ namespace ComisionesSaludOcupacional.Controllers
 
                 if (valido != 0)
                 {
-                    List<SelectListItem> regionesTemp;
-                    regionesTemp = (from d in db.Region
-                                    orderby d.numeroRegion
-                                    select new SelectListItem
-                                    {
-                                        Value = d.idRegion.ToString(),
-                                        Text = d.nombreRegion,
-                                    }).ToList();
-                    model.listaDeRegiones = new SelectList(regionesTemp, "Value", "Text");
                     ModelState.AddModelError("nombreCentroDeTrabajo", "El Centro de Trabajo ya está asignado a otra comisión");
                     return View(model);
                 }
-
-                Comision oComision = new Comision();
-                oComision.idCentroDeTrabajo = model.idCentroDeTrabajo;
-                db.Comision.Add(oComision);
 
                 string nombreComision = String.Concat(oCentroDeTrabajo.nombreCentroDeTrabajo.Where(c => !Char.IsWhiteSpace(c)));
                 nombreComision = "comision" + nombreComision;
@@ -181,17 +159,28 @@ namespace ComisionesSaludOcupacional.Controllers
 
                 string contrasena = Membership.GeneratePassword(10, 1);
 
+                ViewBag.nombre = nombreComision;
+                ViewBag.contra = contrasena;
+
+                Debug.WriteLine(contrasena); //equisde  
+
+                contrasena = CryptoEngine.Encrypt(contrasena, "sxlw-3jn8-sqoy12");
+
                 Cuenta oCuenta = new Cuenta();
                 oCuenta.nombre = nombreComision;
                 oCuenta.contrasena = contrasena;
                 oCuenta.rol = 1;
-                oCuenta.idComision = oComision.idComision;
                 db.Cuenta.Add(oCuenta);
+
+                Comision oComision = new Comision();
+                oComision.idCentroDeTrabajo = model.idCentroDeTrabajo;
+                oComision.idCuenta = oCuenta.idCuenta;
+                db.Comision.Add(oComision);
 
                 db.SaveChanges();
             }
 
-            return Redirect(Url.Content("~/AdminCuenta"));
+            return View(model);
         }
 
         [HttpPost]
