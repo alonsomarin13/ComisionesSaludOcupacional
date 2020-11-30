@@ -80,7 +80,6 @@ namespace ComisionesSaludOcupacional.Controllers
         [HttpPost]
         public ActionResult VerContrasena(int Id)
         {
-            Debug.WriteLine(Id);
             CuentaPopupViewModel model = new CuentaPopupViewModel();
             using (var db = new SaludOcupacionalEntities())
             {

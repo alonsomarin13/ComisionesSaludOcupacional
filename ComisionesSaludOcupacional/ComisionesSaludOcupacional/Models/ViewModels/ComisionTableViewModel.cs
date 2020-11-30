@@ -20,6 +20,7 @@ namespace ComisionesSaludOcupacional.Models.ViewModels
         public string jefaturaTelefono { get; set; }
         public string numeroRegistro { get; set; }
         public DateTime? fechaDeRegistro { get; set; }
+        public DateTime? ultimoInforme { get; set; }
 
     }
 
@@ -56,6 +57,8 @@ namespace ComisionesSaludOcupacional.Models.ViewModels
         public DateTime? fechaDeRegistro { get; set; }
 
         public List<RepresentanteTableViewModel> representantes { get; set; }
+
+        public DateTime? ultimoInforme { get; set; }
 
 }
 }

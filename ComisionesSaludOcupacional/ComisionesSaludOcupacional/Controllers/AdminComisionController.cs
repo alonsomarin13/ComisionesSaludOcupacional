@@ -21,12 +21,28 @@ namespace ComisionesSaludOcupacional.Controllers
     {
         public int regionIDCombo;
         // GET: AdminComision
-        public ActionResult Index(string nombre, int? region, DateTime? fechaInicial, DateTime? fechaFinal)
+        public ActionResult Index(string nombre, int? region, DateTime? fechaInicial, DateTime? fechaFinal, int? informe, int? vencida)
         {
             AdminComisionViewModel model = new AdminComisionViewModel();
 
             model.fechaInicial = fechaInicial;
             model.fechaFinal = fechaFinal;
+
+            List<SelectListItem> informeEntregado = new List<SelectListItem>
+            {
+                new SelectListItem{Text = "Sí", Value = "1"},
+                new SelectListItem{Text = "No", Value = "0"}
+            };
+
+            ViewBag.listaInforme = new SelectList(informeEntregado, "Value", "Text");
+
+            List<SelectListItem> comisionVencida = new List<SelectListItem>
+            {
+                new SelectListItem{Text = "Sí", Value = "1"},
+                new SelectListItem{Text = "No", Value = "0"}
+            };
+
+            ViewBag.listaVencimiento = new SelectList(comisionVencida, "Value", "Text");
 
             model.comisiones = null;
             using (SaludOcupacionalEntities db = new SaludOcupacionalEntities())
@@ -41,8 +57,6 @@ namespace ComisionesSaludOcupacional.Controllers
                                 }).ToList();
 
                 ViewBag.Regiones = new SelectList(regiones, "Value", "Text");
-
-                Debug.WriteLine(fechaInicial.ToString());
 
                 var comisiones = from d in db.Comision
                                  join c in db.CentroDeTrabajo on d.idCentroDeTrabajo equals c.idCentroDeTrabajo
@@ -61,7 +75,8 @@ namespace ComisionesSaludOcupacional.Controllers
                                      jefaturaCorreo = d.jefaturaCorreo,
                                      jefaturaTelefono = d.jefaturaTelefono,
                                      numeroRegistro = d.numeroDeRegistro,
-                                     fechaDeRegistro = d.fechaDeRegistro
+                                     fechaDeRegistro = d.fechaDeRegistro,
+                                     ultimoInforme = d.ultimoInforme
                                  };
 
                 if (!String.IsNullOrEmpty(nombre)) {
@@ -81,6 +96,32 @@ namespace ComisionesSaludOcupacional.Controllers
                 if (fechaFinal != null)
                 {
                     comisiones = comisiones.Where(d => d.fechaDeRegistro <= fechaFinal);
+                }
+
+                if (informe != null)
+                {
+                    DateTime hoy = DateTime.Today;
+                    DateTime primerDiaDelAño = new DateTime(hoy.Year, 1, 1);
+                    if (informe == 0)
+                    {
+                        comisiones = comisiones.Where(d => (d.ultimoInforme < primerDiaDelAño) || (d.ultimoInforme == null));
+                    }
+                    else
+                    {
+                        comisiones = comisiones.Where(d => d.ultimoInforme >= primerDiaDelAño);
+                    }
+                }
+
+                if (vencida != null)
+                {
+                    DateTime hoyHace3Annos = DateTime.Today.AddYears(-3);
+                    if (vencida == 0)
+                    {
+                        comisiones = comisiones.Where(d => d.fechaDeRegistro >= hoyHace3Annos);
+                    } else
+                    {
+                        comisiones = comisiones.Where(d => d.fechaDeRegistro < hoyHace3Annos);
+                    }
                 }
 
                 model.comisiones = comisiones.ToList();
@@ -162,8 +203,6 @@ namespace ComisionesSaludOcupacional.Controllers
                 ViewBag.nombre = nombreComision;
                 ViewBag.contra = contrasena;
 
-                Debug.WriteLine(contrasena); //equisde  
-
                 contrasena = CryptoEngine.Encrypt(contrasena, "sxlw-3jn8-sqoy12");
 
                 Cuenta oCuenta = new Cuenta();
@@ -185,18 +224,13 @@ namespace ComisionesSaludOcupacional.Controllers
 
         [HttpPost]
         public JsonResult GetCentrosDeTrabajo(string Prefix, int regID) {
-            Debug.WriteLine("Entre a la funcion de centros");
-            
-            Debug.WriteLine(regionIDCombo);
+
             using (SaludOcupacionalEntities db = new SaludOcupacionalEntities()) {
                 var centros = (from d in db.CentroDeTrabajo
                                join c in db.Region on d.idRegion equals c.idRegion
                                where d.nombreCentroDeTrabajo.StartsWith(Prefix) && d.idRegion == regID
                                select new { nombreCentroDeTrabajo = d.nombreCentroDeTrabajo, idCentroDeTrabajo = d.idCentroDeTrabajo }
                                ).ToList();
-                foreach (var x in centros) {
-                    //Debug.WriteLine(x.idCentroDeTrabajo);
-                }
                 return Json(centros, JsonRequestBehavior.AllowGet);
             }
         }

@@ -99,7 +99,8 @@ namespace ComisionesSaludOcupacional.Controllers
 
             using (var db = new SaludOcupacionalEntities())
             {
-                var nombreExistente = db.CentroDeTrabajo.Any(x => x.nombreCentroDeTrabajo == model.nombre);
+                int idRegion = int.Parse(model.idRegion);
+                var nombreExistente = db.CentroDeTrabajo.Any(x => (x.nombreCentroDeTrabajo == model.nombre) && (x.idRegion == idRegion));
                 if (nombreExistente)
                 {
                     ModelState.AddModelError("nombre", "Este Centro de Trabajo ya está registrado");
@@ -109,7 +110,7 @@ namespace ComisionesSaludOcupacional.Controllers
                 CentroDeTrabajo oCentroDeTrabajo = new CentroDeTrabajo();
 
                 oCentroDeTrabajo.nombreCentroDeTrabajo = model.nombre;
-                oCentroDeTrabajo.idRegion = int.Parse(model.idRegion);
+                oCentroDeTrabajo.idRegion = idRegion;
 
                 db.CentroDeTrabajo.Add(oCentroDeTrabajo);
 

@@ -21,7 +21,6 @@
           <Property Name="contacto" Type="varchar" MaxLength="50" />
           <Property Name="contactoCorreo" Type="varchar" MaxLength="50" />
           <Property Name="contactoTelefono" Type="varchar" MaxLength="50" />
-          <Property Name="ultimoInforme" Type="varchar" MaxLength="50" />
           <Property Name="jefatura" Type="varchar" MaxLength="50" />
           <Property Name="jefaturaCorreo" Type="varchar" MaxLength="50" />
           <Property Name="jefaturaTelefono" Type="varchar" MaxLength="25" />
@@ -29,6 +28,7 @@
           <Property Name="fechaDeRegistro" Type="date" />
           <Property Name="idCentroDeTrabajo" Type="int" Nullable="false" />
           <Property Name="idCuenta" Type="int" Nullable="false" />
+          <Property Name="ultimoInforme" Type="date" />
         </EntityType>
         <EntityType Name="Cuenta">
           <Key>
@@ -153,7 +153,6 @@
           <Property Name="contacto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="contactoCorreo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="contactoTelefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ultimoInforme" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="jefatura" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="jefaturaCorreo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="jefaturaTelefono" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
@@ -161,6 +160,7 @@
           <Property Name="fechaDeRegistro" Type="DateTime" Precision="0" />
           <Property Name="idCentroDeTrabajo" Type="Int32" Nullable="false" />
           <Property Name="idCuenta" Type="Int32" Nullable="false" />
+          <Property Name="ultimoInforme" Type="DateTime" Precision="0" />
           <NavigationProperty Name="CentroDeTrabajo" Relationship="Self.FK_Comision_CentroDeTrabajo" FromRole="Comision" ToRole="CentroDeTrabajo" />
           <NavigationProperty Name="Cuenta" Relationship="Self.FK_Comision_Cuenta" FromRole="Comision" ToRole="Cuenta" />
           <NavigationProperty Name="Representante" Relationship="Self.FK_Representante_Comision" FromRole="Comision" ToRole="Representante" />
@@ -290,7 +290,6 @@
                 <ScalarProperty Name="contacto" ColumnName="contacto" />
                 <ScalarProperty Name="contactoCorreo" ColumnName="contactoCorreo" />
                 <ScalarProperty Name="contactoTelefono" ColumnName="contactoTelefono" />
-                <ScalarProperty Name="ultimoInforme" ColumnName="ultimoInforme" />
                 <ScalarProperty Name="jefatura" ColumnName="jefatura" />
                 <ScalarProperty Name="jefaturaCorreo" ColumnName="jefaturaCorreo" />
                 <ScalarProperty Name="jefaturaTelefono" ColumnName="jefaturaTelefono" />
@@ -298,6 +297,7 @@
                 <ScalarProperty Name="fechaDeRegistro" ColumnName="fechaDeRegistro" />
                 <ScalarProperty Name="idCentroDeTrabajo" ColumnName="idCentroDeTrabajo" />
                 <ScalarProperty Name="idCuenta" ColumnName="idCuenta" />
+                <ScalarProperty Name="ultimoInforme" ColumnName="ultimoInforme" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

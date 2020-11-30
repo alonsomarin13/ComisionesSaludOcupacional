@@ -31,51 +31,106 @@
                     <td>@Model.jefaturaCorreo</td>
                     <td>@Model.jefaturaTelefono</td>
                     <td>@Model.numeroRegistro</td>
-                    <td>@Model.fechaDeRegistro.ToString().Replace("0:00:00", "").Replace("12:00:00","")</td>
+                    <td>@Model.fechaDeRegistro.ToString().Replace("0:00:00", "").Replace("12:00:00", "")</td>
                 </tr>
             </table>
+            @if (ViewBag.Vencimiento != null) {
+                <div><p class="text-danger">@ViewBag.Vencimiento</p></div>
+            }
+
+
         </div>
     </div>
 
     <br>
     <div class="col-md-12" style="text-align:right;">
-        <input type="button" onclick="document.location.href='@Url.Content("~/ComisionUser/Edit/" + Model.idComision)'" value="Editar Información" class="btn btn-lg btn-warning"/>
+        <input type="button" onclick="document.location.href='@Url.Content("~/ComisionUser/Edit/" + Model.idComision)'" value="Editar Información" class="btn btn-lg btn-warning" />
     </div>
-</div>
 
-<div class="jumbotron">
-    <h4 class="display-3">Representantes</h4>
-    <div class="row">
-        <div class="col-lg-12">
-            <table class="table table-bordered">
-                <tr class="table-primary">
-                    <th>Nombre</th>
-                    <th>Correo</th>
-                    <th>Teléfono</th>
-                    <th>Editar representante</th>
-                    <th>Borrar representante</th>
-                </tr>
+    <div class="jumbotron">
+        @if (ViewBag.RepresentantesWarning != null)
+        {
+            <div><p class="text-danger">@ViewBag.RepresentantesWarning</p></div>
+        }
+        <h4 class="display-3">Representantes</h4>
+        <div class="row">
+            <div class="col-lg-12">
+                <table class="table table-bordered">
+                    <tr class="table-primary">
+                        <th>Nombre</th>
+                        <th>Correo</th>
+                        <th>Teléfono</th>
+                        <th>Editar representante</th>
+                        <th>Borrar representante</th>
+                    </tr>
 
-                @if (Model != null)
-                {
-                    foreach (var oObjeto in Model.representantes)
+                    @if (Model != null)
                     {
-                        <tr>
-                            <td>@oObjeto.nombre</td>
-                            <td>@oObjeto.correo</td>
-                            <td>@oObjeto.telefono</td>
-                            <td><input onclick="document.location.href='@Url.Content("~/ComisionUserRepresentantes/Edit/"+oObjeto.idRepresentante)'" type="button" value="Editar" class="btn btn-warning" /></td>
-                            <td><input onclick="location.href='@Url.Content("~/ComisionUserRepresentantes/Delete/"+oObjeto.idRepresentante)'" type="button" value="Borrar" class="btn btn-danger" /></td>
-                            
-                        </tr>
+                        foreach (var oObjeto in Model.representantes)
+                        {
+                            <tr>
+                                <td>@oObjeto.nombre</td>
+                                <td>@oObjeto.correo</td>
+                                <td>@oObjeto.telefono</td>
+                                <td><input onclick="document.location.href='@Url.Content("~/ComisionUserRepresentantes/Edit/" + oObjeto.idRepresentante)'" type="button" value="Editar" class="btn btn-warning" /></td>
+                                <td><input onclick="location.href='@Url.Content("~/ComisionUserRepresentantes/Delete/" + oObjeto.idRepresentante)'" type="button" value="Borrar" class="btn btn-danger" /></td>
+
+                            </tr>
+                        }
                     }
-                }
-            </table>
+                </table>
+            </div>
+        </div>
+        <br>
+
+        <div class="col-md-12" style="text-align:right;">
+            <input type="button" onclick="document.location.href='@Url.Content("~/ComisionUserRepresentantes/Add/" + Model.idComision)'" value="Crear Representante" class="btn btn-lg btn-success" />
         </div>
     </div>
-    <br>
 
-    <div class="col-md-12" style="text-align:right;">
-        <input type="button" onclick="document.location.href='@Url.Content("~/ComisionUserRepresentantes/Add/"+ Model.idComision)'" value="Crear Representante" class="btn btn-lg btn-success"/>
-    </div>
+
+    @if (ViewBag.Mensaje != null)
+    {
+        <div class="container">
+            <div class="col-md-6 col-md-offset-3">
+                <div id="SampleDiv" title="Notificación">
+                    @ViewBag.Mensaje
+                    <div class="row">
+                        <div class="col-sm">
+                            <div style="text-align:left">
+                                <a class="btn btn-danger btn-lg" href="#" id="btnMasTarde">No</a>
+                            </div>
+                        </div>
+                        <div class="col-sm">
+                            <div style="text-align:right">
+                                <input type="button" onclick="document.location.href='@Url.Content("~/ComisionUser/InformeEntregado/" + Model.idComision)'" value="Si" class="btn btn-lg btn-success" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 </div>
+
+<!-- JS includes -->
+<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<!-- CSS Includes -->
+<link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" language="javascript">
+    $(document).ready(function() {
+        $("#SampleDiv").dialog({
+            modal: true
+        });
+
+        $("#btnMasTarde").click(function() {
+            $('#SampleDiv').dialog('close')
+        });
+
+        $("#btnConfirmarInforme").click(function() {
+            $('#SampleDiv').dialog('open')
+        });
+
+    });
+</script>

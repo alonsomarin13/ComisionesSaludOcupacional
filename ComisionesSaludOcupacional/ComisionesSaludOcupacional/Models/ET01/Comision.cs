@@ -24,7 +24,6 @@ namespace ComisionesSaludOcupacional.Models.ET01
         public string contacto { get; set; }
         public string contactoCorreo { get; set; }
         public string contactoTelefono { get; set; }
-        public string ultimoInforme { get; set; }
         public string jefatura { get; set; }
         public string jefaturaCorreo { get; set; }
         public string jefaturaTelefono { get; set; }
@@ -32,6 +31,7 @@ namespace ComisionesSaludOcupacional.Models.ET01
         public Nullable<System.DateTime> fechaDeRegistro { get; set; }
         public int idCentroDeTrabajo { get; set; }
         public int idCuenta { get; set; }
+        public Nullable<System.DateTime> ultimoInforme { get; set; }
     
         public virtual CentroDeTrabajo CentroDeTrabajo { get; set; }
         public virtual Cuenta Cuenta { get; set; }

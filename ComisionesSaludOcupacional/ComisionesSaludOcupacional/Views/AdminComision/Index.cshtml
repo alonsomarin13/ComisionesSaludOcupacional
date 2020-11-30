@@ -24,6 +24,12 @@
             @Html.Label("Fecha Final")
             @Html.EditorFor(model => model.fechaFinal, new { htmlAttributes = new { @class = "form-control-filter" } })
 
+            @Html.Label("Entregó el informe?")
+            @Html.DropDownList("informe", (SelectList)ViewBag.listaInforme, "Seleccione opción", new { @class = "custom-select-filter" })
+
+            @Html.Label("Comisión vencida")
+            @Html.DropDownList("vencida", (SelectList)ViewBag.listaVencimiento, "Seleccione opción", new { @class = "custom-select-filter" })
+
             <input type="submit" value="Buscar" />
         }
     </div>
@@ -41,6 +47,7 @@
                         <th>Teléfono de la Jefatura</th>
                         <th>Número de Registro</th>
                         <th>Fecha de Registro</th>
+                        <th>Entregó informe anual</th>
                         <th> </th>
                     </tr>
 
@@ -57,6 +64,9 @@
                             <td>@oObjeto.jefaturaTelefono</td>
                             <td>@oObjeto.numeroRegistro</td>
                             <td>@oObjeto.fechaDeRegistro.ToString().Replace("0:00:00", "").Replace("12:00:00","")</td>
+                            @{DateTime primerDiaDelAño = new DateTime(DateTime.Today.Year, 1, 1);
+                              var hizoElInforme = (oObjeto.ultimoInforme < primerDiaDelAño) || (oObjeto.ultimoInforme == null) ? "No" : "Si";}
+                            <td>@hizoElInforme</td>
                             <td><input onclick="document.location.href='@Url.Content("~/AdminRepresentantes/Representantes/" + oObjeto.idComision)'" type="button" value="Integrantes" class="btn btn-primary" /></td>
                         </tr>
                     }

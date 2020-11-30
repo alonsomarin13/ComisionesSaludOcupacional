@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -34,6 +35,7 @@ namespace ComisionesSaludOcupacional.Controllers
                 model.idComision = oComision.idComision;
                 model.fechaDeRegistro = oComision.fechaDeRegistro;
                 model.numeroRegistro = oComision.numeroDeRegistro;
+                model.ultimoInforme = oComision.ultimoInforme;
             }
             if (model.contacto == null || model.contactoCorreo == null || model.contactoTelefono == null || model.jefatura == null ||
                 model.jefaturaCorreo == null || model.jefaturaTelefono == null || model.fechaDeRegistro == null || model.numeroRegistro == null) {
@@ -53,6 +55,48 @@ namespace ComisionesSaludOcupacional.Controllers
                              idComision = d.idComision
                          }).ToList();
             }
+
+            DateTime hoy = DateTime.Today;
+            DateTime? fechaInforme = model.ultimoInforme;
+
+            if (/*hoy.Month == 2 &&*/ (fechaInforme == null || fechaInforme?.Year < hoy.Year))
+            {
+                ViewBag.Mensaje = "Recuerde por favor entregar el informe Anual\n Ya lo ha entregado?";
+            }
+
+            DateTime? fechaRegistro = model.fechaDeRegistro;
+            DateTime? fechaVencimiento = fechaRegistro?.AddYears(3);
+            DateTime? fechaVencimientoTemp = fechaVencimiento?.AddMonths(-2);
+
+            if (hoy < fechaVencimiento && hoy >= fechaVencimientoTemp)
+            {
+                var cantDias = (fechaVencimiento - hoy)?.TotalDays;
+                ViewBag.Vencimiento = "Su comisión está a " + cantDias.ToString() + " días de vencerse. Por favor, renuévela.";
+            } else if (hoy >= fechaVencimiento)
+            {
+                ViewBag.Vencimiento = "Su comisión está vencida desde el "+ fechaVencimiento?.ToShortDateString() + ". Por favor, renuévela.";
+            }
+
+            int cantPatronos, cantTrabajadores;
+
+            using (var db = new SaludOcupacionalEntities())
+            {
+                cantPatronos = (from d in db.Comision
+                                join r in db.Representante on d.idComision equals r.idComision
+                                where d.idComision == model.idComision && r.tipo == 0 && r.estado == 1
+                                select d.idCentroDeTrabajo).Count();
+
+                cantTrabajadores = (from d in db.Comision
+                                join r in db.Representante on d.idComision equals r.idComision
+                                where d.idComision == model.idComision && r.tipo == 1 && r.estado == 1
+                                    select d.idCentroDeTrabajo).Count();
+            }
+
+            if (cantPatronos != cantTrabajadores)
+            {
+                ViewBag.RepresentantesWarning = "Su comisión no tiene cantidades iguales de Patronos y Trabajadores, por favor asegúrese de que esto se cumpla. porfis porfis bro";
+            }
+
             return View(model);
         }
 
@@ -189,6 +233,22 @@ namespace ComisionesSaludOcupacional.Controllers
             }
 
             return View(model);
+        }
+
+
+        public ActionResult InformeEntregado(int id)
+        {
+            using (var db = new SaludOcupacionalEntities())
+            {
+                var oComision = db.Comision.Find(id);
+
+                oComision.ultimoInforme = DateTime.Today;
+
+                db.Entry(oComision).State = System.Data.Entity.EntityState.Modified;
+
+                db.SaveChanges();
+            }
+            return Redirect(Url.Content("~/ComisionUser/InformacionPrincipal/" + id));
         }
     }
 }
