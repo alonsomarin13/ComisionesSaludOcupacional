@@ -103,7 +103,7 @@ namespace ComisionesSaludOcupacional.Controllers
                 var nombreExistente = db.CentroDeTrabajo.Any(x => (x.nombreCentroDeTrabajo == model.nombre) && (x.idRegion == idRegion));
                 if (nombreExistente)
                 {
-                    ModelState.AddModelError("nombre", "Este Centro de Trabajo ya está registrado");
+                    ModelState.AddModelError("nombre", "Este Centro de Trabajo ya está registrado en esta región");
                     return View(model);
                 }
 
