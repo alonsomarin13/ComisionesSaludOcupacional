@@ -87,6 +87,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
     margin: 10px;
 }
 
+
 body {
   margin-top:-50px;
   margin-bottom:0;
@@ -1700,17 +1701,22 @@ pre code {
 }
 
 .table {
-  width: 100%;
-  margin-bottom: 1rem;
-  color: #222;
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #222;
+    
 }
+
+
 
 .table th,
 .table td {
-  padding: 0.75rem;
-  vertical-align: top;
-  border-top: 1px solid #dee2e6;
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
 }
+
+
 
 .table thead th {
   vertical-align: bottom;
@@ -3944,6 +3950,21 @@ input[type="button"].btn-block {
   border-radius: 0.5rem;
 }
 
+.label-box{
+    width: 55px;
+    display:inline-block;
+}
+
+.label-box-1 {
+    width: 75px;
+    display: inline-block;
+}
+
+.label-box-2 {
+    width: 125px;
+    display: inline-block;
+}
+
 .custom-switch .custom-control-label::after {
   top: calc(0.15625rem + 2px);
   left: calc(-2.25rem + 2px);
@@ -3991,7 +4012,7 @@ input[type="button"].btn-block {
 }
 
 .custom-select-filter {
-    width: 200px;
+    width: 175px;
     height: 25px;
     padding-left:5px;
     font-size: 0.875rem;
