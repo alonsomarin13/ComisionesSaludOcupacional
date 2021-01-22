@@ -94,7 +94,7 @@ namespace ComisionesSaludOcupacional.Controllers
 
             if (cantPatronos != cantTrabajadores)
             {
-                ViewBag.RepresentantesWarning = "Su comisión no tiene cantidades iguales de Patronos y Trabajadores, por favor asegúrese de que esto se cumpla. porfis porfis bro";
+                ViewBag.RepresentantesWarning = "Su comisión no tiene cantidades iguales de Patronos y Trabajadores, por favor asegúrese de que esto se cumpla.";
             }
 
             return View(model);
