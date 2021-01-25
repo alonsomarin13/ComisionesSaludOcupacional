@@ -1,0 +1,45 @@
+﻿@model ComisionesSaludOcupacional.Models.ViewModels.VerNoticiaViewModel
+@{
+    ViewBag.Title = "Ver Noticia";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h4 class="display-3">@Model.titulo</h4>
+
+<div class="myBox">
+    <div class="row">
+        @if (Model.texto != null)
+        {
+            <div class="col-sm">
+                <p>@Html.Raw(Model.texto.Replace("\n", "<br />"))</p>
+            </div>
+        }
+    </div>
+
+    @if (ViewBag.Mensaje != null)
+    {
+        <div class="row">
+            <div class="col-sm">
+                <input type="button" onclick="document.location.href='@Url.Content("~/AdminNoticia/Descargar/" + Model.archivo.idArchivo)'" value="Descargar Archivo" class="btn btn-sm btn-primary" />
+            </div>
+        </div>
+    }
+
+    <div class="row">
+        <div class="col-sm">
+            <div style="text-align:left">
+                <input onclick="history.back()" type="button" class="btn btn-danger btn-lg" value="Atrás" />
+            </div>
+        </div>
+        <div class="col-sm">
+            <div style="text-align:center">
+                <input onclick="document.location.href='@Url.Content("~/AdminNoticia/EditarNoticia/" + Model.idNoticia)'" type="button" value="Editar" class="btn btn-outline-warning" />
+            </div>
+        </div>
+        <div class="col-sm">
+            <div style="text-align:center">
+                <input onclick="document.location.href='@Url.Content("~/AdminNoticia/BorrarNoticia/" + Model.idNoticia)'" type="button" value="Borrar" class="btn btn-danger" />
+            </div>
+        </div>
+    </div>
+</div>

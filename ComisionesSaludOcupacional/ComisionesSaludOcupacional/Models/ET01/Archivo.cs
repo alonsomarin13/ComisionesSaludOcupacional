@@ -12,16 +12,14 @@ namespace ComisionesSaludOcupacional.Models.ET01
     using System;
     using System.Collections.Generic;
     
-    public partial class Representante
+    public partial class Archivo
     {
-        public int idRepresentante { get; set; }
+        public int idArchivo { get; set; }
         public string nombre { get; set; }
-        public string correo { get; set; }
-        public string telefono { get; set; }
-        public int tipo { get; set; }
-        public int estado { get; set; }
-        public Nullable<int> idComision { get; set; }
+        public string filePath { get; set; }
+        public int idNoticia { get; set; }
+        public string tipo { get; set; }
     
-        public virtual Comision Comision { get; set; }
+        public virtual Noticia Noticia { get; set; }
     }
 }

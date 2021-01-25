@@ -131,6 +131,7 @@
     <Compile Include="Controllers\AdminCentroDeTrabajoController.cs" />
     <Compile Include="Controllers\AdminComisionController.cs" />
     <Compile Include="Controllers\AdminCuentaController.cs" />
+    <Compile Include="Controllers\AdminNoticiaController.cs" />
     <Compile Include="Controllers\AdminRepresentantesController.cs" />
     <Compile Include="Controllers\ComisionUserController.cs" />
     <Compile Include="Controllers\ComisionUserRepresentantesController.cs" />
@@ -141,6 +142,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ClasesUtilidad\CryptoEngine.cs" />
+    <Compile Include="Models\ET01\Archivo.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ET01\CentroDeTrabajo.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -165,12 +169,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\ET01\Noticia.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ET01\Region.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ET01\Representante.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModels\ArchivoViewModel.cs" />
     <Compile Include="Models\ViewModels\CentroDeTrabajoViewModel.cs" />
     <Compile Include="Models\ViewModels\ComisionTableViewModel.cs" />
     <Compile Include="Models\ViewModels\ComisionViewModel.cs" />
@@ -178,6 +186,7 @@
     <Compile Include="Models\ViewModels\CuentaViewModel.cs" />
     <Compile Include="Models\ViewModels\FiltroFechasViewModel.cs" />
     <Compile Include="Models\ViewModels\LoginViewModel.cs" />
+    <Compile Include="Models\ViewModels\NoticiaViewModel.cs" />
     <Compile Include="Models\ViewModels\RepresentanteTableViewModel.cs" />
     <Compile Include="Models\ViewModels\RepresentanteViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -268,9 +277,14 @@
     <Content Include="Views\AdminCentroDeTrabajo\Index.cshtml" />
     <Content Include="Views\AdminCentroDeTrabajo\EditCentroDeTrabajo.cshtml" />
     <Content Include="Views\AdminCentroDeTrabajo\AddCentroDeTrabajo.cshtml" />
+    <Content Include="Views\AdminNoticia\Index.cshtml" />
+    <Content Include="Views\AdminNoticia\AddNoticia.cshtml" />
+    <Content Include="Views\AdminNoticia\VerNoticia.cshtml" />
+    <Content Include="Views\AdminNoticia\EditarNoticia.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="UploadedFiles\" />
     <Folder Include="Views\Logout\" />
   </ItemGroup>
   <ItemGroup>
@@ -315,6 +329,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
+      <UserProperties content_4bootstrap_1css_1map__JsonSchema="" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

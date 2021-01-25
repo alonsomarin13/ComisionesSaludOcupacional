@@ -1,0 +1,51 @@
+﻿@model ComisionesSaludOcupacional.Models.ViewModels.EditNoticiaViewModel
+@{
+    ViewBag.Title = "Editar Noticia";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h4 class="display-3">Editar Noticia</h4>
+
+@using (Html.BeginForm("EditarNoticia", "AdminNoticia", FormMethod.Post, new { role = "form", @class = "form-group", enctype = "multipart/form-data" }))
+{
+
+    <div class="myBox">
+        <div class="row">
+            <div class="col-sm">
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(d => d.idNoticia)
+                @Html.HiddenFor(d => d.idArchivoActual)
+
+                @Html.ValidationMessage("error", new { @class = "text-danger" })
+
+                @Html.LabelFor(d => d.titulo)
+                @Html.TextBoxFor(d => d.titulo, new { @class = "form-control" })
+                @Html.ValidationMessage("titulo", new { @class = "text-danger" }) <hr class="my-4">
+
+                @Html.LabelFor(d => d.texto)
+                @Html.TextAreaFor(d => d.texto, new { @class = "form-control", @rows = 20 })
+                @Html.ValidationMessage("texto", new { @class = "text-danger" }) <hr class="my-4">
+
+                <input type="file" name="archivoNuevo" /> <hr class="my-4">
+
+                @if (ViewBag.Mensaje != null)
+                {
+                    <input type="button" onclick="document.location.href='@Url.Content("~/AdminNoticia/Eliminar/" + Model.idArchivoActual)'" value="Eliminar Archivo" class="btn btn-sm btn-danger" />
+                }
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <div style="text-align:left">
+                    <input onclick="document.location.href='@Url.Content("~/AdminNoticia/VerNoticia/" + Model.idNoticia)'" type="button" class="btn btn-danger btn-lg" value="Atrás" />
+                </div>
+            </div>
+            <div class="col-sm">
+                <div style="text-align:right">
+                    <input type="submit" class="btn btn-success btn-lg" value="Editar" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

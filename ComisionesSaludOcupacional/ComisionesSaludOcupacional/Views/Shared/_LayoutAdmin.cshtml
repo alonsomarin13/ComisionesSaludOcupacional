@@ -29,6 +29,9 @@
                     <a class="nav-link" onclick="document.location.href='@Url.Content("~/AdminCentroDeTrabajo")'">Centros de Trabajo</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" onclick="document.location.href='@Url.Content("~/AdminNoticia")'">Noticias</a>
+                </li>
+                <li class="nav-item">
                     <a> @Html.ActionLink("Cerrar Sesión", "Logout", "Cierre", null, new { @class = "nav-link" })</a>
                 </li>
             </ul>
@@ -40,7 +43,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Proyecto de Ing. de Software - TEC</p>
+            <p>&copy; @DateTime.Now.Year</p>
         </footer>
     </div>
 

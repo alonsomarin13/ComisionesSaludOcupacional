@@ -12,20 +12,20 @@ namespace ComisionesSaludOcupacional.Models.ET01
     using System;
     using System.Collections.Generic;
     
-    public partial class CentroDeTrabajo
+    public partial class Noticia
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CentroDeTrabajo()
+        public Noticia()
         {
-            this.Comision = new HashSet<Comision>();
+            this.Archivo = new HashSet<Archivo>();
         }
     
-        public int idCentroDeTrabajo { get; set; }
-        public string nombreCentroDeTrabajo { get; set; }
-        public int idRegion { get; set; }
+        public int idNoticia { get; set; }
+        public string titulo { get; set; }
+        public string texto { get; set; }
+        public System.DateTime fecha { get; set; }
     
-        public virtual Region Region { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Comision> Comision { get; set; }
+        public virtual ICollection<Archivo> Archivo { get; set; }
     }
 }
