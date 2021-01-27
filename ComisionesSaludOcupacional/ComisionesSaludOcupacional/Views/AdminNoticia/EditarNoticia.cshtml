@@ -26,6 +26,8 @@
                 @Html.TextAreaFor(d => d.texto, new { @class = "form-control", @rows = 20 })
                 @Html.ValidationMessage("texto", new { @class = "text-danger" }) <hr class="my-4">
 
+                @Html.ValidationMessage("archivo", new { @class = "text-danger" }) <hr class="my-4">
+
                 <input type="file" name="archivoNuevo" /> <hr class="my-4">
 
                 @if (ViewBag.Mensaje != null)

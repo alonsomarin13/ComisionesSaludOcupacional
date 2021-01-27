@@ -1,12 +1,23 @@
 ﻿@model ComisionesSaludOcupacional.Models.ViewModels.CuentaPopupViewModel
 <table cellpadding="0" cellspacing="0" border="0">
     <tr>
-
-        <td valign="top"><b>Contraseña: </b></td>
+        @using (Html.BeginForm("SendEmail", "AdminCuenta", FormMethod.Post, new { id = "form-email", role = "form", @class = "form-group" }))
+        {
         <td>
-            @Html.DisplayFor(model => model.password)
+            @Html.HiddenFor(model => model.nombre)
+            @Html.HiddenFor(model => model.password)
+            @Html.LabelFor(model => model.useremail)
+            @Html.TextBoxFor(model => model.useremail)
+            @Html.ValidationMessage("useremail", new { @class = "text-danger" })
+
+            @if (ViewBag.mensaje != null)
+            {
+                <p class="text-success" id="successMessage">@ViewBag.mensaje</p>
+            }
         </td>
+            <td><input type="submit" class="btn btn-success" value="Enviar Correo" /></td>
+        }
     </tr>
 
-    <p>Entregue esta contraseña al usuario de la comisión para que pueda volver acceder al sistema</p>
+    <p>xd</p>
 </table>

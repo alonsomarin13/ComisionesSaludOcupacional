@@ -40,5 +40,10 @@ namespace ComisionesSaludOcupacional.Models.ViewModels
     {
         public string nombre { get; set; }
         public string password { get; set; }
+        [Required]
+        [Display(Name = "Correo")]
+        [DataType(DataType.EmailAddress)]
+        [EmailAddress]
+        public string useremail { get; set; }
     }
 }

@@ -18,6 +18,7 @@ namespace ComisionesSaludOcupacional.Models.ViewModels
         [Display(Name = "Texto")]
         public string texto { get; set; }
 
+        [MaxFileSize(10485760)]
         public HttpPostedFileBase archivo { get; set; }
 
     }
@@ -47,6 +48,7 @@ namespace ComisionesSaludOcupacional.Models.ViewModels
         [Display(Name = "Texto")]
         public string texto { get; set; }
 
+        [MaxFileSize(10485760)]
         public HttpPostedFileBase archivoNuevo { get; set; }
         public int? idArchivoActual { get; set; }
     }

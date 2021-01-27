@@ -1,0 +1,44 @@
+﻿@model ComisionesSaludOcupacional.Models.ViewModels.CuentaPopupViewModel
+
+@{
+    ViewBag.Title = "Enviar Correo con Contraseña";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h4 class="display-3">Enviar un Correo de Recuperación de Contraseña</h4>
+
+@using (Html.BeginForm("EnviarCorreo", "AdminCuenta", FormMethod.Post, new { role = "form", @class = "form-group" }))
+{
+
+    <div class="myBox">
+        <div class="row">
+            <div class="col-sm">
+                @Html.AntiForgeryToken()
+
+                @Html.HiddenFor(model => model.nombre)
+                @Html.HiddenFor(model => model.password)
+
+                @Html.LabelFor(model => model.useremail)
+                @Html.TextBoxFor(model => model.useremail)
+                @Html.ValidationMessage("useremail", new { @class = "text-danger" }) <hr class="my-4">
+
+                @if (ViewBag.mensaje != null)
+                {
+                    <p class="text-success" id="successMessage">@ViewBag.mensaje</p>
+                }
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <div style="text-align:left">
+                    <input onclick="history.back()" type="button" class="btn btn-danger btn-lg" value="Atrás" />
+                </div>
+            </div>
+            <div class="col-sm">
+                <div style="text-align:right">
+                    <input type="submit" class="btn btn-success btn-lg" value="Crear" />
+                </div>
+            </div>
+        </div>
+    </div>
+}

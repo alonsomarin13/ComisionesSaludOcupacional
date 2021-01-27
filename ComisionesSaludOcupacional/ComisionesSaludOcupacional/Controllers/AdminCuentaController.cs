@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Diagnostics;
+using System.Web.Helpers;
 
 namespace ComisionesSaludOcupacional.Controllers
 {
@@ -77,17 +78,36 @@ namespace ComisionesSaludOcupacional.Controllers
             return Redirect(Url.Content("~/AdminCuenta"));
         }
 
-        [HttpPost]
-        public ActionResult VerContrasena(int Id)
+        [HttpGet]
+        public ActionResult EnviarCorreo(int Id)
         {
             CuentaPopupViewModel model = new CuentaPopupViewModel();
             using (var db = new SaludOcupacionalEntities())
             {
                 Cuenta oCuenta = db.Cuenta.Find(Id);
                 model.password = CryptoEngine.Decrypt(oCuenta.contrasena, "sxlw-3jn8-sqoy12");
+                model.nombre = oCuenta.nombre;
             }
 
-            return PartialView("~/Views/AdminCuenta/VerContrasena.cshtml", model);
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult EnviarCorreo(CuentaPopupViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            string subject = "Credenciales de " + model.nombre;
+            string mensaje = "Usted ha solitado las credenciales del sistema para el usuario: " + model.nombre + "\r\n\r\nUsuario: " + model.nombre + "\nContraseña: " + model.password + "\r\n\r\nSi ha recibido este correo por error, por favor ignórelo.";
+            string body = mensaje.Replace("\n", "<br />");
+
+            WebMail.Send(model.useremail, subject, body, null, null, null, true, null, null, null, null, null, null);
+            ViewBag.mensaje = "Correo enviado satisfactoriamente.";
+
+            return View(model);
         }
     }
 }

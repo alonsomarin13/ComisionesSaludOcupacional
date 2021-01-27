@@ -145,7 +145,8 @@ namespace ComisionesSaludOcupacional.Controllers
                         oArchivo.idNoticia = oNoticia.idNoticia;
 
                         db.Archivo.Add(oArchivo);
-                    } else
+                    }
+                    else
                     {
                         var oArchivo = db.Archivo.Find(model.idArchivoActual);
 
@@ -165,6 +166,7 @@ namespace ComisionesSaludOcupacional.Controllers
                         db.Entry(oArchivo).State = System.Data.Entity.EntityState.Modified;
                     }
                 }
+                
 
                 db.SaveChanges();
 
@@ -213,7 +215,6 @@ namespace ComisionesSaludOcupacional.Controllers
                 var oArchivo = db.Archivo.Find(id);
                 filePath = oArchivo.filePath;
                 tipo = oArchivo.tipo;
-                Debug.WriteLine(tipo);
             }
 
             return File(filePath, tipo);
@@ -268,6 +269,11 @@ namespace ComisionesSaludOcupacional.Controllers
             }
 
             return Redirect(Url.Content("~/AdminNoticia"));
+        }
+
+        public ActionResult Error()
+        {
+            return View();
         }
     }
 }

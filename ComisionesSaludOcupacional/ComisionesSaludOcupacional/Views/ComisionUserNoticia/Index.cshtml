@@ -1,0 +1,48 @@
+﻿@model List<ComisionesSaludOcupacional.Models.ViewModels.NoticiaTableViewModel>
+@{
+    Layout = "~/Views/Shared/_LayoutComisionUser.cshtml";
+    ViewBag.Title = "Index";
+}
+
+<br>
+
+
+<h1 class="display-3">Noticias</h1>
+
+<div class="myBox-adjustable">
+
+    <div class="row">
+
+        <div class="col" align="right">
+            @using (Html.BeginForm("Index", "ComisionUserNoticia", FormMethod.Get))
+            {
+                @Html.Label("Título", new { @class = "label-box" })
+                @Html.TextBox("titulo", null, new { @class = "form-control-filter" })
+
+                <input type="submit" value="Buscar" class="btn btn-sm btn-secondary" />
+            }
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div style="overflow-x:auto; overflow-y:auto;">
+            <table class="table table-bordered">
+                <tr class="table-primary">
+                    <th>Título</th>
+                    <th>Fecha</th>
+                    <th></th>
+                </tr>
+
+                @foreach (var oObjeto in Model)
+                {
+                    <tr>
+                        <td>@oObjeto.titulo</td>
+                        <td>@oObjeto.fecha.ToString()</td>
+                        <td><input onclick="document.location.href='@Url.Content("~/ComisionUserNoticia/VerNoticia/" + oObjeto.idNoticia)'" type="button" value="Abrir" class="btn btn-primary" /></td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>

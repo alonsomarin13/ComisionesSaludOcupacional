@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Ver Noticia";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h4 class="display-3">Error</h4>
+
+<div class="myBox">
+    <div class="row">
+            <div class="col-sm">
+                <p>El Archivo que intentó subir es demasiado grande, por favor inténtelo de nuevo. El límite de tamaño es de 10MB</p>
+            </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-sm">
+            <div style="text-align:center">
+                <input onclick="document.location.href='@Url.Content("~/AdminNoticia")'" type="button" value="OK" class="btn btn-outline-warning" />
+            </div>
+        </div>
+    </div>
+</div>

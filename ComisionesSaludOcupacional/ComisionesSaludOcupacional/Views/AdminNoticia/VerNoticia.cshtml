@@ -21,8 +21,20 @@
         <div class="row">
             <div class="col-sm">
                 <input type="button" onclick="document.location.href='@Url.Content("~/AdminNoticia/Descargar/" + Model.archivo.idArchivo)'" value="Descargar Archivo" class="btn btn-sm btn-primary" />
+                <p>@Model.archivo.nombre</p>
             </div>
         </div>
+
+        if (Model.archivo.tipo == "application/pdf")
+        {
+            <iframe src="@Url.Content(Model.archivo.filePath)" height="700" width="500"></iframe>
+        }
+
+        if (Model.archivo.tipo == "image/jpeg" || Model.archivo.tipo == "image/png")
+        {
+            <img src="@Url.Content(Model.archivo.filePath)" alt="Image" style="height:500px;width:500px;"/>
+        }
+
     }
 
     <div class="row">

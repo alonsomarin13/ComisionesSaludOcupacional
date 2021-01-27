@@ -45,70 +45,9 @@
                 <tr>
                     <td>@oObjeto.nombreComision</td>
                     <td>@oObjeto.nombre</td>
-                    <td><a class="contrasenaBtn" href="javascript:;" data-id="@oObjeto.idCuenta">Consultar Contraseña</a>  </td>
+                    <td><input onclick="document.location.href='@Url.Content("~/AdminCuenta/EnviarCorreo/" + oObjeto.idCuenta)'" type="button" value="Enviar Correo con Contraseña" class="btn btn-primary" /></td>
                 </tr>
             }
         </table>
     </div>
 </div>
-
-
-    
-
-    
-<div id="dialog" class="card border-warning mb-3" style="max-width: 20rem;">
-</div>
-
-
-
-
-@section scripts
-{
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/jquery-ui.js" type="text/javascript"></script>
-    
-    <script type="text/javascript">
-        $(function () {
-            
-            $(".contrasenaBtn").click(function () {
-                debugger;
-                var $buttonClicked = $(this);
-                var id = $buttonClicked.attr('data-id');
-                var options = { "backdrop": "static", keyboard: true };
-                $.ajax({
-                    type: "POST",
-                    url: "AdminCuenta/VerContrasena/" + id,
-                    contentType: "application/json; charset=utf-8",
-                    datatype: "json",
-                    success: function (response) {
-                        debugger;
-                        $('#dialog').html(response);
-                        $('#dialog').dialog('open');
-
-                    },
-                    error: function () {
-                        alert("Dynamic content load failed.");
-                    }
-                });
-            });
-            $("#dialog").dialog({
-                autoOpen: false,
-                modal: true,
-                title: "",
-                open: function (event, ui) {
-                    $(this).closest('.ui-dialog').find('.ui-dialog-titlebar-close').hide();
-                        
-                },
-                dialogClass: "no-close",
-                buttons: [{
-                    text: "OK",
-                    click: function () {
-                        $(this).dialog("close");
-                    }
-                }]
-            });
-        });
-
-    </script>
-
-}
