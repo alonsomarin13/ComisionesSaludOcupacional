@@ -15,11 +15,13 @@ namespace ComisionesSaludOcupacional.Models.ViewModels
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             var file = value as HttpPostedFileBase;
-
-            if (file.ContentLength > _maxFileSize)
-            {
-                return new ValidationResult("Excede el tamaño máximo del archivo, debe ser menor a 10MB");
+            if (file != null) {
+                if (file.ContentLength > _maxFileSize)
+                {
+                    return new ValidationResult("Excede el tamaño máximo del archivo, debe ser menor a 10MB");
+                }
             }
+            
 
             return ValidationResult.Success;
         }
