@@ -6,32 +6,43 @@
 
 <br />
 
-<div class="jumbotron" align="center">
-    @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { role = "form", @class = "form-group" }))
-    {
+<div class="row">
+    <div class="col" align="center">
+        <h1 class="display-4">Sistema de Comisiones de Salud Ocupacional</h1>
+        <hr class="my-4">
+        <img src="~/Content/images/MSP.Logo.2019.Original.png" style="width:300px">
+        <hr class="my-4">
+    </div>
 
-    <div class="myBox">
-        <div class="row">
-            <div class="col-sm">
-                @Html.AntiForgeryToken()
+    <div class="col">
 
-                @Html.ValidationMessage("error", new { @class = "text-danger" })
+        <div class="jumbotron" align="center">
+            @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { role = "form", @class = "form-group" }))
+            {
 
-                @Html.LabelFor(d => d.username)
-                @Html.TextBoxFor(d => d.username, new { @class = "form-control" })
-                @Html.ValidationMessage("username", new { @class = "text-danger" }) <hr class="my-4">
+                <div class="myBox">
+                    <div class="row">
+                        <div class="col-sm">
+                            @Html.AntiForgeryToken()
 
-                @Html.LabelFor(d => d.contrasena)
-                @Html.PasswordFor(d => d.contrasena, new { @class = "form-control" })
-                @Html.ValidationMessage("contrasena", new { @class = "text-danger" }) <hr class="my-4">
-            </div>
-        </div>
-        <div class="col-sm">
-            <div style="text-align:center">
-                <input type="submit" class="btn btn-success btn-lg" value="Iniciar Sesión" />
-            </div>
+                            @Html.ValidationMessage("error", new { @class = "text-danger" })
+
+                            @Html.LabelFor(d => d.username)
+                            @Html.TextBoxFor(d => d.username, new { @class = "form-control" })
+                            @Html.ValidationMessage("username", new { @class = "text-danger" }) <hr class="my-4">
+
+                            @Html.LabelFor(d => d.contrasena)
+                            @Html.PasswordFor(d => d.contrasena, new { @class = "form-control" })
+                            @Html.ValidationMessage("contrasena", new { @class = "text-danger" }) <hr class="my-4">
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div style="text-align:center">
+                            <input type="submit" class="btn btn-success btn-lg" value="Iniciar Sesión" />
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
     </div>
-    }
 </div>
-    

@@ -10,6 +10,7 @@ namespace ComisionesSaludOcupacional.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.route = Server.MapPath("~") + "\\Views\\Home\\logo.png";
             return View();
         }
 

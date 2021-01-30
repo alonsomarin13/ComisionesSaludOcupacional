@@ -16,10 +16,14 @@ namespace ComisionesSaludOcupacional.Models.ViewModels
         {
             var file = value as HttpPostedFileBase;
 
-            if (file.ContentLength > _maxFileSize)
+            if(file != null)
             {
-                return new ValidationResult("Excede el tamaño máximo del archivo, debe ser menor a 10MB");
+                if (file.ContentLength > _maxFileSize)
+                {
+                    return new ValidationResult("Excede el tamaño máximo del archivo, debe ser menor a 10MB");
+                }
             }
+            
 
             return ValidationResult.Success;
         }
