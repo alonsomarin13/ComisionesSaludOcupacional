@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Diagnostics;
 using System.Web.Helpers;
+using System.Net.Mail;
 
 namespace ComisionesSaludOcupacional.Controllers
 {
@@ -103,8 +104,19 @@ namespace ComisionesSaludOcupacional.Controllers
             string subject = "Credenciales de " + model.nombre;
             string mensaje = "Usted ha solitado las credenciales del sistema para el usuario: " + model.nombre + "\r\n\r\nUsuario: " + model.nombre + "\nContraseña: " + model.password + "\r\n\r\nSi ha recibido este correo por error, por favor ignórelo.";
             string body = mensaje.Replace("\n", "<br />");
+            SmtpClient cliente = new SmtpClient("smtp-mail.outlook.com");
+            cliente.Port = 587;
+            cliente.DeliveryMethod = SmtpDeliveryMethod.Network;
+            cliente.UseDefaultCredentials = false;
+            System.Net.NetworkCredential credencial = new System.Net.NetworkCredential("comisionessaludocupacional@outlook.com","lastword1");
+            cliente.EnableSsl = true;
+            cliente.Credentials = credencial;
 
-            WebMail.Send(model.useremail, subject, body, null, null, null, true, null, null, null, null, null, null);
+            MailMessage correo = new MailMessage("comisionessaludocupacional@outlook.com",model.useremail);
+            correo.Subject = subject;
+            correo.Body = body;
+            correo.IsBodyHtml = true;
+            cliente.Send(correo);
             ViewBag.mensaje = "Correo enviado satisfactoriamente.";
 
             return View(model);
