@@ -4,38 +4,43 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h4 class="display-3">Editar Centro de Trabajo</h4>
+<div align="center">
+    <h4 class="display-3">Editar Centro de Trabajo</h4>
 
-@using (Html.BeginForm("EditCentroDeTrabajo", "AdminCentroDeTrabajo", FormMethod.Post, new { role = "form", @class = "form-group" }))
-{
+    @using (Html.BeginForm("EditCentroDeTrabajo", "AdminCentroDeTrabajo", FormMethod.Post, new { role = "form", @class = "form-group" }))
+    {
 
-    <div class="myBox">
-        <div class="row">
-            <div class="col-sm">
-                @Html.HiddenFor(d => d.idCentroDeTrabajo)
-                @Html.AntiForgeryToken()
+        <div class="myBox">
+            <div class="row">
+                <div class="col-sm">
+                    @Html.HiddenFor(d => d.idCentroDeTrabajo)
+                    @Html.AntiForgeryToken()
 
-                @Html.ValidationMessage("error", new { @class = "text-danger" })
+                    @Html.ValidationMessage("error", new { @class = "text-danger" })
 
-                @Html.LabelFor(d => d.nombre)
-                @Html.TextBoxFor(d => d.nombre, new { @class = "form-control" })
-                @Html.ValidationMessage("nombre", new { @class = "text-danger" }) <hr class="my-4">
+                    @Html.LabelFor(d => d.nombre)
+                    @Html.TextBoxFor(d => d.nombre, new { @class = "form-control" })
+                    @Html.ValidationMessage("nombre", new { @class = "text-danger" }) <hr class="my-4">
 
-                @if (TempData["Success"] != null)
-                {
-                    <p class="text-success" id="successMessage">@TempData["Success"]</p>
-                }
-            </div>
-        </div>
-        <div class="row">
-            <div style="text-align:left">
-                <input onclick="history.back()" type="button" class="btn btn-danger btn-lg" value="Atrás" />
-            </div>
-            <div class="col-sm">
-                <div style="text-align:right">
-                    <input type="submit" class="btn btn-success btn-lg" value="Cambiar" />
+                    @if (TempData["Success"] != null)
+                    {
+                        <p class="text-success" id="successMessage">@TempData["Success"]</p>
+                    }
                 </div>
             </div>
-        </div>
-    </div>
-}
+            <div class="row">
+                <div class="col-sm">
+                    <div style="text-align:left">
+                        <input onclick="document.location.href='@Url.Content("~/AdminCentroDeTrabajo")'" type="button" class="btn btn-danger btn-lg" value="Atrás" />
+                    </div>
+                </div>
+
+                <div class="col-sm">
+                    <div style="text-align:right">
+                        <input type="submit" class="btn btn-success btn-lg" value="Cambiar" />
+                    </div>
+                </div>
+                </div>
+            </div>
+    }
+</div>

@@ -12,11 +12,9 @@
 
 <div class="myBox-adjustable">
     <div class="row">
-        <div class="col" align="left">
-            <input type="button" onclick="document.location.href='@Url.Content("~/AdminCentroDeTrabajo/AddCentroDeTrabajo")'" value="Crear nuevo Centro de Trabajo" class="btn btn-sm btn-primary" />
-        </div>
 
-        <div class="col-8" align="right">
+
+        <div class="col-8" align="left">
             @using (Html.BeginForm("Index", "AdminCentroDeTrabajo", FormMethod.Get))
             {
                 @Html.Label("Nombre")
@@ -25,8 +23,12 @@
                 @Html.Label("Region")
                 @Html.DropDownList("region", (SelectList)ViewBag.Regiones, "Seleccione Región", new { @class = "custom-select-filter" })
 
-                <input type="submit" value="Buscar" class="btn btn-sm btn-secondary"/>
+                <input type="submit" value="Buscar" class="btn btn-sm btn-secondary" />
             }
+        </div>
+
+        <div class="col" align="right">
+            <input type="button" onclick="document.location.href='@Url.Content("~/AdminCentroDeTrabajo/AddCentroDeTrabajo")'" value="Crear nuevo Centro de Trabajo" class="btn btn-sm btn-primary" />
         </div>
     </div>
 
@@ -47,7 +49,7 @@
                     <tr>
                         <td>@oObjeto.nombre</td>
                         <td>@oObjeto.nombreRegion</td>
-                        <td><input onclick="document.location.href='@Url.Content("~/AdminCentroDeTrabajo/EditCentroDeTrabajo/" + oObjeto.idCentroDeTrabajo)'" type="button" value="Editar" class="btn btn-primary" /></td>
+                        <td><input onclick="document.location.href='@Url.Content("~/AdminCentroDeTrabajo/EditCentroDeTrabajo/" + oObjeto.idCentroDeTrabajo)'" type="button" value="Editar" class="btn btn-warning" /></td>
                     </tr>
                 }
             </table>

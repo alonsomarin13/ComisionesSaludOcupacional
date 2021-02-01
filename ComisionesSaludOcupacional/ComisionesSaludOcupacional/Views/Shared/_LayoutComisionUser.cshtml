@@ -10,28 +10,34 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand">MSP</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 
-        <div class="collapse navbar-collapse" id="navbarColor02">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" onclick="document.location.href='@Url.Content("~/ComisionUser/InformacionPrincipal/"+Session["ComisionUserID"])'">Comision</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" onclick="document.location.href='@Url.Content("~/ComisionUser/Cuenta")'">Cuenta</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" onclick="document.location.href='@Url.Content("~/ComisionUserNoticia")'">Noticias</a>
-                </li>
-                <li class="nav-item">
-                    <a> @Html.ActionLink("Cerrar Sesión", "Logout", "Cierre", null, new { @class = "nav-link" })</a>
-                </li>
-            </ul>
+        <div class="col">
+                <img src="~/Content/images/MSP.Logo.2019.Original.png" style="width:75px">
+                <a class="navbar-brand">Ministerio de Seguridad Pública</a>
         </div>
+
+        <form class="form-inline my-5 my-lg-3">
+
+
+            <div class="collapse navbar-collapse" id="navbarColor02">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="document.location.href='@Url.Content("~/ComisionUser/InformacionPrincipal/"+Session["ComisionUserID"])'">Comision</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="document.location.href='@Url.Content("~/ComisionUser/Cuenta")'">Cuenta</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="document.location.href='@Url.Content("~/ComisionUserNoticia")'">Noticias</a>
+                    </li>
+                    <li class="nav-item">
+                        <a> @Html.ActionLink("Cerrar Sesión", "Logout", "Cierre", null, new { @class = "nav-link" })</a>
+                    </li>
+                </ul>
+            </div>
+        </form>
+
     </nav>
 
     <div class="container body-content">

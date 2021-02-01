@@ -5,13 +5,14 @@
     Layout = "~/Views/Shared/_LayoutComisionUser.cshtml";
 }
 
-<h4 class="display-3">Agregar Representante</h4>
+<div align="center">
+    <h4 class="display-3">Agregar Representante</h4>
 
-@using (Html.BeginForm("Add", "ComisionUserRepresentantes", FormMethod.Post, new { role = "form", @class = "form-group" }))
-{
-
-    var lista = new List<SelectListItem>()
+    @using (Html.BeginForm("Add", "ComisionUserRepresentantes", FormMethod.Post, new { role = "form", @class = "form-group" }))
     {
+
+        var lista = new List<SelectListItem>()
+{
         new SelectListItem()
         {
             Text = "Patrono",
@@ -22,42 +23,44 @@
             Value = "1",
         }
     };
-    <div class="myBox">
-        <div class="row">
-            <div class="col-sm">
-                @Html.AntiForgeryToken()
 
-                @Html.ValidationMessage("error", new { @class = "text-danger" })
+<div class="myBox">
+    <div class="row">
+        <div class="col-sm">
+            @Html.AntiForgeryToken()
 
-                @Html.LabelFor(d => d.nombre)
-                @Html.TextBoxFor(d => d.nombre, new { @class = "form-control" })
-                @Html.ValidationMessage("nombre", new { @class = "text-danger" }) <hr class="my-4">
+            @Html.ValidationMessage("error", new { @class = "text-danger" })
 
-                @Html.LabelFor(d => d.correo)
-                @Html.TextBoxFor(d => d.correo, new { @class = "form-control" })
-                @Html.ValidationMessage("correo", new { @class = "text-danger" }) <hr class="my-4">
+            @Html.LabelFor(d => d.nombre)
+            @Html.TextBoxFor(d => d.nombre, new { @class = "form-control" })
+            @Html.ValidationMessage("nombre", new { @class = "text-danger" }) <hr class="my-4">
 
-                @Html.LabelFor(d => d.telefono)
-                @Html.TextBoxFor(d => d.telefono, new { @class = "form-control" })
-                @Html.ValidationMessage("telefono", new { @class = "text-danger" }) <hr class="my-4">
+            @Html.LabelFor(d => d.correo)
+            @Html.TextBoxFor(d => d.correo, new { @class = "form-control" })
+            @Html.ValidationMessage("correo", new { @class = "text-danger" }) <hr class="my-4">
 
-                @Html.Label("Tipo de Representante")
-                <br>
-                @Html.DropDownListFor(d => d.tipo, lista, new { @class = "custom-select" }) <hr class="my-4">
+            @Html.LabelFor(d => d.telefono)
+            @Html.TextBoxFor(d => d.telefono, new { @class = "form-control" })
+            @Html.ValidationMessage("telefono", new { @class = "text-danger" }) <hr class="my-4">
+
+            @Html.Label("Tipo de Representante")
+            <br>
+            @Html.DropDownListFor(d => d.tipo, lista, new { @class = "custom-select" }) <hr class="my-4">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm">
+            <div style="text-align:left">
+                <input onclick="document.location.href='@Url.Content("~/ComisionUser/InformacionPrincipal/"+Session["ComisionUserID"])'" type="button" class="btn btn-danger btn-lg" value="Atrás" />
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm">
-                <div style="text-align:left">
-                    <input onclick="history.back()" type="button" class="btn btn-danger btn-lg" value="Atrás" />
-                </div>
-            </div>
-            <div class="col-sm">
-                <div style="text-align:right">
-                    <input type="submit" class="btn btn-success btn-lg" value="Crear" />
-                </div>
+        <div class="col-sm">
+            <div style="text-align:right">
+                <input type="submit" class="btn btn-success btn-lg" value="Crear" />
             </div>
         </div>
     </div>
-    }
+</div>
+}
+</div>
 

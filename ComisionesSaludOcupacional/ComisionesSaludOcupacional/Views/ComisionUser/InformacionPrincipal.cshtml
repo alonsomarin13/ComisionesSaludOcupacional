@@ -6,10 +6,11 @@
     Layout = "~/Views/Shared/_LayoutComisionUser.cshtml";
 }
 
+<h3 class="display-2">@Model.nombre</h3>
 
 <div class="jumbotron">
-    <h3 class="display-3">@Model.nombre</h3>
-
+    
+    <h3 class="display-4">Información del contacto</h3>
     <div class="row">
         <div class="col-lg-12">
             <table class="table table-bordered">
@@ -34,7 +35,8 @@
                     <td>@Model.fechaDeRegistro.ToString().Replace("0:00:00", "").Replace("12:00:00", "")</td>
                 </tr>
             </table>
-            @if (ViewBag.Vencimiento != null) {
+            @if (ViewBag.Vencimiento != null)
+            {
                 <div><p class="text-danger">@ViewBag.Vencimiento</p></div>
             }
 
@@ -46,20 +48,19 @@
     <div class="col-md-12" style="text-align:right;">
         <input type="button" onclick="document.location.href='@Url.Content("~/ComisionUser/Edit/" + Model.idComision)'" value="Editar Información" class="btn btn-lg btn-warning" />
     </div>
-
+</div>
     <div class="jumbotron">
-        @if (ViewBag.RepresentantesWarning != null)
-        {
-            <div><p class="text-danger">@ViewBag.RepresentantesWarning</p></div>
-        }
-        <h4 class="display-3">Representantes</h4>
+
+        <h4 class="display-4">Representantes de @Model.nombre</h4>
         <div class="row">
             <div class="col-lg-12">
                 <table class="table table-bordered">
                     <tr class="table-primary">
+                        <th>Cédula</th>
                         <th>Nombre</th>
                         <th>Correo</th>
                         <th>Teléfono</th>
+                        <th>Tipo del representante</th>
                         <th>Editar representante</th>
                         <th>Borrar representante</th>
                     </tr>
@@ -69,9 +70,11 @@
                         foreach (var oObjeto in Model.representantes)
                         {
                             <tr>
+                                <td>Aqui va la cedula</td>
                                 <td>@oObjeto.nombre</td>
                                 <td>@oObjeto.correo</td>
                                 <td>@oObjeto.telefono</td>
+                                <td>@oObjeto.tipo</td>
                                 <td><input onclick="document.location.href='@Url.Content("~/ComisionUserRepresentantes/Edit/" + oObjeto.idRepresentante)'" type="button" value="Editar" class="btn btn-warning" /></td>
                                 <td><input onclick="location.href='@Url.Content("~/ComisionUserRepresentantes/Delete/" + oObjeto.idRepresentante)'" type="button" value="Borrar" class="btn btn-danger" /></td>
 
@@ -81,8 +84,10 @@
                 </table>
             </div>
         </div>
-        <br>
-
+        @if (ViewBag.RepresentantesWarning != null)
+        {
+            <div><p class="text-danger">@ViewBag.RepresentantesWarning</p></div>
+        }
         <div class="col-md-12" style="text-align:right;">
             <input type="button" onclick="document.location.href='@Url.Content("~/ComisionUserRepresentantes/Add/" + Model.idComision)'" value="Crear Representante" class="btn btn-lg btn-success" />
         </div>
@@ -111,7 +116,7 @@
             </div>
         </div>
     }
-</div>
+
 
 <!-- JS includes -->
 <script src="https://code.jquery.com/jquery-1.11.3.js"></script>

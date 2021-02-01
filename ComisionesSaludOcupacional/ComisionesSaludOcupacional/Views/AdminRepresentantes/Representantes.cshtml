@@ -5,8 +5,10 @@
 }
 
 <br>
+<h1 class="display-3">Representantes</h1>
+
 <div class="jumbotron">
-    <h1 class="display-3">Representantes</h1>
+    
     <div class="row">
         <div class="col-lg-12">
             <table class="table table-bordered">
@@ -14,17 +16,21 @@
                 @if (Model != null && Model.Count() != 0)
                 {
                     <tr class="table-primary">
+                        <th>Cédula</th>
                         <th>Nombre</th>
                         <th>Correo</th>
                         <th>Teléfono</th>
+                        <th>Tipo de representante</th>
                     </tr>
 
                     foreach (var oObjeto in Model)
                     {
                         <tr>
+                            <td>Aquí va la cédula</td>
                             <td>@oObjeto.nombre</td>
                             <td>@oObjeto.correo</td>
                             <td>@oObjeto.telefono</td>
+                            <td>@oObjeto.tipo</td>
                         </tr>
                     }
                 }
@@ -34,7 +40,7 @@
                 }
             </table>
 
-            <input type="button" class="btn btn-primary" onclick="document.location.href='@Url.Content("~/AdminComision")'" value="Volver" />
+            <input type="button" class="btn btn-danger btn-lg" onclick="document.location.href='@Url.Content("~/AdminComision")'" value="Volver" />
         </div>
     </div>
 </div>

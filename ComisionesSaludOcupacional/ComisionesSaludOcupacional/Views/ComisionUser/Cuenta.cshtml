@@ -4,48 +4,58 @@
     Layout = "~/Views/Shared/_LayoutComisionUser.cshtml";
 }
 
-<h4 class="display-3">Configuración de Cuenta</h4>
+<div align="center">
+    <h4 class="display-3">Configuración de Cuenta</h4>
 
-@using (Html.BeginForm("Cuenta", "ComisionUser", FormMethod.Post, new { role = "form", @class = "form-group" }))
-{
+    @using (Html.BeginForm("Cuenta", "ComisionUser", FormMethod.Post, new { role = "form", @class = "form-group" }))
+    {
 
-    <div class="myBox">
-        <div class="row">
-            <div class="col-sm">
-                @Html.AntiForgeryToken()
+        <div class="myBox">
+            <div class="row">
+                <div class="col-sm">
+                    @Html.AntiForgeryToken()
 
-                @Html.ValidationMessage("error", new { @class = "text-danger" })
+                    @Html.ValidationMessage("error", new { @class = "text-danger" })
 
-                @Html.LabelFor(d => d.nombre)
-                <p>@Model.nombre</p>
+                    @Html.LabelFor(d => d.nombre)
 
-                @Html.LabelFor(d => d.contrasena)
-                @Html.PasswordFor(d => d.contrasena, new { @class = "form-control" })
-                @Html.ValidationMessage("contrasena", new { @class = "text-danger" }) <hr class="my-4">
+                    <br />
 
-                @Html.LabelFor(d => d.contrasenaNueva)
-                @Html.PasswordFor(d => d.contrasenaNueva, new { @class = "form-control" })
-                @Html.ValidationMessage("contrasenaNueva", new { @class = "text-danger" }) <hr class="my-4">
+                    <input type="text" value="@Model.nombre" readonly="readonly" class="form-control" />
 
-                @Html.LabelFor(d => d.confirmarContrasena)
-                @Html.PasswordFor(d => d.confirmarContrasena, new { @class = "form-control" })
-                @Html.ValidationMessage("confirmarContrasena", new { @class = "text-danger" }) <hr class="my-4">
+                    <hr class="my-4">
 
-                @if (TempData["Success"] != null)
-                {
-                    <p class="text-success" id="successMessage">@TempData["Success"]</p>
-                }
+                    @Html.LabelFor(d => d.contrasena)
+                    @Html.PasswordFor(d => d.contrasena, new { @class = "form-control" })
+                    @Html.ValidationMessage("contrasena", new { @class = "text-danger" }) <hr class="my-4">
+
+                    @Html.LabelFor(d => d.contrasenaNueva)
+                    @Html.PasswordFor(d => d.contrasenaNueva, new { @class = "form-control" })
+                    @Html.ValidationMessage("contrasenaNueva", new { @class = "text-danger" }) <hr class="my-4">
+
+                    @Html.LabelFor(d => d.confirmarContrasena)
+                    @Html.PasswordFor(d => d.confirmarContrasena, new { @class = "form-control" })
+                    @Html.ValidationMessage("confirmarContrasena", new { @class = "text-danger" }) <hr class="my-4">
+
+                    @if (TempData["Success"] != null)
+                    {
+                        <p class="text-success" id="successMessage">@TempData["Success"]</p>
+                    }
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div style="text-align:left">
-                <input onclick="history.back()" type="button" class="btn btn-danger btn-lg" value="Atrás" />
-            </div>
-            <div class="col-sm">
-                <div style="text-align:right">
-                    <input type="submit" class="btn btn-success btn-lg" value="Cambiar" />
+            <div class="row">
+                <div class="col-sm">
+                    <div style="text-align:left">
+                        <input onclick="history.back()" type="button" class="btn btn-danger btn-lg" value="Atrás" />
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div style="text-align:right">
+                        <input type="submit" class="btn btn-success btn-lg" value="Cambiar" />
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-}
+    }
+</div>
+

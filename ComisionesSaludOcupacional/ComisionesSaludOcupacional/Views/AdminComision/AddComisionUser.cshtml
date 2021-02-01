@@ -5,97 +5,97 @@
 
 }
 
-<h2>Agregar Comisión</h2>
+<div align="center">
+    <h4 class="display-3">Agregar Comisión</h4>
 
-@using (Html.BeginForm("AddComisionUser", "AdminComision", FormMethod.Post, new { role = "form", @class = "", id = "form" }))
-{
-    <div class="jumbotron">
-        <div class="myBox">
-            <div class="row">
-                <div class="col-sm">
-                    @Html.AntiForgeryToken()
+    @using (Html.BeginForm("AddComisionUser", "AdminComision", FormMethod.Post, new { role = "form", @class = "", id = "form" }))
+    {
+            <div class="myBox">
+                <div class="row">
+                    <div class="col-sm">
+                        @Html.AntiForgeryToken()
 
-                    @Html.ValidationMessage("error", new { @class = "text-danger" })
+                        @Html.ValidationMessage("error", new { @class = "text-danger" })
 
-                    @Html.LabelFor(d => d.nombreRegion) <br />
-                    @Html.DropDownListFor(d => d.nombreRegion, Model.listaDeRegiones, htmlAttributes: new { @class = "custom-select" })
-                    <br />
-                    @Html.ValidationMessage("nombreRegion", new { @class = "text-danger" }) <br />
-                    @Html.LabelFor(d => d.nombreCentroDeTrabajo)
-                    @Html.TextBoxFor(model => model.nombreCentroDeTrabajo, htmlAttributes: new { @class = "form-control" })
-                    <br />
-                    @Html.ValidationMessage("nombreCentroDeTrabajo", new { @class = "text-danger" }) <br />
-                    @Html.TextBoxFor(model => model.idCentroDeTrabajo, htmlAttributes: new { style = "display: none;" })
+                        @Html.LabelFor(d => d.nombreRegion) <br />
+                        @Html.DropDownListFor(d => d.nombreRegion, Model.listaDeRegiones, htmlAttributes: new { @class = "custom-select" })
+                        <hr class="my-3">
+                        @Html.ValidationMessage("nombreRegion", new { @class = "text-danger" }) <br />
+                        @Html.LabelFor(d => d.nombreCentroDeTrabajo)
+                        @Html.TextBoxFor(model => model.nombreCentroDeTrabajo, htmlAttributes: new { @class = "form-control" })
+                        <br />
+                        @Html.ValidationMessage("nombreCentroDeTrabajo", new { @class = "text-danger" })
+                        @Html.TextBoxFor(model => model.idCentroDeTrabajo, htmlAttributes: new { style = "display: none;" })
 
-                    @if (ViewBag.nombre != null)
-                    {
-                        <p class="text-success" id="successMessage">Cuenta creada correctamente!</p>
-                        <p> Nombre de usuario: @ViewBag.nombre</p>
-                        <p> Contraseña: @ViewBag.contra</p>
-                        <p class="text-dark">Asegúrese de enviar estas creedenciales a un usuario de la comisión (puede consultarlas más adelante)</p>
-                    }
+                        @if (ViewBag.nombre != null)
+                        {
+                            <p class="text-success" id="successMessage">Cuenta creada correctamente!</p>
+                            <p> Nombre de usuario: @ViewBag.nombre</p>
+                            <p> Contraseña: @ViewBag.contra</p>
+                            <p class="text-dark">Asegúrese de enviar estas creedenciales a un usuario de la comisión (puede consultarlas más adelante)</p>
+                        }
+                    </div>
                 </div>
-            </div>
-            <br />
-            <div class="row">
-                <div class="col-sm">
-                    <div class="col">
-                        <div style="text-align:left;">
-                            <input onclick="history.back()" type="button" class="btn btn-danger btn-lg" value="Atrás" />
+                <hr class="my-4">
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="col">
+                            <div style="text-align:left;">
+                                <input onclick="document.location.href='@Url.Content("~/AdminCuenta")'" type="button" class="btn btn-danger btn-lg" value="Atrás" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div class="col">
+                            <div style="text-align:right;">
+                                <input type="submit" class="btn btn-success btn-lg" value="Crear" />
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm">
-                    <div class="col">
-                        <div style="text-align:right;">
-                            <input type="submit" class="btn btn-success btn-lg" value="Crear" />
-                        </div>
-                    </div>
-                </div>
             </div>
-        </div>
-    </div>
-}
+    }
+</div>
 
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/start/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#nombreCentroDeTrabajo").autocomplete({
-            source: function (request, response) {
-                $.ajax({
-                    url: "/AdminComision/getCentrosDeTrabajo",
-                    type: "POST",
-                    dataType: "json",
-                    data: { Prefix: request.term, regID: $('#nombreRegion').val() },
-                    success: function (data) {
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/start/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#nombreCentroDeTrabajo").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/AdminComision/getCentrosDeTrabajo",
+                        type: "POST",
+                        dataType: "json",
+                        data: { Prefix: request.term, regID: $('#nombreRegion').val() },
+                        success: function (data) {
 
-                        response($.map(data, function (item) {
-                            return { label: item.nombreCentroDeTrabajo, value: item.idCentroDeTrabajo };
-                        }))
+                            response($.map(data, function (item) {
+                                return { label: item.nombreCentroDeTrabajo, value: item.idCentroDeTrabajo };
+                            }))
 
-                    },
-                    error: function (response) {
-                        alert(response.responseText);
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        }
+                    })
+                },
+                messages: {
+                    noResults: "",
+                    results: function (count) {
+                        return count + (count > 1 ? ' results' : ' result ') + ' found';
                     }
-                })
-            },
-            messages: {
-                noResults: "",
-                results: function (count) {
-                    return count + (count > 1 ? ' results' : ' result ') + ' found';
+                },
+                select: function (event, ui) {
+                    event.preventDefault();
+                    $("#nombreCentroDeTrabajo").val(ui.item.label);
+                    $("#idCentroDeTrabajo").val(ui.item.value);
+                },
+                focus: function (event, ui) {
+                    event.preventDefault();
+                    $("#nombreCentroDeTrabajo").val(ui.item.label);
                 }
-            },
-            select: function (event, ui) {
-                event.preventDefault();
-                $("#nombreCentroDeTrabajo").val(ui.item.label);
-                $("#idCentroDeTrabajo").val(ui.item.value);
-            },
-            focus: function (event, ui) {
-                event.preventDefault();
-                $("#nombreCentroDeTrabajo").val(ui.item.label);
-            }
-        });
-    })
-</script>
+            });
+        })
+    </script>

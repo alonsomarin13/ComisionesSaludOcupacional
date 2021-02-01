@@ -4,50 +4,53 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h4 class="display-3">Editar Noticia</h4>
+<div align="center">
+    <h4 class="display-3">Editar Noticia</h4>
 
-@using (Html.BeginForm("EditarNoticia", "AdminNoticia", FormMethod.Post, new { role = "form", @class = "form-group", enctype = "multipart/form-data" }))
-{
+    @using (Html.BeginForm("EditarNoticia", "AdminNoticia", FormMethod.Post, new { role = "form", @class = "form-group", enctype = "multipart/form-data" }))
+    {
 
-    <div class="myBox">
-        <div class="row">
-            <div class="col-sm">
-                @Html.AntiForgeryToken()
-                @Html.HiddenFor(d => d.idNoticia)
-                @Html.HiddenFor(d => d.idArchivoActual)
+        <div class="myBox-adjustable">
+            <div class="row" >
+                <div class="col" width="100%">
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(d => d.idNoticia)
+                    @Html.HiddenFor(d => d.idArchivoActual)
 
-                @Html.ValidationMessage("error", new { @class = "text-danger" })
+                    @Html.ValidationMessage("error", new { @class = "text-danger" })
 
-                @Html.LabelFor(d => d.titulo)
-                @Html.TextBoxFor(d => d.titulo, new { @class = "form-control" })
-                @Html.ValidationMessage("titulo", new { @class = "text-danger" }) <hr class="my-4">
+                    @Html.LabelFor(d => d.titulo)
+                    @Html.TextBoxFor(d => d.titulo, new { @class = "form-control", style = "max-width:100%" })
+                    @Html.ValidationMessage("titulo", new { @class = "text-danger" }) <hr class="my-4">
 
-                @Html.LabelFor(d => d.texto)
-                @Html.TextAreaFor(d => d.texto, new { @class = "form-control", @rows = 20 })
-                @Html.ValidationMessage("texto", new { @class = "text-danger" }) <hr class="my-4">
+                    @Html.LabelFor(d => d.texto)
+                    @Html.TextAreaFor(d => d.texto, new { @class = "form-control", @rows = 20, style = "max-width:100%" })
+                    @Html.ValidationMessage("texto", new { @class = "text-danger" }) <hr class="my-4">
 
-                @Html.ValidationMessage("archivo", new { @class = "text-danger" }) <hr class="my-4">
+                    @Html.LabelFor(d => d.archivoNuevo) <br />
 
-                <input type="file" name="archivoNuevo" /> <hr class="my-4">
+                    <input type="file" name="archivoNuevo" />
+                    <br /><br />
+                    @if (ViewBag.Mensaje != null)
+                    {
+                        <input type="button" onclick="document.location.href='@Url.Content("~/AdminNoticia/Eliminar/" + Model.idArchivoActual)'" value="Eliminar Archivo" class="btn btn-sm btn-danger" />
+                    }
 
-                @if (ViewBag.Mensaje != null)
-                {
-                    <input type="button" onclick="document.location.href='@Url.Content("~/AdminNoticia/Eliminar/" + Model.idArchivoActual)'" value="Eliminar Archivo" class="btn btn-sm btn-danger" />
-                }
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm">
-                <div style="text-align:left">
-                    <input onclick="document.location.href='@Url.Content("~/AdminNoticia/VerNoticia/" + Model.idNoticia)'" type="button" class="btn btn-danger btn-lg" value="Atrás" />
+                    <hr class="my-4">
                 </div>
             </div>
-            <div class="col-sm">
-                <div style="text-align:right">
-                    <input type="submit" class="btn btn-success btn-lg" value="Editar" />
+            <div class="row">
+                <div class="col-sm">
+                    <div style="text-align:left">
+                        <input onclick="document.location.href='@Url.Content("~/AdminNoticia/VerNoticia/" + Model.idNoticia)'" type="button" class="btn btn-danger btn-lg" value="Atrás" />
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div style="text-align:right">
+                        <input type="submit" class="btn btn-success btn-lg" value="Guardar cambios" />
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-}
-
+    }
+</div>

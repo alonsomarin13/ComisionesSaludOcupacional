@@ -5,40 +5,43 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h4 class="display-3">Enviar un Correo de Recuperación de Contraseña</h4>
+<div align="center">
 
-@using (Html.BeginForm("EnviarCorreo", "AdminCuenta", FormMethod.Post, new { role = "form", @class = "form-group" }))
-{
+    <h4 class="display-4">Enviar un Correo de Recuperación de Contraseña</h4>
 
-    <div class="myBox">
-        <div class="row">
-            <div class="col-sm">
-                @Html.AntiForgeryToken()
+    @using (Html.BeginForm("EnviarCorreo", "AdminCuenta", FormMethod.Post, new { role = "form", @class = "form-group" }))
+    {
 
-                @Html.HiddenFor(model => model.nombre)
-                @Html.HiddenFor(model => model.password)
+        <div class="myBox">
+            <div class="row">
+                <div class="col-sm">
+                    @Html.AntiForgeryToken()
 
-                @Html.LabelFor(model => model.useremail)
-                @Html.TextBoxFor(model => model.useremail)
-                @Html.ValidationMessage("useremail", new { @class = "text-danger" }) <hr class="my-4">
+                    @Html.HiddenFor(model => model.nombre)
+                    @Html.HiddenFor(model => model.password)
 
-                @if (ViewBag.mensaje != null)
-                {
-                    <p class="text-success" id="successMessage">@ViewBag.mensaje</p>
-                }
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm">
-                <div style="text-align:left">
-                    <input onclick="history.back()" type="button" class="btn btn-danger btn-lg" value="Atrás" />
+                    @Html.LabelFor(model => model.useremail) <br />
+                    @Html.TextBoxFor(model => model.useremail, new { @class = "form-control" })
+                    @Html.ValidationMessage("useremail", new { @class = "text-danger" }) <hr class="my-4">
+
+                    @if (ViewBag.mensaje != null)
+                    {
+                        <p class="text-success" id="successMessage">@ViewBag.mensaje</p>
+                    }
                 </div>
             </div>
-            <div class="col-sm">
-                <div style="text-align:right">
-                    <input type="submit" class="btn btn-success btn-lg" value="Crear" />
+            <div class="row">
+                <div class="col-sm">
+                    <div style="text-align:left">
+                        <input onclick="document.location.href='@Url.Content("~/AdminCuenta")'" type="button" class="btn btn-danger btn-lg" value="Atrás" />
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div style="text-align:right">
+                        <input type="submit" class="btn btn-success btn-lg" value="Crear" />
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-}
+    }
+</div>

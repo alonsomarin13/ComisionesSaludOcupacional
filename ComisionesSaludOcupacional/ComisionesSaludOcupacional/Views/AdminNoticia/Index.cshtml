@@ -12,12 +12,9 @@
 <div class="myBox-adjustable">
 
     <div class="row">
+
+
         <div class="col" align="left">
-            <input type="button" onclick="document.location.href='@Url.Content("~/AdminNoticia/AddNoticia")'" value="Crear Noticia" class="btn btn-sm btn-primary" />
-
-        </div>
-
-        <div class="col" align="right">
             @using (Html.BeginForm("Index", "AdminNoticia", FormMethod.Get))
             {
                 @Html.Label("Título", new { @class = "label-box" })
@@ -25,6 +22,10 @@
 
                 <input type="submit" value="Buscar" class="btn btn-sm btn-secondary" />
             }
+        </div>
+
+        <div class="col" align="right">
+            <input type="button" onclick="document.location.href='@Url.Content("~/AdminNoticia/AddNoticia")'" value="Crear Noticia" class="btn btn-sm btn-primary" />
         </div>
     </div>
 </div>

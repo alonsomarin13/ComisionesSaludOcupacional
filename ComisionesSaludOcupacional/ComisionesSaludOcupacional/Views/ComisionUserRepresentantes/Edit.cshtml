@@ -4,45 +4,46 @@
     Layout = "~/Views/Shared/_LayoutComisionUser.cshtml";
 }
 
-<h4 class="display-3">Editar Representante</h4>
+<div align="center">
+    <h4 class="display-3">Editar Representante</h4>
 
 
-@using (Html.BeginForm("Edit", "ComisionUserRepresentantes", FormMethod.Post, new { role = "form", @class = "" }))
-{
-<div class="myBox">
-    <div class="row" sstyle="display: flex;">
-        <div class="col-lg">
-            @Html.HiddenFor(d => d.idRepresentante)
-            @Html.AntiForgeryToken()
+    @using (Html.BeginForm("Edit", "ComisionUserRepresentantes", FormMethod.Post, new { role = "form", @class = "" }))
+    {
+        <div class="myBox">
+            <div class="row" sstyle="display: flex;">
+                <div class="col-lg">
+                    @Html.HiddenFor(d => d.idRepresentante)
+                    @Html.AntiForgeryToken()
 
-            @Html.ValidationMessage("error", new { @class = "text-danger" })
+                    @Html.ValidationMessage("error", new { @class = "text-danger" })
 
-            @Html.LabelFor(d => d.nombre)
-            @Html.TextBoxFor(d => d.nombre, new { @class = "form-control" })
-            @Html.ValidationMessage("nombre", new { @class = "text-danger" }) <hr class="my-4">
+                    @Html.LabelFor(d => d.nombre)
+                    @Html.TextBoxFor(d => d.nombre, new { @class = "form-control" })
+                    @Html.ValidationMessage("nombre", new { @class = "text-danger" }) <hr class="my-4">
 
-            @Html.LabelFor(d => d.correo)
-            @Html.TextBoxFor(d => d.correo, new { @class = "form-control" })
-            @Html.ValidationMessage("correo", new { @class = "text-danger" }) <hr class="my-4">
+                    @Html.LabelFor(d => d.correo)
+                    @Html.TextBoxFor(d => d.correo, new { @class = "form-control" })
+                    @Html.ValidationMessage("correo", new { @class = "text-danger" }) <hr class="my-4">
 
-            @Html.LabelFor(d => d.telefono)
-            @Html.TextBoxFor(d => d.telefono, new { @class = "form-control" })
-            @Html.ValidationMessage("telefono", new { @class = "text-danger" }) <hr class="my-4">
-        </div>
-    </div>
+                    @Html.LabelFor(d => d.telefono)
+                    @Html.TextBoxFor(d => d.telefono, new { @class = "form-control" })
+                    @Html.ValidationMessage("telefono", new { @class = "text-danger" }) <hr class="my-4">
+                </div>
+            </div>
 
-    <div class="row">
-        <div class="col-sm">
-            <div style="text-align:left">
-                <input onclick="history.back()" type="button" class="btn btn-danger btn-lg" value="Atrás" />
+            <div class="row">
+                <div class="col-sm">
+                    <div style="text-align:left">
+                        <input onclick="document.location.href='@Url.Content("~/ComisionUser/InformacionPrincipal/"+Session["ComisionUserID"])'" type="button" class="btn btn-danger btn-lg" value="Atrás" />
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div style="text-align:right">
+                        <input type="submit" class="btn btn-success btn-lg" value="Guardar Cambios" />
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-sm">
-            <div style="text-align:right">
-                <input type="submit" class="btn btn-primary btn-lg" value="Guardar Cambios" />
-            </div>
-        </div>
-    </div>
+    }
 </div>
-}
-
