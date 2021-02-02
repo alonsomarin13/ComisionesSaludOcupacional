@@ -25,6 +25,10 @@ namespace ComisionesSaludOcupacional.Models.ViewModels
         [Required]
         [Display(Name = "Nombre del Centro de Trabajo")]
         public string nombre { get; set; }
+        [Required]
+        [Display(Name = "Region")]
+        public string idRegion { get; set; }
+        public IEnumerable<SelectListItem> listaDeRegiones { get; set; }
     }
 
     public class CentroDeTrabajoTableViewModel

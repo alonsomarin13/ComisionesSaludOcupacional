@@ -8,12 +8,19 @@ namespace ComisionesSaludOcupacional.Controllers
 {
     public class HomeController : Controller
     {
+        /* Función de controlador tipo GET que se corre al iniciar el sistema, 
+         * alza la pantalla principal de login con la imagen del Ministerio.*/
         public ActionResult Index()
         {
             ViewBag.route = Server.MapPath("~") + "\\Views\\Home\\logo.png";
             return View();
         }
 
+        /* Función de controlador tipo POST que realiza la autenticación del usuario, 
+         * extrae del modelo los datos ingresados por la persona y revisa que estén correctos con
+         * los que están guardados en la base También, realiza la redirección dependiendo si el usuario
+         * es administrador, o usuario de comisión.
+         Parámetros: modelo que envía la vista */
         [HttpPost]
         public ActionResult Index(LoginViewModel model)
         {

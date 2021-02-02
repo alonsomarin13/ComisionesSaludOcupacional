@@ -15,18 +15,18 @@
 
                 @if (Model != null && Model.Count() != 0)
                 {
-                    <tr class="table-primary">
-                        <th>Cédula</th>
-                        <th>Nombre</th>
-                        <th>Correo</th>
-                        <th>Teléfono</th>
-                        <th>Tipo de representante</th>
-                    </tr>
+                <tr class="table-primary">
+                    <!--<th>Cédula</th>-->
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Teléfono</th>
+                    <th>Tipo de representante</th>
+                </tr>
 
                     foreach (var oObjeto in Model)
                     {
                         <tr>
-                            <td>Aquí va la cédula</td>
+                            <!--<td>Aquí va la cédula</td>-->
                             <td>@oObjeto.nombre</td>
                             <td>@oObjeto.correo</td>
                             <td>@oObjeto.telefono</td>

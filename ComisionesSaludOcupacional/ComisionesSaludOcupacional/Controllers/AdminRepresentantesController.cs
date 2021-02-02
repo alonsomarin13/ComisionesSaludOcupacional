@@ -11,13 +11,10 @@ namespace ComisionesSaludOcupacional.Controllers
 {
     public class AdminRepresentantesController : Controller
     {
-        // GET: AdminRepresentantes
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-
+        /* Función de controlador tipo GET que abre la vista principal de
+         * visualización de representantes del lado del administrador. Permite ver
+         * todos los representantes anexados a cierta comisión
+         Parámetros: Id de la comisión*/
         public ActionResult Representantes(int id)
         {
             List<RepresentanteTableViewModel> lista = null;
@@ -32,7 +29,8 @@ namespace ComisionesSaludOcupacional.Controllers
                              nombre = d.nombre,
                              correo = d.correo,
                              telefono = d.telefono,
-                             idComision = d.idComision
+                             idComision = d.idComision,
+                             tipo = d.tipo == 0 ? "Patrono" : "Trabajador"
                          }).ToList();
             }
 

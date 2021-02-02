@@ -7,8 +7,13 @@ using System.Text;
 
 namespace ComisionesSaludOcupacional.Models.ClasesUtilidad
 {
+    /* Clase CryptoEngine 
+     * Utilizada para la encriptación de contraseñas que van hacia la base de datos,
+     * con fines de seguridad.*/
     public class CryptoEngine
     {
+        /* Función que se encarga de encriptar una contraseña, mediante una key definida.
+         * Parámetros: contraseña a encriptar, y key de encriptación.*/
         public static string Encrypt(string input, string key)
         {
             byte[] inputArray = UTF8Encoding.UTF8.GetBytes(input);
@@ -21,6 +26,8 @@ namespace ComisionesSaludOcupacional.Models.ClasesUtilidad
             tripleDES.Clear();
             return Convert.ToBase64String(resultArray, 0, resultArray.Length);
         }
+        /* Función que se encarga de desencriptar una contraseña, mediante una key definida.
+         * Parámetros: contraseña a desencriptar, y key de encriptación.*/
         public static string Decrypt(string input, string key)
         {
             byte[] inputArray = Convert.FromBase64String(input);

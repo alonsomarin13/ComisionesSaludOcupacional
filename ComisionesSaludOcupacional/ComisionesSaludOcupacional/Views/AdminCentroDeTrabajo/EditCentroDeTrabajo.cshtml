@@ -20,7 +20,11 @@
 
                     @Html.LabelFor(d => d.nombre)
                     @Html.TextBoxFor(d => d.nombre, new { @class = "form-control" })
-                    @Html.ValidationMessage("nombre", new { @class = "text-danger" }) <hr class="my-4">
+                    @Html.ValidationMessage("nombre", new { @class = "text-danger" }) 
+                    <hr class="my-4">
+                    @Html.LabelFor(d => d.idRegion) <br />
+                    @Html.DropDownListFor(d => d.idRegion, Model.listaDeRegiones, htmlAttributes: new { @class = "custom-select" })
+                    <br />
 
                     @if (TempData["Success"] != null)
                     {
@@ -28,6 +32,7 @@
                     }
                 </div>
             </div>
+            <hr class="my-4">
             <div class="row">
                 <div class="col-sm">
                     <div style="text-align:left">

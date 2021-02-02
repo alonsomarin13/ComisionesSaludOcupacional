@@ -10,7 +10,10 @@ namespace ComisionesSaludOcupacional.Controllers
 {
     public class ComisionUserNoticiaController : Controller
     {
-        // GET: ComisionUserNoticia
+        /* Función de controlador tipo GET que abre la vista principal del módulo de
+         * noticias, por el lado del usuario de comisión. Permite ver todas las noticias subidas, 
+         * así como filtrar por título
+         Parámetros: título a filtrar.*/
         public ActionResult Index(string titulo)
         {
             List<NoticiaTableViewModel> lista = null;
@@ -37,6 +40,9 @@ namespace ComisionesSaludOcupacional.Controllers
             return View(lista);
         }
 
+        /* Función de controlador tipo GET que abre la vista de ver noticia, donde
+         * se puede visualizar el título, contenido y archivo de la noticia seleccionada
+         Parámetros: Id de la noticia.*/
         public ActionResult VerNoticia(int id)
         {
             VerNoticiaViewModel model = new VerNoticiaViewModel();
@@ -67,6 +73,9 @@ namespace ComisionesSaludOcupacional.Controllers
             return View(model);
         }
 
+        /* Función de controlador tipo GET que se alza cada vez que el usuario presione
+         * el botón de "Descargar Archivo". Permite descargar el archivo seleccionado.
+         Parámetros: Id del archivo*/
         public FileResult Descargar(int id)
         {
             string filePath = "";

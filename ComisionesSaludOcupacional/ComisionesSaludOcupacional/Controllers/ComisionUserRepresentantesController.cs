@@ -11,12 +11,8 @@ namespace ComisionesSaludOcupacional.Controllers
 {
     public class ComisionUserRepresentantesController : Controller
     {
-        // GET: ComisionUserRepresentantes
-        public ActionResult Index()
-        {
-            return View();
-        }
-
+        /* Función de controlador tipo GET que abre la vista de añadir representante,
+         * donde se permite crear un nuevo representante anexado a la comisión*/
         [HttpGet]
         public ActionResult Add()
         {
@@ -24,6 +20,9 @@ namespace ComisionesSaludOcupacional.Controllers
             return View();
         }
 
+        /* Función de controlador tipo POST que realiza la creación del representante, 
+         * extrae del modelo los datos ingresados por la persona y los guarda en la base.
+         Parámetros: modelo que envía la vista, Id de la comisión*/
         [HttpPost]
         public ActionResult Add(RepresentanteViewModel model, int id)
         {
@@ -50,6 +49,9 @@ namespace ComisionesSaludOcupacional.Controllers
             return Redirect(Url.Content("~/ComisionUser/InformacionPrincipal/" + Session["ComisionUserID"]));
         }
 
+        /* Función de controlador tipo GET que abre la vista de editar representante,
+         * donde se pueden editar todos los contenidos de un representante elegido
+         Parámetros: Id del representante.*/
         public ActionResult Edit(int id)
         {
             EditRepresentanteViewModel model = new EditRepresentanteViewModel();
@@ -65,6 +67,9 @@ namespace ComisionesSaludOcupacional.Controllers
             return View(model);
         }
 
+        /* Función de controlador tipo POST que realiza la edición del representante, 
+         * extrae del modelo los datos ingresados por la persona y los guarda en la base.
+         Parámetros: modelo que envía la vista*/
         [HttpPost]
         public ActionResult Edit(EditRepresentanteViewModel model)
         {
@@ -88,6 +93,9 @@ namespace ComisionesSaludOcupacional.Controllers
             return Redirect(Url.Content("~/ComisionUser/InformacionPrincipal/" + Session["ComisionUserID"]));
         }
 
+        /* Función de controlador tipo GET que permite el borrado lógico de un representante en
+         * la base de datos, en caso de que sea necesario. 
+         Parámetros: Id del representante*/
         public ActionResult Delete(int? id)
         {
             using (var db = new SaludOcupacionalEntities())

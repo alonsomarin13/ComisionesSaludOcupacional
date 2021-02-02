@@ -13,12 +13,9 @@ namespace ComisionesSaludOcupacional.Controllers
 {
     public class ComisionUserController : Controller
     {
-        // GET: ComisionUser
-        public ActionResult Index()
-        {
-            return View();
-        }
-
+        /* Función de controlador tipo GET que abre la vista principal del sistema del lado del
+         * usuario, en esta vista se permite visualizar toda la información principal de la comisión.
+         Parámetros: Id de la comisión*/
         public ActionResult InformacionPrincipal(int id) {
             ComisionUserTableViewModel model = new ComisionUserTableViewModel();
             using (var db = new SaludOcupacionalEntities())
@@ -52,14 +49,16 @@ namespace ComisionesSaludOcupacional.Controllers
                              nombre = d.nombre,
                              correo = d.correo,
                              telefono = d.telefono,
-                             idComision = d.idComision
+                             idComision = d.idComision,
+                             tipo = d.tipo == 0 ? "Patrono" : "Trabajador"
                          }).ToList();
             }
 
             DateTime hoy = DateTime.Today;
             DateTime? fechaInforme = model.ultimoInforme;
 
-            if (/*hoy.Month == 2 &&*/ (fechaInforme == null || fechaInforme?.Year < hoy.Year))
+            // Comparación para alzar la notificación de entrega del informe anual. 
+            if (fechaInforme == null || fechaInforme?.Year < hoy.Year)
             {
                 ViewBag.Mensaje = "Recuerde por favor entregar el informe Anual\n Ya lo ha entregado?";
             }
@@ -68,6 +67,9 @@ namespace ComisionesSaludOcupacional.Controllers
             DateTime? fechaVencimiento = fechaRegistro?.AddYears(3);
             DateTime? fechaVencimientoTemp = fechaVencimiento?.AddMonths(-2);
 
+            /* Comparación que actualiza el mensaje de vencimiento de comisión, dependiendo si 
+             * faltan 2 meses para su vencimiento, o bien está vencida. La renovación de comisión
+             * es un proceso que se realiza por fuera entonces sólo corresponde recordar*/
             if (hoy < fechaVencimiento && hoy >= fechaVencimientoTemp)
             {
                 var cantDias = (fechaVencimiento - hoy)?.TotalDays;
@@ -92,6 +94,9 @@ namespace ComisionesSaludOcupacional.Controllers
                                     select d.idCentroDeTrabajo).Count();
             }
 
+            /* Comparación que actualiza el mensaje de recordatorio al usuario de comisión, para que tenga 
+             * ingresados al sistema una cantidad bipartita de patronos o trabajadores. Que esto se cumpla es 
+             * deber del usuario que utiliza el sistema.*/
             if (cantPatronos != cantTrabajadores)
             {
                 ViewBag.RepresentantesWarning = "Su comisión no tiene cantidades iguales de Patronos y Trabajadores, por favor asegúrese de que esto se cumpla.";
@@ -100,6 +105,10 @@ namespace ComisionesSaludOcupacional.Controllers
             return View(model);
         }
 
+        /* Función de controlador tipo GET que abre la vista preliminar del usuario de comisión, 
+         * esta se abrirá la primera vez que se acceda al sistema mediante una cuenta de usuario de comisión, para
+         * así llenar los datos necesarios.
+         Parámetros: Id de la comisión*/
         public ActionResult LlenarInformacion(int id) {
             EditComisionViewModel model = new EditComisionViewModel();
 
@@ -120,6 +129,9 @@ namespace ComisionesSaludOcupacional.Controllers
             return View(model);
         }
 
+        /* Función de controlador tipo POST que guarda en la base de datos la información, 
+         * ingresada por el usuario de comisión la primera vez que ingresa al sistema.
+         Parámetros: modelo que envía la vista*/
         [HttpPost]
         public ActionResult LlenarInformacion(EditComisionViewModel model) {
             if (!ModelState.IsValid)
@@ -146,6 +158,9 @@ namespace ComisionesSaludOcupacional.Controllers
             return Redirect(Url.Content("~/ComisionUser/InformacionPrincipal/" + model.idComision));
         }
 
+        /* Función de controlador tipo GET que abre la vista de editar comisión, 
+         * que permite editar toda la información perteneciente a la comisión, del lado del usuario.
+         Parámetros: Id de la comisión*/
         public ActionResult Edit(int id)
         {
             EditComisionViewModel model = new EditComisionViewModel();
@@ -167,6 +182,9 @@ namespace ComisionesSaludOcupacional.Controllers
             return View(model);
         }
 
+        /* Función de controlador tipo POST que realiza la edición de la comisión, 
+         * extrae del modelo los datos ingresados por la persona y los guarda en la base.
+         Parámetros: modelo que envía la vista*/
         [HttpPost]
         public ActionResult Edit(EditComisionViewModel model)
         {
@@ -194,6 +212,8 @@ namespace ComisionesSaludOcupacional.Controllers
             return Redirect(Url.Content("~/ComisionUser/InformacionPrincipal/" + model.idComision));
         }
 
+        /* Función de controlador tipo GET que abre la vista de modificación de cuenta,
+         * donde se permite cambiar la contraseña de la cuenta en caso de ser necesario.*/
         public ActionResult Cuenta()
         {
             CuentaModificadaViewModel model = new CuentaModificadaViewModel();
@@ -204,6 +224,10 @@ namespace ComisionesSaludOcupacional.Controllers
             return View(model);
         }
 
+        /* Función de controlador tipo POST que realiza la edición de la cuenta, 
+         * realiza la verificación de la contraseña por seguridad, y
+         * extrae del modelo los datos ingresados por la persona y los guarda en la base.
+         Parámetros: modelo que envía la vista*/
         [HttpPost]
         public ActionResult Cuenta(CuentaModificadaViewModel model)
         {
@@ -235,7 +259,10 @@ namespace ComisionesSaludOcupacional.Controllers
             return View(model);
         }
 
-
+        /* Función de controlador tipo GET que se alza cuando la persona presiona "Sí" en la
+         * notificación de Informe Entregado, lo que causa que se actualize como "entregado" el
+         * informe en la base de datos.
+         Parámetros: Id de la comisión*/
         public ActionResult InformeEntregado(int id)
         {
             using (var db = new SaludOcupacionalEntities())
