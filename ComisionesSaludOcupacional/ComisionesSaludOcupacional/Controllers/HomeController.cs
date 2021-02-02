@@ -32,7 +32,7 @@ namespace ComisionesSaludOcupacional.Controllers
             using (var db = new SaludOcupacionalEntities())
             {
 
-                model.contrasena = CryptoEngine.Encrypt(model.contrasena, "sxlw-3jn8-sqoy12");
+                model.contrasena = CryptoEngine.Encrypt(model.contrasena);
 
                 var cuenta = from d in db.Cuenta
                              where d.nombre == model.username

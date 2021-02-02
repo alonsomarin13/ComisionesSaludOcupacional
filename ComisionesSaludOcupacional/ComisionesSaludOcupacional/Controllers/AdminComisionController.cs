@@ -239,7 +239,7 @@ namespace ComisionesSaludOcupacional.Controllers
                 ViewBag.contra = contrasena;
 
                 // Se encripta la contraseña
-                contrasena = CryptoEngine.Encrypt(contrasena, "sxlw-3jn8-sqoy12");
+                contrasena = CryptoEngine.Encrypt(contrasena);
 
                 Cuenta oCuenta = new Cuenta();
                 oCuenta.nombre = nombreComision;

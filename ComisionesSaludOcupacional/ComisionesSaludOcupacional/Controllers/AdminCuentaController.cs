@@ -76,7 +76,7 @@ namespace ComisionesSaludOcupacional.Controllers
                 Cuenta oCuenta = new Cuenta();
 
                 oCuenta.nombre = model.nombre;
-                oCuenta.contrasena = CryptoEngine.Encrypt(model.contrasena, "sxlw-3jn8-sqoy12");
+                oCuenta.contrasena = CryptoEngine.Encrypt(model.contrasena);
                 oCuenta.rol = 0; // Rol 0 significa "administrador"
                 db.Cuenta.Add(oCuenta);
 
@@ -96,7 +96,7 @@ namespace ComisionesSaludOcupacional.Controllers
             using (var db = new SaludOcupacionalEntities())
             {
                 Cuenta oCuenta = db.Cuenta.Find(Id);
-                model.password = CryptoEngine.Decrypt(oCuenta.contrasena, "sxlw-3jn8-sqoy12");
+                model.password = CryptoEngine.Decrypt(oCuenta.contrasena);
                 model.nombre = oCuenta.nombre;
             }
 

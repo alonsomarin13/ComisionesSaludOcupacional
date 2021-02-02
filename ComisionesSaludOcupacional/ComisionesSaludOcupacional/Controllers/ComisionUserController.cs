@@ -238,7 +238,7 @@ namespace ComisionesSaludOcupacional.Controllers
                 return View(model);
             }
 
-            if (oCuenta.contrasena != CryptoEngine.Encrypt(model.contrasena, "sxlw-3jn8-sqoy12"))
+            if (oCuenta.contrasena != CryptoEngine.Encrypt(model.contrasena))
             {
                 ModelState.AddModelError("contrasena", "Contraseña incorrecta");
                 return View(model);
@@ -246,7 +246,7 @@ namespace ComisionesSaludOcupacional.Controllers
 
             using (var db = new SaludOcupacionalEntities())
             {
-                string contrasenaNueva = CryptoEngine.Encrypt(model.contrasenaNueva, "sxlw-3jn8-sqoy12");
+                string contrasenaNueva = CryptoEngine.Encrypt(model.contrasenaNueva);
                 oCuenta.contrasena = contrasenaNueva;
 
                 db.Entry(oCuenta).State = System.Data.Entity.EntityState.Modified;

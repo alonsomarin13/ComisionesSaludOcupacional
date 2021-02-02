@@ -14,11 +14,11 @@ namespace ComisionesSaludOcupacional.Models.ClasesUtilidad
     {
         /* Función que se encarga de encriptar una contraseña, mediante una key definida.
          * Parámetros: contraseña a encriptar, y key de encriptación.*/
-        public static string Encrypt(string input, string key)
+        public static string Encrypt(string input)
         {
             byte[] inputArray = UTF8Encoding.UTF8.GetBytes(input);
             TripleDESCryptoServiceProvider tripleDES = new TripleDESCryptoServiceProvider();
-            tripleDES.Key = UTF8Encoding.UTF8.GetBytes(key);
+            tripleDES.Key = UTF8Encoding.UTF8.GetBytes("sxlw-3jn8-sqoy12");
             tripleDES.Mode = CipherMode.ECB;
             tripleDES.Padding = PaddingMode.PKCS7;
             ICryptoTransform cTransform = tripleDES.CreateEncryptor();
@@ -28,11 +28,11 @@ namespace ComisionesSaludOcupacional.Models.ClasesUtilidad
         }
         /* Función que se encarga de desencriptar una contraseña, mediante una key definida.
          * Parámetros: contraseña a desencriptar, y key de encriptación.*/
-        public static string Decrypt(string input, string key)
+        public static string Decrypt(string input)
         {
             byte[] inputArray = Convert.FromBase64String(input);
             TripleDESCryptoServiceProvider tripleDES = new TripleDESCryptoServiceProvider();
-            tripleDES.Key = UTF8Encoding.UTF8.GetBytes(key);
+            tripleDES.Key = UTF8Encoding.UTF8.GetBytes("sxlw-3jn8-sqoy12");
             tripleDES.Mode = CipherMode.ECB;
             tripleDES.Padding = PaddingMode.PKCS7;
             ICryptoTransform cTransform = tripleDES.CreateDecryptor();
